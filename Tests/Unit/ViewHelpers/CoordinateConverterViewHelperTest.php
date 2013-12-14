@@ -72,6 +72,21 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
     /**
      * @test
      */
+    public function viewHelperFormatsUtmCorrectly() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.487111',
+            '8.466278',
+            'UTM'
+        );
+        $this->assertEquals('32U 461344 5481745', $actualResult);
+    }
+
+
+
+    /**
+     * @test
+     */
     public function viewHelperUsesDelimiterCorrectly() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(

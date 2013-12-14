@@ -25,6 +25,8 @@ namespace Byterror\BytCoordconverter\ViewHelpers;
 *  This copyright notice MUST APPEAR in all copies of the script!
 * ************************************************************* */
 
+use Byterror\BytCoordconverter\Utility\UtmUtility;
+
 
 /**
  * View helper for converting a geospatial coordinate into another
@@ -41,10 +43,11 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      *
      * @var array
      */
-    protected $allowedFormats = array(
+    protected $allowedOutputFormats = array(
         'degree',
         'degreeMinutes',
         'degreeMinutesSeconds',
+        'UTM',
     );
 
 
@@ -53,13 +56,13 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      *
      * @param float $latitude
      * @param float $longitude
-     * @param string $format
+     * @param string $outputFormat
      * @param string $cardinalPoints in format North South East West
      * @param string $delimiter
-     * @param boolean $debug
+     * @param boolean $showErrors
      * @return string
      */
-    public function render($latitude, $longitude, $format = 'degree', $cardinalPoints = 'N|S|E|W', $delimiter = ', ', $showErrors = FALSE) {
+    public function render($latitude, $longitude, $outputFormat = 'degree', $cardinalPoints = 'N|S|E|W', $delimiter = ', ', $showErrors = FALSE) {
         $latitude = (float) $latitude;
         $longitude = (float) $longitude;
         $cardinalPointsArray = explode('|', $cardinalPoints);
@@ -76,11 +79,11 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
             return $showErrors ? 'Wrong number of parameters for cardinal points: must be 4 (separated by |, given: ' . htmlspecialchars($cardinalPoints) . ')' : '';
         }
 
-        if (!in_array($format, $this->allowedFormats)) {
-            return $showErrors ? 'Wrong format (given: ' . htmlspecialchars($format) . ', allowed: ' . implode(', ', $this->allowedFormats) . ')' : '';
+        if (!in_array($outputFormat, $this->allowedOutputFormats)) {
+            return $showErrors ? 'Wrong output format (given: ' . htmlspecialchars($outputFormat) . ', allowed: ' . implode(', ', $this->allowedOutputFormats) . ')' : '';
         }
 
-        $functionCall = 'get' . ucfirst($format) . 'Notation';
+        $functionCall = 'get' . ucfirst($outputFormat) . 'Notation';
 
         return $this->$functionCall($latitude, $longitude, $cardinalPointsArray, $delimiter);
     }
@@ -173,6 +176,20 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
 
 
     /**
+     * Get the UTM notation
+     *
+     * @param float $latitude
+     * @param float $longitude
+     * @param array $cardinalPoints not needed
+     * @param string $delimiter not needed
+     * @return string
+     */
+    protected function getUTMNotation($latitude, $longitude, $cardinalPoints, $delimiter) {
+        return UtmUtility::getUtmFromLatitudeLongitude($latitude, $longitude);
+    }
+
+
+        /**
      * Get the cardinal point for a latitude
      *
      * @param float $latitude
