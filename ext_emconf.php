@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'Coordinate Converter',
-    'description' => 'Converts geospacial coordinates from one format into another',
+    'description' => 'View helper for converting geospatial coordinates from one format into another',
     'category' => 'fe',
     'author' => 'Chris Müller',
     'author_email' => 'byt3error@web.de',
@@ -20,17 +20,16 @@ $EM_CONF[$_EXTKEY] = array(
     'shy' => '',
     'priority' => '',
     'module' => '',
-    'state' => 'beta',
+    'state' => 'stable',
     'internal' => '',
     'uploadfolder' => '0',
     'createDirs' => '',
     'modify_tables' => '',
     'clearCacheOnLoad' => 0,
     'lockType' => '',
-    'version' => '0.8.0',
+    'version' => '1.0.0',
     'constraints' => array(
         'depends' => array(
-            'extbase' => '6.0.0-6.1.99',
             'fluid' => '6.0.0-6.1.99',
             'typo3' => '6.0.0-6.1.99',
         ),
