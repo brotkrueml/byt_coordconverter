@@ -107,8 +107,8 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      */
     protected function getDegreeNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $delimiter) {
         return $this->getFormattedLatitudeLongitude(
-            abs($latitude),
-            abs($longitude),
+            abs($latitude) . '°',
+            abs($longitude) . '°',
             $this->getCardinalPointForLatitude($latitude, $cardinalPoints[0], $cardinalPoints[1]),
             $this->getCardinalPointForLongitude($longitude, $cardinalPoints[2], $cardinalPoints[3]),
             $cardinalPointsPosition,

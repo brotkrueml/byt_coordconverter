@@ -38,7 +38,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '8.466278'
         );
 
-        $this->assertEquals('N 49.487111, E 8.466278', $actualResult);
+        $this->assertEquals('N 49.487111°, E 8.466278°', $actualResult);
     }
 
 
@@ -98,7 +98,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'before',
             ' / '
         );
-        $this->assertEquals('N 49.487111 / E 8.466278', $actualResult);
+        $this->assertEquals('N 49.487111° / E 8.466278°', $actualResult);
     }
 
 
@@ -114,7 +114,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'degree',
             'North|South|East|West'
         );
-        $this->assertEquals('North 49.487111, East 8.466278', $actualResult);
+        $this->assertEquals('North 49.487111°, East 8.466278°', $actualResult);
     }
 
 
@@ -130,7 +130,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'degree',
             'North|South|East|West'
         );
-        $this->assertEquals('South 53.163494, West 70.905071', $actualResult);
+        $this->assertEquals('South 53.163494°, West 70.905071°', $actualResult);
     }
 
 
@@ -147,7 +147,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before'
         );
-        $this->assertEquals('N 49.487111, E 8.466278', $actualResult);
+        $this->assertEquals('N 49.487111°, E 8.466278°', $actualResult);
     }
 
 
@@ -164,7 +164,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'after'
         );
-        $this->assertEquals('49.487111 N, 8.466278 E', $actualResult);
+        $this->assertEquals('49.487111° N, 8.466278° E', $actualResult);
     }
 
 
