@@ -96,6 +96,15 @@ Or you like to use the german version?
 This outputs: `N 49.487111 / O 8.466278`
 
 
+### Cardinal points position
+
+You can choose, at which position to show the cardinal point, before or after the coordinate:
+
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPointsPosition="after" />
+
+Now you get the cardinal point after each coordinate: `49.487111 N, 8.466278 E`
+
+
 ### Errors
 
 If you enter an invalid value for a parameter no output is shown. You can get the error messages if you set the error parameter to 1:

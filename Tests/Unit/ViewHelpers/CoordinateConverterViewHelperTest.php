@@ -37,6 +37,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '49.487111',
             '8.466278'
         );
+
         $this->assertEquals('N 49.487111, E 8.466278', $actualResult);
     }
 
@@ -94,6 +95,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '8.466278',
             'degree',
             'N|S|E|W',
+            'before',
             ' / '
         );
         $this->assertEquals('N 49.487111 / E 8.466278', $actualResult);
@@ -135,6 +137,61 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
     /**
      * @test
      */
+    public function viewHelperUsesCardinalPointsPositionBeforeCorrectly() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+
+        $actualResult = $viewHelper->render(
+            '49.487111',
+            '8.466278',
+            'degree',
+            'N|S|E|W',
+            'before'
+        );
+        $this->assertEquals('N 49.487111, E 8.466278', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
+    public function viewHelperUsesCardinalPointsPositionAfterCorrectly() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+
+        $actualResult = $viewHelper->render(
+            '49.487111',
+            '8.466278',
+            'degree',
+            'N|S|E|W',
+            'after'
+        );
+        $this->assertEquals('49.487111 N, 8.466278 E', $actualResult);
+    }
+
+
+
+
+    /**
+     * @test
+     */
+    public function viewHelperUsesCardinalPointsPositionAndOutputsErrorOnWrongParameter() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+
+        $actualResult = $viewHelper->render(
+            '49.487111',
+            '8.466278',
+            'degree',
+            'N|S|E|W',
+            'not-defined',
+            '',
+            TRUE
+        );
+        $this->assertContains('wrong cardinal points position', $actualResult, '', TRUE);
+    }
+
+
+    /**
+     * @test
+     */
     public function viewHelperOutputsErrorWhenLatitudeExceedsPlus90DegreeAndErrorsShouldBeShown() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
 
@@ -143,6 +200,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '0.0',
             'degree',
             'N|S|E|W',
+            'before',
             ', ',
             TRUE
         );
@@ -161,6 +219,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '0.0',
             'degree',
             'N|S|E|W',
+            'before',
             ', ',
             FALSE
         );
@@ -179,6 +238,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '0.0',
             'degree',
             'N|S|E|W',
+            'before',
             ', ',
             TRUE
         );
@@ -197,6 +257,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '0.0',
             'degree',
             'N|S|E|W',
+            'before',
             ', ',
             FALSE
         );
@@ -215,6 +276,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '180.01',
             'degree',
             'N|S|E|W',
+            'before',
             ', ',
             TRUE
         );
@@ -233,6 +295,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '180.01',
             'degree',
             'N|S|E|W',
+            'before',
             ', ',
             FALSE
         );
@@ -251,6 +314,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '-180.01',
             'degree',
             'N|S|E|W',
+            'before',
             ', ',
             TRUE
         );
@@ -269,6 +333,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '-180.01',
             'degree',
             'N|S|E|W',
+            'before',
             ', ',
             FALSE
         );
@@ -287,10 +352,11 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '8.466278',
             'not existing',
             'N|S|E|W',
+            'before',
             ', ',
             TRUE
         );
-        $this->assertContains('wrong format', $actualResult, '', TRUE);
+        $this->assertContains('wrong output format', $actualResult, '', TRUE);
     }
 
 
@@ -305,6 +371,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '8.466278',
             'not existing',
             'N|S|E|W',
+            'before',
             ', ',
             FALSE
         );
@@ -323,6 +390,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '8.466278',
             'degree',
             'only|three|parameters',
+            'before',
             ', ',
             TRUE
         );
@@ -341,6 +409,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '8.466278',
             'degree',
             'only|three|parameters',
+            'before',
             ', ',
             FALSE
         );
