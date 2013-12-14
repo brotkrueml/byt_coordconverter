@@ -59,14 +59,16 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      * @param string $outputFormat
      * @param string $cardinalPoints in format North South East West
      * @param string $cardinalPointsPosition [before|after]
+     * @param int $numberOfDecimals
      * @param string $delimiter
      * @param boolean $showErrors
      * @return string
      */
-    public function render($latitude, $longitude, $outputFormat = 'degree', $cardinalPoints = 'N|S|E|W', $cardinalPointsPosition = 'before', $delimiter = ', ', $showErrors = FALSE) {
+    public function render($latitude, $longitude, $outputFormat = 'degree', $cardinalPoints = 'N|S|E|W', $cardinalPointsPosition = 'before', $numberOfDecimals = 5, $delimiter = ', ', $showErrors = FALSE) {
         $latitude = (float) $latitude;
         $longitude = (float) $longitude;
         $cardinalPointsArray = explode('|', $cardinalPoints);
+        $numberOfDecimals = (int) $numberOfDecimals;
 
         if (($latitude > 90.0) || ($latitude < -90.0)) {
             return $showErrors ? 'Wrong latitude: must be between 90.0 and -90.0 (given: ' . htmlspecialchars($latitude) . ')' : '';
@@ -90,7 +92,7 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
 
         $functionCall = 'get' . ucfirst($outputFormat) . 'Notation';
 
-        return $this->$functionCall($latitude, $longitude, $cardinalPointsArray, $cardinalPointsPosition, $delimiter);
+        return $this->$functionCall($latitude, $longitude, $cardinalPointsArray, $cardinalPointsPosition, $numberOfDecimals, $delimiter);
     }
 
 
@@ -102,13 +104,14 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      * @param float $longitude
      * @param array $cardinalPoints
      * @param array $cardinalPointsPosition not needed
+     * @param int $numberOfDecimals
      * @param string $delimiter
      * @return string
      */
-    protected function getDegreeNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $delimiter) {
+    protected function getDegreeNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $numberOfDecimals, $delimiter) {
         return $this->getFormattedLatitudeLongitude(
-            abs($latitude) . '°',
-            abs($longitude) . '°',
+            number_format(abs($latitude), $numberOfDecimals) . '°',
+            number_format(abs($longitude), $numberOfDecimals) . '°',
             $this->getCardinalPointForLatitude($latitude, $cardinalPoints[0], $cardinalPoints[1]),
             $this->getCardinalPointForLongitude($longitude, $cardinalPoints[2], $cardinalPoints[3]),
             $cardinalPointsPosition,
@@ -124,19 +127,20 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      * @param float $longitude
      * @param array $cardinalPoints
      * @param array $cardinalPointsPosition not needed
+     * @param int $numberOfDecimals
      * @param string $delimiter
      * @return string
      */
-    protected function getDegreeMinutesNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $delimiter) {
+    protected function getDegreeMinutesNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $numberOfDecimals, $delimiter) {
         $latitudeDegrees = abs((int) $latitude);
-        $latitudeMinutes = abs(($latitude - (int) $latitude) * 60);
+        $latitudeMinutes = number_format(abs(($latitude - (int) $latitude) * 60), $numberOfDecimals);
 
         $longitudeDegrees = abs((int) $longitude);
-        $longitudeMinutes = abs(($longitude - (int) $longitude) * 60);
+        $longitudeMinutes = number_format(abs(($longitude - (int) $longitude) * 60), $numberOfDecimals);
 
         return $this->getFormattedLatitudeLongitude(
-            $latitudeDegrees . '°' . number_format($latitudeMinutes, 3) . '\'',
-            $longitudeDegrees . '°' . number_format($longitudeMinutes, 3) . '\'',
+            $latitudeDegrees . '°' . $latitudeMinutes . '\'',
+            $longitudeDegrees . '°' . $longitudeMinutes . '\'',
             $this->getCardinalPointForLatitude($latitude, $cardinalPoints[0], $cardinalPoints[1]),
             $this->getCardinalPointForLongitude($longitude, $cardinalPoints[2], $cardinalPoints[3]),
             $cardinalPointsPosition,
@@ -152,23 +156,24 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      * @param float $longitude
      * @param array $cardinalPoints
      * @param array $cardinalPointsPosition not needed
+     * @param int $numberOfDecimals
      * @param string $delimiter
      * @return string
      */
-    protected function getDegreeMinutesSecondsNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $delimiter) {
+    protected function getDegreeMinutesSecondsNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $numberOfDecimals, $delimiter) {
         $latitudeDegrees = abs((int) $latitude);
         $latitudeMinutes = abs(($latitude - (int) $latitude) * 60);
-        $latitudeSeconds = abs(($latitudeMinutes - (int) $latitudeMinutes) * 60);
+        $latitudeSeconds = number_format(abs(($latitudeMinutes - (int) $latitudeMinutes) * 60), $numberOfDecimals);
         $latitudeMinutes = (int) $latitudeMinutes;
 
         $longitudeDegrees = abs((int) $longitude);
         $longitudeMinutes = abs(($longitude - (int) $longitude) * 60);
-        $longitudeSeconds = abs(($longitudeMinutes - (int) $longitudeMinutes) * 60);
+        $longitudeSeconds = number_format(abs(($longitudeMinutes - (int) $longitudeMinutes) * 60), $numberOfDecimals);
         $longitudeMinutes = (int) $longitudeMinutes;
 
         return $this->getFormattedLatitudeLongitude(
-            $latitudeDegrees . '° ' . $latitudeMinutes . '\' ' . number_format($latitudeSeconds, 2) . '"',
-            $longitudeDegrees . '° ' . $longitudeMinutes . '\' ' . number_format($longitudeSeconds, 2) . '"',
+            $latitudeDegrees . '° ' . $latitudeMinutes . '\' ' . $latitudeSeconds . '"',
+            $longitudeDegrees . '° ' . $longitudeMinutes . '\' ' . $longitudeSeconds . '"',
             $this->getCardinalPointForLatitude($latitude, $cardinalPoints[0], $cardinalPoints[1]),
             $this->getCardinalPointForLongitude($longitude, $cardinalPoints[2], $cardinalPoints[3]),
             $cardinalPointsPosition,
@@ -185,10 +190,11 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      * @param float $longitude
      * @param array $cardinalPoints not needed
      * @param array $cardinalPointsPosition not needed
+     * @param int $numberOfDecimals not needed
      * @param string $delimiter not needed
      * @return string
      */
-    protected function getUTMNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $delimiter) {
+    protected function getUTMNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $numberOfDecimals, $delimiter) {
         return UtmUtility::getUtmFromLatitudeLongitude($latitude, $longitude);
     }
 

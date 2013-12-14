@@ -34,7 +34,7 @@ Now you can add the new view helper. In the minimal version you must assign a la
 
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" />
 
-The output is: `N 49.487111, E 8.466278`
+The output is: `N 49.48711°, E 8.46628°`
 
 **Notice:** The values for the latitude variable are number-only and range from +90.0 to -90.0, the positives values are north, the negative values are south.
 The values for the longitude variable range from +180.0 to -180.0, the positives values are east, the negative values are west.
@@ -51,7 +51,7 @@ To convert the coordinate pair into the degree/minutes format just add the outpu
 
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degreeMinutes" />
 
-Now you get the result: `N 49°29.227', E 8°27.977'`
+Now you get the result: `N 49°29.22666', E 8°27.97668'`
 
 
 ### Degree/minutes/seconds notation
@@ -60,7 +60,7 @@ If you want to output the coordinate pair in minutes and seconds just use this s
 
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degreeMinutesSeconds" />
 
-The result is: `N 49° 29' 13.60", E 8° 27' 58.60"`
+The result is: `N 49° 29' 13.59960", E 8° 27' 58.60080"`
 
 
 ### UTM notation
@@ -72,13 +72,22 @@ You can also convert the latitude/longitude coordinates to the UTM (Universal Tr
 The result is: `32U 461344 5481745`
 
 
+### Number of decimals
+
+The default number of decimals to show in the coordinates is set to 5. If you want to change the just use the numberOfDecimals parameter:
+
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" numberOfDecimals="4" />
+
+The output is: `N 49.4871°, E 8.4663°`
+
+
 ### Delimiter
 
 The default delimiter between the two coordinates is the comma with a white space. You can change it:
 
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" delimiter=" / " />
 
-You get the result: `N 49.487111 / E 8.466278`
+You get the result: `N 49.48711° / E 8.46628°`
 
 
 ### Cardinal points
@@ -87,13 +96,13 @@ You don't like the abbreviations N, S, E, W? You can change it:
 
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPoints="North|South|East|West" />
 
-Now you get: `North 49.487111 / East 8.466278`
+Now you get: `North 49.48711° / East 8.46628°`
 
 Or you like to use the german version?
 
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPoints="N|S|O|W" />
 
-This outputs: `N 49.487111 / O 8.466278`
+This outputs: `N 49.48711° / O 8.46628°`
 
 
 ### Cardinal points position
@@ -102,7 +111,7 @@ You can choose, at which position to show the cardinal point, before or after th
 
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPointsPosition="after" />
 
-Now you get the cardinal point after each coordinate: `49.487111 N, 8.466278 E`
+Now you get the cardinal point after each coordinate: `49.48711° N, 8.46628° E`
 
 
 ### Errors
