@@ -81,6 +81,15 @@ The default number of decimals to show in the coordinates is set to 5. If you wa
 The output is: `N 49.4871°, E 8.4663°`
 
 
+### Remove trailing zeros
+
+Sometimes the coordinates look nicer when the trailing zeros are stripped. Just use the `removeTrailingZeros` parameter:
+
+    <cc:coordinateConverter latitude="49.48710" longitude="8.46600" removeTrailingZeros="1" />
+
+The output is: `N 49.4871°, E 8.466°`
+
+
 ### Delimiter
 
 The default delimiter between the two coordinates is the comma with a white space. You can change it:

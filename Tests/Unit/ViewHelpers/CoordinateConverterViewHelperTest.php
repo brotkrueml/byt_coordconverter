@@ -65,7 +65,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '8.466278',
             'degreeMinutesSeconds'
         );
-        $this->assertEquals('N 49° 29\' 13.59960", E 8° 27\' 58.60080"', $actualResult);
+        $this->assertEquals('N 49° 29\' 13.59960&quot;, E 8° 27\' 58.60080&quot;', $actualResult);
     }
 
 
@@ -120,7 +120,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
     /**
      * @test
      */
-    public function viewHelperFormatsDegreeMinutesWithNumberOfDecimalsSecondsCorrectly() {
+    public function viewHelperFormatsDegreeMinutesSecondsWithNumberOfDecimalsCorrectly() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
@@ -130,7 +130,61 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'before',
             1
         );
-        $this->assertEquals('N 49° 29\' 13.6", E 8° 27\' 58.6"', $actualResult);
+        $this->assertEquals('N 49° 29\' 13.6&quot;, E 8° 27\' 58.6&quot;', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
+    public function viewHelperFormatsDegreeWithRemovingTrailingZerosCorrectly() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.487000',
+            '8.466201',
+            'degree',
+            'N|S|E|W',
+            'before',
+            5,
+            TRUE
+        );
+        $this->assertEquals('N 49.487°, E 8.4662°', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
+    public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectly() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.487',
+            '8.466',
+            'degreeMinutes',
+            'N|S|E|W',
+            'before',
+            3,
+            TRUE
+        );
+        $this->assertEquals('N 49°29.22\', E 8°27.96\'', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
+    public function viewHelperFormatsDegreeMinutesSecondsWithRemovingTrailingZerosCorrectly() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.487111',
+            '8.466278',
+            'degreeMinutesSeconds',
+            'N|S|E|W',
+            'before',
+            2,
+            TRUE
+        );
+        $this->assertEquals('N 49° 29\' 13.6&quot;, E 8° 27\' 58.6&quot;', $actualResult);
     }
 
 
@@ -146,6 +200,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ' / '
         );
         $this->assertEquals('N 49.48711° / E 8.46628°', $actualResult);
@@ -233,6 +288,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'not-defined',
             5,
+            FALSE,
             '',
             TRUE
         );
@@ -253,6 +309,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             TRUE
         );
@@ -273,6 +330,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             FALSE
         );
@@ -293,6 +351,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             TRUE
         );
@@ -313,6 +372,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             FALSE
         );
@@ -333,6 +393,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             TRUE
         );
@@ -353,6 +414,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             FALSE
         );
@@ -373,6 +435,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             TRUE
         );
@@ -393,6 +456,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             FALSE
         );
@@ -413,6 +477,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             TRUE
         );
@@ -433,6 +498,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'N|S|E|W',
             'before',
             5,
+            FALSE,
             ', ',
             FALSE
         );
@@ -453,6 +519,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'only|three|parameters',
             'before',
             5,
+            FALSE,
             ', ',
             TRUE
         );
@@ -473,6 +540,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             'only|three|parameters',
             'before',
             5,
+            FALSE,
             ', ',
             FALSE
         );
