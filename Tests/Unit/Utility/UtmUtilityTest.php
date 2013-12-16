@@ -41,1266 +41,167 @@ class UtmUtilityTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 
     /**
-     * @test
-     */
-    public function longitudinalZone1IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 1;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -180.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -174.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone2IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 2;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -174.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -168.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone3IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 3;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -168.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -162.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone4IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 4;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -162.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -156.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone5IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 5;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -156.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -150.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone6IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 6;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -150.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -144.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone7IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 7;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -144.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -138.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone8IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 8;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -138.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -132.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone9IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 9;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -132.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -126.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone10IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 10;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -126.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -120.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone11IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 11;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -120.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -114.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone12IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 12;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -114.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -108.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone13IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 13;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -108.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -102.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone14IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 14;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -102.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -96.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone15IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 15;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -96.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -90.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone16IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 16;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -90.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -84.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone17IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 17;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -84.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -78.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone18IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 18;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -78.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -72.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone19IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 19;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -72.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -66.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone20IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 20;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -66.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -60.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone21IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 21;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -60.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -54.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone22IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 22;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -54.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -48.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone23IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 23;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -48.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -42.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone24IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 24;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -42.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -36.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone25IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 25;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -36.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -30.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone26IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 26;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -30.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -24.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone27IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 27;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -24.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -18.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone28IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 28;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -18.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -12.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone29IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 29;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -12.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -6.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone30IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 30;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, -6.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, -0.0001);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone31IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 31;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 0.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 5.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone32IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 32;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 6.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 11.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone33IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 33;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 12.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 17.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone34IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 34;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 18.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 23.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone35IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 35;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 24.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 29.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone36IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 36;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 30.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 35.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone37IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 37;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 36.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 41.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone38IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 38;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 42.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 47.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone39IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 39;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 48.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 53.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone40IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 40;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 54.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 59.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone41IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 41;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 60.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 65.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone42IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 42;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 66.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 71.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone43IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 43;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 72.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 77.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone44IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 44;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 78.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 83.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone45IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 45;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 84.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 89.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone46IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 46;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 90.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 95.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone47IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 47;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 96.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 101.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone48IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 48;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 102.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 107.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone49IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 49;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 108.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 113.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone50IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 50;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 114.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 119.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone51IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 51;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 120.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 125.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone52IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 52;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 126.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 131.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone53IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 53;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 132.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 137.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone54IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 54;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 138.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 143.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone55IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 55;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 144.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 149.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone56IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 56;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 150.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 155.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone57IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 57;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 156.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 161.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone58IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 58;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 162.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 167.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone59IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 59;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 168.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 173.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone60IsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 60;
-
-        $west = UtmUtility::getLongitudinalZone(0.0, 174.0);
-        $east = UtmUtility::getLongitudinalZone(0.0, 179.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $west);
-        $this->assertEquals($expectedLongitudinalZone, $east);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone31ExceptionForNorwayIsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 31;
-
-        $northwest = UtmUtility::getLongitudinalZone(63.9999, 0.0);
-        $southeast = UtmUtility::getLongitudinalZone(56.0, 2.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $northwest);
-        $this->assertEquals($expectedLongitudinalZone, $southeast);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone32ExceptionForNorwayIsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 32;
-
-        $northwest = UtmUtility::getLongitudinalZone(63.9999, 3.0);
-        $southeast = UtmUtility::getLongitudinalZone(56.0, 11.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $northwest);
-        $this->assertEquals($expectedLongitudinalZone, $southeast);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone31ExceptionForSvalbardIsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 31;
-
-        $northwest = UtmUtility::getLongitudinalZone(83.9999, 0.0);
-        $southeast = UtmUtility::getLongitudinalZone(72.0, 8.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $northwest);
-        $this->assertEquals($expectedLongitudinalZone, $southeast);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone33ExceptionForSvalbardIsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 33;
-
-        $northwest = UtmUtility::getLongitudinalZone(83.9999, 9.0);
-        $southeast = UtmUtility::getLongitudinalZone(72.0, 20.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $northwest);
-        $this->assertEquals($expectedLongitudinalZone, $southeast);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone35ExceptionForSvalbardIsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 35;
-
-        $northwest = UtmUtility::getLongitudinalZone(83.9999, 21.0);
-        $southeast = UtmUtility::getLongitudinalZone(72.0, 32.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $northwest);
-        $this->assertEquals($expectedLongitudinalZone, $southeast);
-    }
-
-
-    /**
-     * @test
-     */
-    public function longitudinalZone37ExceptionForSvalbardIsCorrectlyCalculated() {
-        $expectedLongitudinalZone = 37;
-
-        $northwest = UtmUtility::getLongitudinalZone(83.9999, 33.0);
-        $southeast = UtmUtility::getLongitudinalZone(72.0, 41.9999);
-
-        $this->assertEquals($expectedLongitudinalZone, $northwest);
-        $this->assertEquals($expectedLongitudinalZone, $southeast);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneCIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'C';
-
-        $north = UtmUtility::getLatitudinalZone(-72.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-80.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneDIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'D';
-
-        $north = UtmUtility::getLatitudinalZone(-64.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-72.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneEIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'E';
-
-        $north = UtmUtility::getLatitudinalZone(-56.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-64.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneFIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'F';
-
-        $north = UtmUtility::getLatitudinalZone(-48.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-56.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneGIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'G';
-
-        $north = UtmUtility::getLatitudinalZone(-40.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-48.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneHIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'H';
-
-        $north = UtmUtility::getLatitudinalZone(-32.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-40.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneJIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'J';
-
-        $north = UtmUtility::getLatitudinalZone(-24.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-32.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneKIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'K';
-
-        $north = UtmUtility::getLatitudinalZone(-16.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-24.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneLIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'L';
-
-        $north = UtmUtility::getLatitudinalZone(-8.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-16.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneMIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'M';
-
-        $north = UtmUtility::getLatitudinalZone(-0.0001, 0.0);
-        $south = UtmUtility::getLatitudinalZone(-8.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneNIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'N';
-
-        $north = UtmUtility::getLatitudinalZone(7.9999, 0.0);
-        $south = UtmUtility::getLatitudinalZone(0.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZonePIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'P';
-
-        $north = UtmUtility::getLatitudinalZone(15.9999, 0.0);
-        $south = UtmUtility::getLatitudinalZone(8.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneQIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'Q';
-
-        $north = UtmUtility::getLatitudinalZone(23.9999, 0.0);
-        $south = UtmUtility::getLatitudinalZone(16.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneRIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'R';
-
-        $north = UtmUtility::getLatitudinalZone(31.9999, 0.0);
-        $south = UtmUtility::getLatitudinalZone(24.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneSIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'S';
-
-        $north = UtmUtility::getLatitudinalZone(39.9999, 0.0);
-        $south = UtmUtility::getLatitudinalZone(32.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneTIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'T';
-
-        $north = UtmUtility::getLatitudinalZone(47.9999, 0.0);
-        $south = UtmUtility::getLatitudinalZone(40.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneUIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'U';
-
-        $north = UtmUtility::getLatitudinalZone(55.9999, 0.0);
-        $south = UtmUtility::getLatitudinalZone(48.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
+     * Data provider for longitudinal zones
+     *
+     * @return array [north, south, west, east, expectedZone]
+     */
+    public function matchingLongitudinalZoneDataProvider() {
+        return array(
+            'zone 1'  => array(0.0, 0.0, -180.0, -174.0001,  1),
+            'zone 2'  => array(0.0, 0.0, -174.0, -168.0001,  2),
+            'zone 3'  => array(0.0, 0.0, -168.0, -162.0001,  3),
+            'zone 4'  => array(0.0, 0.0, -162.0, -156.0001,  4),
+            'zone 5'  => array(0.0, 0.0, -156.0, -150.0001,  5),
+            'zone 6'  => array(0.0, 0.0, -150.0, -144.0001,  6),
+            'zone 7'  => array(0.0, 0.0, -144.0, -138.0001,  7),
+            'zone 8'  => array(0.0, 0.0, -138.0, -132.0001,  8),
+            'zone 9'  => array(0.0, 0.0, -132.0, -126.0001,  9),
+            'zone 10' => array(0.0, 0.0, -126.0, -120.0001, 10),
+            'zone 11' => array(0.0, 0.0, -120.0, -114.0001, 11),
+            'zone 12' => array(0.0, 0.0, -114.0, -108.0001, 12),
+            'zone 13' => array(0.0, 0.0, -108.0, -102.0001, 13),
+            'zone 14' => array(0.0, 0.0, -102.0,  -96.0001, 14),
+            'zone 15' => array(0.0, 0.0,  -96.0,  -90.0001, 15),
+            'zone 16' => array(0.0, 0.0,  -90.0,  -84.0001, 16),
+            'zone 17' => array(0.0, 0.0,  -84.0,  -78.0001, 17),
+            'zone 18' => array(0.0, 0.0,  -78.0,  -72.0001, 18),
+            'zone 19' => array(0.0, 0.0,  -72.0,  -66.0001, 19),
+            'zone 20' => array(0.0, 0.0,  -66.0,  -60.0001, 20),
+            'zone 21' => array(0.0, 0.0,  -60.0,  -54.0001, 21),
+            'zone 22' => array(0.0, 0.0,  -54.0,  -48.0001, 22),
+            'zone 23' => array(0.0, 0.0,  -48.0,  -42.0001, 23),
+            'zone 24' => array(0.0, 0.0,  -42.0,  -36.0001, 24),
+            'zone 25' => array(0.0, 0.0,  -36.0,  -30.0001, 25),
+            'zone 26' => array(0.0, 0.0,  -30.0,  -24.0001, 26),
+            'zone 27' => array(0.0, 0.0,  -24.0,  -18.0001, 27),
+            'zone 28' => array(0.0, 0.0,  -18.0,  -12.0001, 28),
+            'zone 29' => array(0.0, 0.0,  -12.0,   -6.0001, 29),
+            'zone 30' => array(0.0, 0.0,   -6.0,   -0.0001, 30),
+            'zone 31' => array(0.0, 0.0,    0.0,    5.9999, 31),
+            'zone 32' => array(0.0, 0.0,    6.0,   11.9999, 32),
+            'zone 33' => array(0.0, 0.0,   12.0,   17.9999, 33),
+            'zone 34' => array(0.0, 0.0,   18.0,   23.9999, 34),
+            'zone 35' => array(0.0, 0.0,   24.0,   29.9999, 35),
+            'zone 36' => array(0.0, 0.0,   30.0,   35.9999, 36),
+            'zone 37' => array(0.0, 0.0,   36.0,   41.9999, 37),
+            'zone 38' => array(0.0, 0.0,   42.0,   47.9999, 38),
+            'zone 39' => array(0.0, 0.0,   48.0,   53.9999, 39),
+            'zone 40' => array(0.0, 0.0,   54.0,   59.9999, 40),
+            'zone 41' => array(0.0, 0.0,   60.0,   65.9999, 41),
+            'zone 42' => array(0.0, 0.0,   66.0,   71.9999, 42),
+            'zone 43' => array(0.0, 0.0,   72.0,   77.9999, 43),
+            'zone 44' => array(0.0, 0.0,   78.0,   83.9999, 44),
+            'zone 45' => array(0.0, 0.0,   84.0,   89.9999, 45),
+            'zone 46' => array(0.0, 0.0,   90.0,   95.9999, 46),
+            'zone 47' => array(0.0, 0.0,   96.0,  101.9999, 47),
+            'zone 48' => array(0.0, 0.0,  102.0,  107.9999, 48),
+            'zone 49' => array(0.0, 0.0,  108.0,  113.9999, 49),
+            'zone 50' => array(0.0, 0.0,  114.0,  119.9999, 50),
+            'zone 51' => array(0.0, 0.0,  120.0,  125.9999, 51),
+            'zone 52' => array(0.0, 0.0,  126.0,  131.9999, 52),
+            'zone 53' => array(0.0, 0.0,  132.0,  137.9999, 53),
+            'zone 54' => array(0.0, 0.0,  138.0,  143.9999, 54),
+            'zone 55' => array(0.0, 0.0,  144.0,  149.9999, 55),
+            'zone 56' => array(0.0, 0.0,  150.0,  155.9999, 56),
+            'zone 57' => array(0.0, 0.0,  156.0,  161.9999, 57),
+            'zone 58' => array(0.0, 0.0,  162.0,  167.9999, 58),
+            'zone 59' => array(0.0, 0.0,  168.0,  173.9999, 59),
+            'zone 60' => array(0.0, 0.0,  174.0,  179.9999, 60),
+
+            'zone 31 (exception for norway)' => array(63.9999, 56.0, 0.0,  2.9999, 31),
+            'zone 32 (exception for norway)' => array(63.9999, 56.0, 3.0, 11.9999, 32),
+
+            'zone 31 (exception for svalbard)' => array(83.9999, 72.0,  0.0,  8.9999, 31),
+            'zone 33 (exception for svalbard)' => array(83.9999, 72.0,  9.0, 20.9999, 33),
+            'zone 35 (exception for svalbard)' => array(83.9999, 72.0, 21.0, 32.9999, 35),
+            'zone 37 (exception for svalbard)' => array(83.9999, 72.0, 33.0, 41.9999, 37),
+        );
+    }
+
+
+    /**
+     * @test
+     * @dataProvider matchingLongitudinalZoneDataProvider
+     */
+    public function longitudinalZonesAreCorrectlyCalculated($north, $south, $west, $east, $expectedZone) {
+        $west = UtmUtility::getLongitudinalZone($north, $west);
+        $east = UtmUtility::getLongitudinalZone($south, $east);
+
+        $this->assertEquals($expectedZone, $west);
+        $this->assertEquals($expectedZone, $east);
+    }
+
+
+    /**
+     * Data provider for latitudinal zones
+     *
+     * @return array [north, south, expectedZone]
+     */
+    public function matchingLatitudinalZoneDataProvider() {
+        return array(
+            'zone c'  => array(-72.0001, -80.0, 'C'),
+            'zone d'  => array(-64.0001, -72.0, 'D'),
+            'zone e'  => array(-56.0001, -64.0, 'E'),
+            'zone f'  => array(-48.0001, -56.0, 'F'),
+            'zone g'  => array(-40.0001, -48.0, 'G'),
+            'zone h'  => array(-32.0001, -40.0, 'H'),
+            'zone j'  => array(-24.0001, -32.0, 'J'),
+            'zone k'  => array(-16.0001, -24.0, 'K'),
+            'zone l'  => array( -8.0001, -16.0, 'L'),
+            'zone m'  => array( -0.0001,  -8.0, 'M'),
+            'zone n'  => array(  7.9999,   0.0, 'N'),
+            'zone p'  => array( 15.9999,   8.0, 'P'),
+            'zone q'  => array( 23.9999,  16.0, 'Q'),
+            'zone r'  => array( 31.9999,  24.0, 'R'),
+            'zone s'  => array( 39.9999,  32.0, 'S'),
+            'zone t'  => array( 47.9999,  40.0, 'T'),
+            'zone u'  => array( 55.9999,  48.0, 'U'),
+            'zone v'  => array( 63.9999,  56.0, 'V'),
+            'zone w'  => array( 71.9999,  64.0, 'W'),
+            'zone x'  => array( 84.0   ,  72.0, 'X'),
+        );
     }
 
 
     /**
      * @test
+     * @dataProvider matchingLatitudinalZoneDataProvider
      */
-    public function latitudinalZoneVIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'V';
-
-        $north = UtmUtility::getLatitudinalZone(63.9999, 0.0);
-        $south = UtmUtility::getLatitudinalZone(56.0, 0.0);
+    public function latitudinalZonesAreCorrectlyCalculated($north, $south, $expectedZone) {
+        $west = UtmUtility::getLatitudinalZone($north, 0.0);
+        $east = UtmUtility::getLatitudinalZone($south, 0.0);
 
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
+        $this->assertEquals($expectedZone, $west);
+        $this->assertEquals($expectedZone, $east);
     }
-
-
-    /**
-     * @test
-     */
-    public function latitudinalZoneWIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'W';
-
-        $north = UtmUtility::getLatitudinalZone(71.9999, 0.0);
-        $south = UtmUtility::getLatitudinalZone(64.0, 0.0);
 
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
-    }
 
 
     /**
-     * @test
+     * Data provider for some coordinates
+     *
+     * @return array [latitude, longitude, expectedResult]
      */
-    public function latitudinalZoneXIsCorrectlyCalculated() {
-        $expectedLatitudinalZone = 'X';
-
-        $north = UtmUtility::getLatitudinalZone(84.0, 0.0);
-        $south = UtmUtility::getLatitudinalZone(72.0, 0.0);
-
-        $this->assertEquals($expectedLatitudinalZone, $north);
-        $this->assertEquals($expectedLatitudinalZone, $south);
+    public function matchingCoordinatesDataProvider() {
+        return array(
+            'paradeplatz, mannheim'             => array( 49.487111,   8.466278, '32U 461344 5481745'),
+            'empire state building, new york'   => array( 40.748440, -73.984559, '18T 585725 4511328'),
+            'statue of christ, rio de janeiro'  => array(-22.951910, -43.210790, '23K 683447 7460687'),
+            'ayers rock, australia'             => array(-25.345200, 131.032400, '52J 704540 7195275'),
+        );
     }
 
 
     /**
      * @test
+     * @dataProvider matchingCoordinatesDataProvider
      */
-    public function UtmFromLatitudeLongitudeForParadeplatzMannheimIsCorrectlyCalculated() {
-        $expectedResult = '32U 461344 5481745';
-
+    public function coordinatesAreCorrectlyCalculated($latitude, $longitude, $expectedResult) {
         $actualResult = UtmUtility::getUtmFromLatitudeLongitude(
-            '49.487111',
-            '8.466278'
+            $latitude,
+            $longitude
         );
 
         $this->assertEquals($expectedResult, $actualResult);
     }
-
-
-    /**
-     * @test
-     */
-    public function UtmFromLatitudeLongitudeForEmpireStateBuildingIsCorrectlyCalculated() {
-        $expectedResult = '18T 585725 4511328';
-
-        $actualResult = UtmUtility::getUtmFromLatitudeLongitude(
-            '40.74844',
-            '-73.984559'
-        );
-
-        $this->assertEquals($expectedResult, $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function UtmFromLatitudeLongitudeForStatueOfChristInRioDeJaneiroIsCorrectlyCalculated() {
-        $expectedResult = '23K 683447 7460687';
-
-        $actualResult = UtmUtility::getUtmFromLatitudeLongitude(
-            '-22.95191',
-            '-43.21079'
-        );
-
-        $this->assertEquals($expectedResult, $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function UtmFromLatitudeLongitudeForAyersRockIsCorrectlyCalculated() {
-        $expectedResult = '52J 704540 7195275';
-
-        $actualResult = UtmUtility::getUtmFromLatitudeLongitude(
-            '-25.3452',
-            '131.0324'
-        );
-
-        $this->assertEquals($expectedResult, $actualResult);
-    }
-
 }
