@@ -399,6 +399,20 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
     }
 
 
+    /**
+     * @test
+     */
+    public function viewHelperOutputIsHtmlspecialchardCorrectly() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+
+        $actualResult = $viewHelper->render(
+            '49.487111',
+            '8.466278',
+            'degree',
+            '<North>|South|"East&|West'
+        );
+        $this->assertEquals('&lt;North&gt; 49.48711°, &quot;East&amp; 8.46628°', $actualResult);
+    }
 
 
     /**
@@ -672,5 +686,4 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
         );
         $this->assertEmpty($actualResult);
     }
-
 }

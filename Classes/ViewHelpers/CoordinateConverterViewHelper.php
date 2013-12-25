@@ -309,10 +309,10 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      */
     protected function getCardinalPointForLatitude($latitude, $north, $south) {
         if ($latitude >= 0.0) {
-            return htmlspecialchars($north);
+            return $north;
         }
 
-        return htmlspecialchars($south);
+        return $south;
     }
 
 
@@ -327,9 +327,9 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      */
     protected function getCardinalPointForLongitude($longitude, $east, $west) {
         if ($longitude >= 0.0) {
-            return htmlspecialchars($east);
+            return $east;
         }
 
-        return htmlspecialchars($west);
+        return $west;
     }
 }
