@@ -30,7 +30,9 @@ Instead of cc you can use any other unique identifier for your template.
 Now you can add the new view helper. In the minimal version you must assign a latitude and longitude in the decimal degree notation:
 
 
-### Degree notation with decimals
+### Output formats
+
+#### Degree notation with decimals
 
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" />
 
@@ -45,7 +47,7 @@ The next example is identical, the output format parameter defaults to "degree":
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degree" />
 
 
-### Degree/minutes notation
+#### Degree/minutes notation
 
 To convert the coordinate pair into the degree/minutes format just add the output format parameter to the view helper:
 
@@ -54,7 +56,7 @@ To convert the coordinate pair into the degree/minutes format just add the outpu
 Now you get the result: `N 49°29.22666', E 8°27.97668'`
 
 
-### Degree/minutes/seconds notation
+#### Degree/minutes/seconds notation
 
 If you want to output the coordinate pair in minutes and seconds just use this syntax:
 
@@ -63,7 +65,7 @@ If you want to output the coordinate pair in minutes and seconds just use this s
 The result is: `N 49° 29' 13.59960", E 8° 27' 58.60080"`
 
 
-### UTM notation
+#### UTM notation
 
 You can also convert the latitude/longitude coordinates to the UTM (Universal Transverse Mercator) notation:
 
@@ -80,6 +82,8 @@ The default number of decimals to show in the coordinates is set to 5. If you wa
 
 The output is: `N 49.4871°, E 8.4663°`
 
+The parameter has no effect in output format "UTM notation".
+
 
 ### Remove trailing zeros
 
@@ -89,6 +93,8 @@ Sometimes the coordinates look nicer when the trailing zeros are stripped. Just 
 
 The output is: `N 49.4871°, E 8.466°`
 
+This parameter has no effect in output format "UTM notation".
+
 
 ### Delimiter
 
@@ -97,6 +103,8 @@ The default delimiter between the two coordinates is the comma with a white spac
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" delimiter=" / " />
 
 You get the result: `N 49.48711° / E 8.46628°`
+
+The parameter has no effect in output format "UTM notation".
 
 
 ### Cardinal points
@@ -113,6 +121,8 @@ Or you like to use the german version?
 
 This outputs: `N 49.48711° / O 8.46628°`
 
+The parameter has no effect in output format "UTM notation".
+
 
 ### Cardinal points position
 
@@ -121,6 +131,8 @@ You can choose, at which position to show the cardinal point, before or after th
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPointsPosition="after" />
 
 Now you get the cardinal point after each coordinate: `49.48711° N, 8.46628° E`
+
+The parameter has no effect in output format "UTM notation".
 
 
 ### Errors
@@ -134,9 +146,7 @@ And get the output:
     Wrong output format (given: somethingNotDefined, allowed: degree, degreeMinutes, degreeMinutesSeconds)
 
 
-Known problems
---------------
-
-None at this time.
+Collaboration
+-------------
 
 If you stumble upon a problem or find a bug, don't hesitate to contact me. You can also provide a patch or feature via a pull request.
