@@ -155,6 +155,24 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
     /**
      * @test
      */
+    public function viewHelperFormatsDegreeWithRemovingTrailingZerosCorrectlyAvoidingDotAtEnd() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.000',
+            '8.000',
+            'degree',
+            'N|S|E|W',
+            'before',
+            5,
+            TRUE
+        );
+        $this->assertEquals('N 49°, E 8°', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
     public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectly() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
@@ -173,6 +191,42 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
     /**
      * @test
      */
+    public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectlyAvoidingDotAtEnd() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.483333',
+            '8.45',
+            'degreeMinutes',
+            'N|S|E|W',
+            'before',
+            3,
+            TRUE
+        );
+        $this->assertEquals('N 49°29\', E 8°27\'', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
+    public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectlyAvoidingDegreeAtEnd() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.000',
+            '8.000',
+            'degreeMinutes',
+            'N|S|E|W',
+            'before',
+            3,
+            TRUE
+        );
+        $this->assertEquals('N 49°, E 8°', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
     public function viewHelperFormatsDegreeMinutesSecondsWithRemovingTrailingZerosCorrectly() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
@@ -185,6 +239,78 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             TRUE
         );
         $this->assertEquals('N 49° 29\' 13.6&quot;, E 8° 27\' 58.6&quot;', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
+    public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyAvoidingDotAtEnd() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.486944',
+            '8.466111',
+            'degreeMinutesSeconds',
+            'N|S|E|W',
+            'before',
+            2,
+            TRUE
+        );
+        $this->assertEquals('N 49° 29\' 13&quot;, E 8° 27\' 58&quot;', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
+    public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyAvoidingEmptySeconds() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.48333334',
+            '8.450001',
+            'degreeMinutesSeconds',
+            'N|S|E|W',
+            'before',
+            2,
+            TRUE
+        );
+        $this->assertEquals('N 49° 29\', E 8° 27\'', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
+    public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyAvoidingEmptyMinutesAndSeconds() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.0',
+            '8.0',
+            'degreeMinutesSeconds',
+            'N|S|E|W',
+            'before',
+            2,
+            TRUE
+        );
+        $this->assertEquals('N 49°, E 8°', $actualResult);
+    }
+
+
+    /**
+     * @test
+     */
+    public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyWithZeroMinutes() {
+        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $actualResult = $viewHelper->render(
+            '49.003778',
+            '8.016278',
+            'degreeMinutesSeconds',
+            'N|S|E|W',
+            'before',
+            2,
+            TRUE
+        );
+        $this->assertEquals('N 49° 0\' 13.6&quot;, E 8° 0\' 58.6&quot;', $actualResult);
     }
 
 

@@ -116,8 +116,8 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
         $newLongitude = number_format(abs($longitude), $numberOfDecimals);
 
         if ($removeTrailingZeros) {
-            $newLatitude = rtrim($newLatitude, '0');
-            $newLongitude = rtrim($newLongitude, '0');
+            $newLatitude = rtrim($newLatitude, '0.');
+            $newLongitude = rtrim($newLongitude, '0.');
         }
 
         $newLatitude .=  '°';
@@ -153,16 +153,21 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
         $longitudeDegrees = abs((int) $longitude);
         $longitudeMinutes = number_format(abs(($longitude - (int) $longitude) * 60), $numberOfDecimals);
 
+        if ($removeTrailingZeros) {
+            $latitudeMinutes = rtrim($latitudeMinutes, '0.');
+            $longitudeMinutes = rtrim($longitudeMinutes, '0.');
+        }
+
         $newLatitude = $latitudeDegrees . '°' . $latitudeMinutes;
         $newLongitude = $longitudeDegrees . '°' . $longitudeMinutes;
 
-        if ($removeTrailingZeros) {
-            $newLatitude = rtrim($newLatitude, '0');
-            $newLongitude = rtrim($newLongitude, '0');
+        if ($latitudeMinutes) {
+            $newLatitude .=  '\'';
         }
 
-        $newLatitude .=  '\'';
-        $newLongitude .=  '\'';
+        if ($longitudeMinutes) {
+            $newLongitude .=  '\'';
+        }
 
         return $this->getFormattedLatitudeLongitude(
             $newLatitude,
@@ -198,16 +203,32 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
         $longitudeSeconds = number_format(abs(($longitudeMinutes - (int) $longitudeMinutes) * 60), $numberOfDecimals);
         $longitudeMinutes = (int) $longitudeMinutes;
 
-        $newLatitude = $latitudeDegrees . '° ' . $latitudeMinutes . '\' ' . $latitudeSeconds;
-        $newLongitude = $longitudeDegrees . '° ' . $longitudeMinutes . '\' ' . $longitudeSeconds;
+        $newLatitude = $latitudeDegrees . '°';
+        $newLongitude = $longitudeDegrees . '°';
 
         if ($removeTrailingZeros) {
-            $newLatitude = rtrim($newLatitude, '0');
-            $newLongitude = rtrim($newLongitude, '0');
-        }
+            $latitudeSeconds = rtrim($latitudeSeconds, '0.');
+            $longitudeSeconds = rtrim($longitudeSeconds, '0.');
 
-        $newLatitude .=  '"';
-        $newLongitude .=  '"';
+            if (empty($latitudeSeconds)) {
+                if ($latitudeMinutes !== 0) {
+                    $newLatitude .= ' ' . $latitudeMinutes . '\'';
+                }
+            } else {
+                $newLatitude .= ' ' . $latitudeMinutes . '\' ' . $latitudeSeconds . '"';
+            }
+
+            if (empty($longitudeSeconds)) {
+                if ($longitudeMinutes !== 0) {
+                    $newLongitude .= ' ' . $longitudeMinutes . '\'';
+                }
+            } else {
+                $newLongitude .= ' ' . $longitudeMinutes . '\' ' . $longitudeSeconds . '"';
+            }
+        } else {
+            $newLatitude .= ' ' . $latitudeMinutes . '\' ' . $latitudeSeconds . '"';
+            $newLongitude .= ' ' . $longitudeMinutes . '\' ' . $longitudeSeconds . '"';
+        }
 
         return $this->getFormattedLatitudeLongitude(
             $newLatitude,
