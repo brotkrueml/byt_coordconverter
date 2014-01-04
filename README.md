@@ -53,7 +53,7 @@ To convert the coordinate pair into the degree/minutes format just add the outpu
 
     <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degreeMinutes" />
 
-Now you get the result: `N 49°29.22666', E 8°27.97668'`
+Now you get the result: `N 49° 29.22666', E 8° 27.97668'`
 
 
 #### Degree/minutes/seconds notation
@@ -143,7 +143,7 @@ If you enter an invalid value for a parameter no output is shown. You can get th
 
 And get the output:
 
-    Wrong output format (given: somethingNotDefined, allowed: degree, degreeMinutes, degreeMinutesSeconds)
+    Wrong output format (given: somethingNotDefined, allowed: degree, degreeMinutes, degreeMinutesSeconds, UTM)
 
 
 Collaboration

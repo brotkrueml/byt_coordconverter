@@ -158,15 +158,15 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
             $longitudeMinutes = rtrim($longitudeMinutes, '0.');
         }
 
-        $newLatitude = $latitudeDegrees . '°' . $latitudeMinutes;
-        $newLongitude = $longitudeDegrees . '°' . $longitudeMinutes;
+        $newLatitude = $latitudeDegrees . '°';
+        $newLongitude = $longitudeDegrees . '°';
 
         if ($latitudeMinutes) {
-            $newLatitude .=  '\'';
+            $newLatitude .=  ' ' . $latitudeMinutes . '\'';
         }
 
         if ($longitudeMinutes) {
-            $newLongitude .=  '\'';
+            $newLongitude .=  ' ' . $longitudeMinutes . '\'';
         }
 
         return $this->getFormattedLatitudeLongitude(
