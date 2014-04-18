@@ -71,24 +71,14 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
         $cardinalPointsArray = explode('|', $cardinalPoints);
         $numberOfDecimals = (int) $numberOfDecimals;
 
-        if (($latitude > 90.0) || ($latitude < -90.0)) {
-            return $showErrors ? 'Wrong latitude: must be between 90.0 and -90.0 (given: ' . htmlspecialchars($latitude) . ')' : '';
-        }
+        try {
+            $this->checkInputParameters($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $outputFormat);
+        } catch (\InvalidArgumentException $e) {
+            if ($showErrors) {
+                return $e->getMessage();
+            }
 
-        if (($longitude > 180.0) || ($longitude < -180.0)) {
-            return $showErrors ? 'Wrong longitude: must be between 180.0 and -180.0 (given: ' . htmlspecialchars($longitude) . ')' : '';
-        }
-
-        if (count($cardinalPointsArray) !== 4) {
-            return $showErrors ? 'Wrong number of parameters for cardinal points: must be 4 (separated by |, given: ' . htmlspecialchars($cardinalPoints) . ')' : '';
-        }
-
-        if (($cardinalPointsPosition !== 'before') && ($cardinalPointsPosition !== 'after')) {
-            return $showErrors ? 'Wrong cardinal points position: must be before or after (given: ' . htmlspecialchars($cardinalPointsPosition) . ')' : '';
-        }
-
-        if (!in_array($outputFormat, $this->allowedOutputFormats)) {
-            return $showErrors ? 'Wrong output format (given: ' . htmlspecialchars($outputFormat) . ', allowed: ' . implode(', ', $this->allowedOutputFormats) . ')' : '';
+            return '';
         }
 
         $functionCall = 'get' . ucfirst($outputFormat) . 'Notation';
@@ -331,5 +321,54 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
         }
 
         return $west;
+    }
+
+
+
+    /**
+     * Check the input parameters of the view helper
+     *
+     * @param $latitude
+     * @param $longitude
+     * @param $cardinalPoints
+     * @param $cardinalPointsPosition
+     * @param $outputFormat
+     * @return bool
+     * @throws \InvalidArgumentException
+     */
+    protected function checkInputParameters($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $outputFormat)
+    {
+        if (($latitude > 90.0) || ($latitude < -90.0)) {
+            throw new \InvalidArgumentException(
+                'Wrong latitude: must be between 90.0 and -90.0 (given: ' . htmlspecialchars($latitude) . ')'
+            );
+        }
+
+        if (($longitude > 180.0) || ($longitude < -180.0)) {
+            throw new \InvalidArgumentException(
+                'Wrong longitude: must be between 180.0 and -180.0 (given: ' . htmlspecialchars($longitude) . ')'
+            );
+        }
+
+        $cardinalPointsArray = explode('|', $cardinalPoints);
+        if (count($cardinalPointsArray) !== 4) {
+            throw new \InvalidArgumentException(
+                'Wrong number of parameters for cardinal points: must be 4 (separated by |, given: ' . htmlspecialchars($cardinalPoints) . ')'
+            );
+        }
+
+        if (($cardinalPointsPosition !== 'before') && ($cardinalPointsPosition !== 'after')) {
+            throw new \InvalidArgumentException(
+                'Wrong cardinal points position: must be before or after (given: ' . htmlspecialchars($cardinalPointsPosition) . ')'
+            );
+        }
+
+        if (!in_array($outputFormat, $this->allowedOutputFormats)) {
+            throw new \InvalidArgumentException(
+                'Wrong output format (given: ' . htmlspecialchars($outputFormat) . ', allowed: ' . implode(', ', $this->allowedOutputFormats) . ')'
+            );
+        }
+
+        return TRUE;
     }
 }
