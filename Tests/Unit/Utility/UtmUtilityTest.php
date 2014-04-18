@@ -4,7 +4,7 @@ namespace Byterror\BytCoordconverter\Tests\Unit\Utility;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Chris Müller <byt3error@web.de>
+ *  (c) 2013-2014 Chris Müller <byt3error@web.de>
  *
  *  All rights reserved
  *
