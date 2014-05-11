@@ -25,6 +25,7 @@ namespace Byterror\BytCoordconverter\Tests\Unit\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
+use \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
 
 class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
@@ -32,7 +33,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
             '8.466278'
@@ -45,7 +46,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
             '8.466278',
@@ -59,7 +60,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesSecondsCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
             '8.466278',
@@ -73,7 +74,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsUtmCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
             '8.466278',
@@ -87,7 +88,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeWithNumberOfDecimalsCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
             '8.466278',
@@ -104,7 +105,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesWithNumberOfDecimalsCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
             '8.466278',
@@ -121,7 +122,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesSecondsWithNumberOfDecimalsCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
             '8.466278',
@@ -138,7 +139,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeWithRemovingTrailingZerosCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487000',
             '8.466201',
@@ -156,7 +157,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeWithRemovingTrailingZerosCorrectlyAvoidingDotAtEnd() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.000',
             '8.000',
@@ -174,7 +175,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487',
             '8.466',
@@ -192,7 +193,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectlyAvoidingDotAtEnd() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.483333',
             '8.45',
@@ -210,7 +211,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectlyAvoidingDegreeAtEnd() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.000',
             '8.000',
@@ -228,7 +229,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesSecondsWithRemovingTrailingZerosCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
             '8.466278',
@@ -246,7 +247,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyAvoidingDotAtEnd() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.486944',
             '8.466111',
@@ -264,7 +265,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyAvoidingEmptySeconds() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.48333334',
             '8.450001',
@@ -282,7 +283,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyAvoidingEmptyMinutesAndSeconds() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.0',
             '8.0',
@@ -300,7 +301,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyWithZeroMinutes() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.003778',
             '8.016278',
@@ -318,7 +319,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperUsesDelimiterCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
         $actualResult = $viewHelper->render(
             '49.487111',
             '8.466278',
@@ -337,7 +338,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperUsesCardinalPointsNorthAndEastCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '49.487111',
@@ -353,7 +354,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperUsesCardinalPointsSouthAndWestCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '-53.163494',
@@ -369,7 +370,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperUsesCardinalPointsPositionBeforeCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '49.487111',
@@ -386,7 +387,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperUsesCardinalPointsPositionAfterCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '49.487111',
@@ -403,7 +404,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputIsHtmlspecialchardCorrectly() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '49.487111',
@@ -419,7 +420,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperUsesCardinalPointsPositionAndOutputsErrorOnInvalidParameter() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '49.487111',
@@ -440,7 +441,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenLatitudeExceedsPlus90DegreeAndErrorsShouldBeShown() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '90.01',
@@ -461,7 +462,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenLatitudeExceedsPlus90DegreeAndErrorsShouldBeSuppressed() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '90.01',
@@ -482,7 +483,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenLatitudeExceedsMinus90DegreeAndErrorsShouldBeShown() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '-90.01',
@@ -503,7 +504,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenLatitudeExceedsMinus90DegreeAndErrorsShouldBeSuppressed() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '-90.01',
@@ -524,7 +525,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenLongitudeExceedsPlus180DegreeAndErrorsShouldBeShown() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '0.0',
@@ -545,7 +546,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenLongitudeExceedsPlus180DegreeAndErrorsShouldBeSuppressed() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '0.0',
@@ -566,7 +567,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenLongitudeExceedsMinus180DegreeAndErrorsShouldBeShown() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '0.0',
@@ -587,7 +588,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenLongitudeExceedsMinus180DegreeAndErrorsShouldBeSuppressed() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '0.0',
@@ -608,7 +609,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenFormatIsInvalidAndErrorsShouldBeShown() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '49.487111',
@@ -629,7 +630,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenFormatIsInvalidAndErrorsShouldBeSuppressed() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '49.487111',
@@ -650,7 +651,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenNumberOfParametersInCardinalPointsAreInvalidAndErrorsShouldBeShown() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '49.487111',
@@ -671,7 +672,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
      * @test
      */
     public function viewHelperOutputsErrorWhenNumberOfParametersInCardinalPointsAreInvalidAndErrorsShouldBeSuppressed() {
-        $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
+        $viewHelper = new CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
             '49.487111',
