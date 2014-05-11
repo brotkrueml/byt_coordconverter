@@ -418,7 +418,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
     /**
      * @test
      */
-    public function viewHelperUsesCardinalPointsPositionAndOutputsErrorOnWrongParameter() {
+    public function viewHelperUsesCardinalPointsPositionAndOutputsErrorOnInvalidParameter() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
@@ -432,7 +432,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             '',
             TRUE
         );
-        $this->assertContains('wrong cardinal points position', $actualResult, '', TRUE);
+        $this->assertContains('invalid cardinal points position', $actualResult, '', TRUE);
     }
 
 
@@ -453,7 +453,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             ', ',
             TRUE
         );
-        $this->assertContains('wrong latitude', $actualResult, '', TRUE);
+        $this->assertContains('invalid latitude', $actualResult, '', TRUE);
     }
 
 
@@ -495,7 +495,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             ', ',
             TRUE
         );
-        $this->assertContains('wrong latitude', $actualResult, '', TRUE);
+        $this->assertContains('invalid latitude', $actualResult, '', TRUE);
     }
 
 
@@ -537,7 +537,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             ', ',
             TRUE
         );
-        $this->assertContains('wrong longitude', $actualResult, '', TRUE);
+        $this->assertContains('invalid longitude', $actualResult, '', TRUE);
     }
 
 
@@ -579,7 +579,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             ', ',
             TRUE
         );
-        $this->assertContains('wrong longitude', $actualResult, '', TRUE);
+        $this->assertContains('invalid longitude', $actualResult, '', TRUE);
     }
 
 
@@ -607,7 +607,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
     /**
      * @test
      */
-    public function viewHelperOutputsErrorWhenFormatIsWrongAndErrorsShouldBeShown() {
+    public function viewHelperOutputsErrorWhenFormatIsInvalidAndErrorsShouldBeShown() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
@@ -621,14 +621,14 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             ', ',
             TRUE
         );
-        $this->assertContains('wrong output format', $actualResult, '', TRUE);
+        $this->assertContains('invalid output format', $actualResult, '', TRUE);
     }
 
 
     /**
      * @test
      */
-    public function viewHelperOutputsErrorWhenFormatIsWrongAndErrorsShouldBeSuppressed() {
+    public function viewHelperOutputsErrorWhenFormatIsInvalidAndErrorsShouldBeSuppressed() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
@@ -649,7 +649,7 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
     /**
      * @test
      */
-    public function viewHelperOutputsErrorWhenNumberOfParametersInCardinalPointsAreWrongAndErrorsShouldBeShown() {
+    public function viewHelperOutputsErrorWhenNumberOfParametersInCardinalPointsAreInvalidAndErrorsShouldBeShown() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(
@@ -663,14 +663,14 @@ class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\Ba
             ', ',
             TRUE
         );
-        $this->assertContains('wrong number', $actualResult, '', TRUE);
+        $this->assertContains('invalid number', $actualResult, '', TRUE);
     }
 
 
     /**
      * @test
      */
-    public function viewHelperOutputsErrorWhenNumberOfParametersInCardinalPointsAreWrongAndErrorsShouldBeSuppressed() {
+    public function viewHelperOutputsErrorWhenNumberOfParametersInCardinalPointsAreInvalidAndErrorsShouldBeSuppressed() {
         $viewHelper = new \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper();
 
         $actualResult = $viewHelper->render(

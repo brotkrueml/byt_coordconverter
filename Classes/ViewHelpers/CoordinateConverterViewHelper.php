@@ -26,6 +26,7 @@ namespace Byterror\BytCoordconverter\ViewHelpers;
 * ************************************************************* */
 
 use Byterror\BytCoordconverter\Utility\UtmUtility;
+use Byterror\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
 
 
 /**
@@ -34,22 +35,12 @@ use Byterror\BytCoordconverter\Utility\UtmUtility;
  *
  * @author Chris Müller <byt3error@web.de>
  * @package Byt_coordconverter
- * @subpackage ViewHelpers\CoordConverter
  */
 class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
-
     /**
-     * The allowed coordinate formats
-     *
-     * @var array
+     * @var Parameter
      */
-    protected $allowedOutputFormats = array(
-        'degree',
-        'degreeMinutes',
-        'degreeMinutesSeconds',
-        'UTM',
-    );
-
+    protected $parameter;
 
     /**
      * Render method
@@ -66,13 +57,17 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
      * @return string
      */
     public function render($latitude, $longitude, $outputFormat = 'degree', $cardinalPoints = 'N|S|E|W', $cardinalPointsPosition = 'before', $numberOfDecimals = 5, $removeTrailingZeros = FALSE, $delimiter = ', ', $showErrors = FALSE) {
-        $latitude = (float) $latitude;
-        $longitude = (float) $longitude;
-        $cardinalPointsArray = explode('|', $cardinalPoints);
-        $numberOfDecimals = (int) $numberOfDecimals;
-
         try {
-            $this->checkInputParameters($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $outputFormat);
+            $this->parameter = new Parameter(
+                $latitude,
+                $longitude,
+                $outputFormat,
+                $cardinalPoints,
+                $cardinalPointsPosition,
+                $numberOfDecimals,
+                $removeTrailingZeros,
+                $delimiter
+            );
         } catch (\InvalidArgumentException $e) {
             if ($showErrors) {
                 return $e->getMessage();
@@ -81,31 +76,28 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
             return '';
         }
 
-        $functionCall = 'get' . ucfirst($outputFormat) . 'Notation';
+        $functionCall = 'get' . ucfirst($this->parameter->getOutputFormat()) . 'Notation';
 
         return htmlspecialchars(
-            $this->$functionCall($latitude, $longitude, $cardinalPointsArray, $cardinalPointsPosition, $numberOfDecimals, $removeTrailingZeros, $delimiter)
+            $this->$functionCall()
         );
     }
 
 
     /**
-     * Get the decimal notation
-     *
-     * @param float $latitude
-     * @param float $longitude
-     * @param array $cardinalPoints
-     * @param array $cardinalPointsPosition not needed
-     * @param int $numberOfDecimals
-     * @param boolean $removeTrailingZeros
-     * @param string $delimiter
      * @return string
      */
-    protected function getDegreeNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $numberOfDecimals, $removeTrailingZeros, $delimiter) {
-        $newLatitude = number_format(abs($latitude), $numberOfDecimals);
-        $newLongitude = number_format(abs($longitude), $numberOfDecimals);
+    protected function getDegreeNotation() {
+        $newLatitude = number_format(
+            abs($this->parameter->getLatitude()),
+            $this->parameter->getNumberOfDecimals()
+        );
+        $newLongitude = number_format(
+            abs($this->parameter->getLongitude()),
+            $this->parameter->getNumberOfDecimals()
+        );
 
-        if ($removeTrailingZeros) {
+        if ($this->parameter->shouldTrailingZerosBeRemoved()) {
             $newLatitude = rtrim($newLatitude, '0.');
             $newLongitude = rtrim($newLongitude, '0.');
         }
@@ -116,34 +108,31 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
         return $this->getFormattedLatitudeLongitude(
             $newLatitude,
             $newLongitude,
-            $this->getCardinalPointForLatitude($latitude, $cardinalPoints[0], $cardinalPoints[1]),
-            $this->getCardinalPointForLongitude($longitude, $cardinalPoints[2], $cardinalPoints[3]),
-            $cardinalPointsPosition,
-            $delimiter
+            $this->parameter->getCardinalPointForLatitude(),
+            $this->parameter->getCardinalPointForLongitude(),
+            $this->parameter->getCardinalPointsPosition(),
+            $this->parameter->getDelimiter()
         );
     }
 
 
     /**
-     * Get the degree with minutes notation
-     *
-     * @param float $latitude
-     * @param float $longitude
-     * @param array $cardinalPoints
-     * @param array $cardinalPointsPosition not needed
-     * @param int $numberOfDecimals
-     * @param boolean $removeTrailingZeros
-     * @param string $delimiter
      * @return string
      */
-    protected function getDegreeMinutesNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $numberOfDecimals, $removeTrailingZeros, $delimiter) {
-        $latitudeDegrees = abs((int) $latitude);
-        $latitudeMinutes = number_format(abs(($latitude - (int) $latitude) * 60), $numberOfDecimals);
+    protected function getDegreeMinutesNotation() {
+        $latitudeDegrees = abs((int) $this->parameter->getLatitude());
+        $latitudeMinutes = number_format(
+            abs(($this->parameter->getLatitude() - (int) $this->parameter->getLatitude()) * 60),
+            $this->parameter->getNumberOfDecimals()
+        );
 
-        $longitudeDegrees = abs((int) $longitude);
-        $longitudeMinutes = number_format(abs(($longitude - (int) $longitude) * 60), $numberOfDecimals);
+        $longitudeDegrees = abs((int) $this->parameter->getLongitude());
+        $longitudeMinutes = number_format(
+            abs(($this->parameter->getLongitude() - (int) $this->parameter->getLongitude()) * 60),
+            $this->parameter->getNumberOfDecimals()
+        );
 
-        if ($removeTrailingZeros) {
+        if ($this->parameter->shouldTrailingZerosBeRemoved()) {
             $latitudeMinutes = rtrim($latitudeMinutes, '0.');
             $longitudeMinutes = rtrim($longitudeMinutes, '0.');
         }
@@ -162,41 +151,38 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
         return $this->getFormattedLatitudeLongitude(
             $newLatitude,
             $newLongitude,
-            $this->getCardinalPointForLatitude($latitude, $cardinalPoints[0], $cardinalPoints[1]),
-            $this->getCardinalPointForLongitude($longitude, $cardinalPoints[2], $cardinalPoints[3]),
-            $cardinalPointsPosition,
-            $delimiter
+            $this->parameter->getCardinalPointForLatitude(),
+            $this->parameter->getCardinalPointForLongitude(),
+            $this->parameter->getCardinalPointsPosition(),
+            $this->parameter->getDelimiter()
         );
     }
 
 
     /**
-     * Get the degree with minutes and seconds notation
-     *
-     * @param float $latitude
-     * @param float $longitude
-     * @param array $cardinalPoints
-     * @param array $cardinalPointsPosition not needed
-     * @param int $numberOfDecimals
-     * @param boolean $removeTrailingZeros
-     * @param string $delimiter
      * @return string
      */
-    protected function getDegreeMinutesSecondsNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $numberOfDecimals, $removeTrailingZeros, $delimiter) {
-        $latitudeDegrees = abs((int) $latitude);
-        $latitudeMinutes = abs(($latitude - (int) $latitude) * 60);
-        $latitudeSeconds = number_format(abs(($latitudeMinutes - (int) $latitudeMinutes) * 60), $numberOfDecimals);
+    protected function getDegreeMinutesSecondsNotation() {
+        $latitudeDegrees = abs((int) $this->parameter->getLatitude());
+        $latitudeMinutes = abs(($this->parameter->getLatitude() - (int) $this->parameter->getLatitude()) * 60);
+        $latitudeSeconds = number_format(
+            abs(($latitudeMinutes - (int) $latitudeMinutes) * 60),
+            $this->parameter->getNumberOfDecimals()
+        );
         $latitudeMinutes = (int) $latitudeMinutes;
 
-        $longitudeDegrees = abs((int) $longitude);
-        $longitudeMinutes = abs(($longitude - (int) $longitude) * 60);
-        $longitudeSeconds = number_format(abs(($longitudeMinutes - (int) $longitudeMinutes) * 60), $numberOfDecimals);
+        $longitudeDegrees = abs((int) $this->parameter->getLongitude());
+        $longitudeMinutes = abs(($this->parameter->getLongitude() - (int) $this->parameter->getLongitude()) * 60);
+        $longitudeSeconds = number_format(
+            abs(($longitudeMinutes - (int) $longitudeMinutes) * 60),
+            $this->parameter->getNumberOfDecimals()
+        );
         $longitudeMinutes = (int) $longitudeMinutes;
 
         $newLatitude = $latitudeDegrees . '°';
         $newLongitude = $longitudeDegrees . '°';
 
-        if ($removeTrailingZeros) {
+        if ($this->parameter->shouldTrailingZerosBeRemoved()) {
             $latitudeSeconds = rtrim($latitudeSeconds, '0.');
             $longitudeSeconds = rtrim($longitudeSeconds, '0.');
 
@@ -223,37 +209,31 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
         return $this->getFormattedLatitudeLongitude(
             $newLatitude,
             $newLongitude,
-            $this->getCardinalPointForLatitude($latitude, $cardinalPoints[0], $cardinalPoints[1]),
-            $this->getCardinalPointForLongitude($longitude, $cardinalPoints[2], $cardinalPoints[3]),
-            $cardinalPointsPosition,
-            $delimiter
+            $this->parameter->getCardinalPointForLatitude(),
+            $this->parameter->getCardinalPointForLongitude(),
+            $this->parameter->getCardinalPointsPosition(),
+            $this->parameter->getDelimiter()
         );
     }
 
 
 
     /**
-     * Get the UTM notation
-     *
-     * @param float $latitude
-     * @param float $longitude
-     * @param array $cardinalPoints not needed
-     * @param array $cardinalPointsPosition not needed
-     * @param int $numberOfDecimals not needed
-     * @param boolean $removeTrailingZeros not needed
-     * @param string $delimiter not needed
      * @return string
      */
-    protected function getUTMNotation($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $numberOfDecimals, $removeTrailingZeros, $delimiter) {
-        return UtmUtility::getUtmFromLatitudeLongitude($latitude, $longitude);
+    protected function getUTMNotation() {
+        return UtmUtility::getUtmFromLatitudeLongitude(
+            $this->parameter->getLatitude(),
+            $this->parameter->getLongitude()
+        );
     }
 
 
     /**
      * Get the formatted latitude/longitude
      *
-     * @param float|string $latitude
-     * @param float|string $longitude
+     * @param string $latitude
+     * @param string $longitude
      * @param string $northOrSouth
      * @param string $eastOrWest
      * @param string $cardinalPointPosition
@@ -286,89 +266,5 @@ class CoordinateConverterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
         }
 
         return $formattedCoordinate;
-    }
-
-
-    /**
-     * Get the cardinal point for a latitude
-     *
-     * @param float $latitude
-     * @param string $north
-     * @param string $south
-     * @return string
-     */
-    protected function getCardinalPointForLatitude($latitude, $north, $south) {
-        if ($latitude >= 0.0) {
-            return $north;
-        }
-
-        return $south;
-    }
-
-
-
-    /**
-     * Get the cardinal point for a longitude
-     *
-     * @param float $longitude
-     * @param string $east
-     * @param string $west
-     * @return string
-     */
-    protected function getCardinalPointForLongitude($longitude, $east, $west) {
-        if ($longitude >= 0.0) {
-            return $east;
-        }
-
-        return $west;
-    }
-
-
-
-    /**
-     * Check the input parameters of the view helper
-     *
-     * @param $latitude
-     * @param $longitude
-     * @param $cardinalPoints
-     * @param $cardinalPointsPosition
-     * @param $outputFormat
-     * @return bool
-     * @throws \InvalidArgumentException
-     */
-    protected function checkInputParameters($latitude, $longitude, $cardinalPoints, $cardinalPointsPosition, $outputFormat)
-    {
-        if (($latitude > 90.0) || ($latitude < -90.0)) {
-            throw new \InvalidArgumentException(
-                'Wrong latitude: must be between 90.0 and -90.0 (given: ' . htmlspecialchars($latitude) . ')'
-            );
-        }
-
-        if (($longitude > 180.0) || ($longitude < -180.0)) {
-            throw new \InvalidArgumentException(
-                'Wrong longitude: must be between 180.0 and -180.0 (given: ' . htmlspecialchars($longitude) . ')'
-            );
-        }
-
-        $cardinalPointsArray = explode('|', $cardinalPoints);
-        if (count($cardinalPointsArray) !== 4) {
-            throw new \InvalidArgumentException(
-                'Wrong number of parameters for cardinal points: must be 4 (separated by |, given: ' . htmlspecialchars($cardinalPoints) . ')'
-            );
-        }
-
-        if (($cardinalPointsPosition !== 'before') && ($cardinalPointsPosition !== 'after')) {
-            throw new \InvalidArgumentException(
-                'Wrong cardinal points position: must be before or after (given: ' . htmlspecialchars($cardinalPointsPosition) . ')'
-            );
-        }
-
-        if (!in_array($outputFormat, $this->allowedOutputFormats)) {
-            throw new \InvalidArgumentException(
-                'Wrong output format (given: ' . htmlspecialchars($outputFormat) . ', allowed: ' . implode(', ', $this->allowedOutputFormats) . ')'
-            );
-        }
-
-        return TRUE;
     }
 }
