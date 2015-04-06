@@ -7,7 +7,7 @@ This is a TYPO3 extension for converting geospacial coordinates from one format 
 Requirements
 ------------
 
-This extension requires TYPO3 version 6.0+.
+This extension requires TYPO3 version 6.2+.
 
 
 Installation
