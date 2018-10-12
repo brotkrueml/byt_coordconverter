@@ -1,41 +1,15 @@
 <?php
+
 namespace Byterror\BytCoordconverter\Utility;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2013-2014 Chris Müller <byt3error@web.de>
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
-
-
 /**
- * Utility functions for converting in UTM
+ * This file is part of the "byt_coordconverter" Extension for TYPO3 CMS.
  *
- * Based on PHPcoord by Jonathan Stott (http://www.jstott.me.uk/phpcoord/)
- *
- * @author Chris Müller <byt3error@web.de>
- * @package Byt_coordconverter
- * @subpackage ViewHelpers\CoordConverter
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
  */
-class UtmUtility {
+class UtmUtility
+{
 
     /**
      * The major (equitorial) axis
@@ -68,28 +42,29 @@ class UtmUtility {
      * @param float $longitude
      * @return string
      */
-    public static function getUtmFromLatitudeLongitude($latitude, $longitude) {
-        $eccentricity = UtmUtility::getEccentricityOfReferenceEllipsoid();
+    public static function getUtmFromLatitudeLongitude($latitude, $longitude)
+    {
+        $eccentricity = static::getEccentricityOfReferenceEllipsoid();
 
         $latitudeRad = $latitudeRad = $latitude * (pi() / 180.0);
         $longitudeRad = $longitude * (pi() / 180.0);
 
-        $longitudinalZone = UtmUtility::getLongitudinalZone($latitude, $longitude);
+        $longitudinalZone = static::getLongitudinalZone($latitude, $longitude);
 
         $longitudeOrigin = ($longitudinalZone - 1) * 6 - 180 + 3;
         $longitudeOriginRad = $longitudeOrigin * (pi() / 180.0);
 
-        $utmZone = UtmUtility::getLatitudinalZone($latitude);
+        $utmZone = static::getLatitudinalZone($latitude);
 
         $eccentricityPrimeSquared = ($eccentricity) / (1 - $eccentricity);
 
-        $n = UtmUtility::ELLIPSOID_MAJOR_AXIS / sqrt(1 - $eccentricity * sin($latitudeRad) * sin($latitudeRad));
+        $n = static::ELLIPSOID_MAJOR_AXIS / sqrt(1 - $eccentricity * sin($latitudeRad) * sin($latitudeRad));
         $t = tan($latitudeRad) * tan($latitudeRad);
         $c = $eccentricityPrimeSquared * cos($latitudeRad) * cos($latitudeRad);
         $A = cos($latitudeRad) * ($longitudeRad - $longitudeOriginRad);
 
         $M =
-            UtmUtility::ELLIPSOID_MAJOR_AXIS
+            static::ELLIPSOID_MAJOR_AXIS
             * ((1
                     - $eccentricity / 4
                     - 3 * $eccentricity * $eccentricity / 64
@@ -106,7 +81,7 @@ class UtmUtility {
                 * sin(6 * $latitudeRad));
 
         $utmEasting =
-            (double) (UtmUtility::SCALING_FACTOR
+            (double)(static::SCALING_FACTOR
                 * $n
                 * ($A
                     + (1 - $t + $c) * pow($A, 3.0) / 6
@@ -116,7 +91,7 @@ class UtmUtility {
                 + 500000.0);
 
         $utmNorthing =
-            (double) (UtmUtility::SCALING_FACTOR
+            (double)(static::SCALING_FACTOR
                 * ($M
                     + $n
                     * tan($latitudeRad)
@@ -140,7 +115,8 @@ class UtmUtility {
      *
      * @return float
      */
-    public static function getEccentricityOfReferenceEllipsoid() {
+    public static function getEccentricityOfReferenceEllipsoid()
+    {
         return ((self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS) - (self::ELLIPSOID_MINOR_AXIS * self::ELLIPSOID_MINOR_AXIS)) / (self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS);
     }
 
@@ -153,8 +129,9 @@ class UtmUtility {
      * @param float $longitude
      * @return int
      */
-    public static function getLongitudinalZone($latitude, $longitude) {
-        $longitudeZone = (int) (($longitude + 180.0) / 6.0) + 1;
+    public static function getLongitudinalZone($latitude, $longitude)
+    {
+        $longitudeZone = (int)(($longitude + 180.0) / 6.0) + 1;
 
         if (($latitude >= 56.0) && ($latitude < 64.0)
             && ($longitude >= 3.0) && ($longitude < 12.0)) {
@@ -163,6 +140,7 @@ class UtmUtility {
 
         // Special zones for Svalbard
         if (($latitude >= 72.0) && ($latitude < 84.0)) {
+            // @formatter:off
             if (($longitude >= 0.0) && ($longitude < 9.0)) {
                 $longitudeZone = 31;
             } else if (($longitude >= 9.0) && ($longitude < 21.0)) {
@@ -172,20 +150,22 @@ class UtmUtility {
             } else if (($longitude >= 33.0) && ($longitude < 42.0)) {
                 $longitudeZone = 37;
             }
+            // @formatter:on
         }
 
         return $longitudeZone;
     }
 
 
-
     /**
      *  Work out the UTM latitudinal zone from the latitude
      *
-     * @param latitude
+     * @param string latitude
      * @return string
      */
-    public static function getLatitudinalZone($latitude) {
+    public static function getLatitudinalZone($latitude)
+    {
+        // @formatter:off
         if ((84 >= $latitude) && ($latitude >= 72)) {
             return 'X';
         } else if ((72 > $latitude) && ($latitude >= 64)) {
@@ -229,5 +209,6 @@ class UtmUtility {
         }
 
         return 'Z';
+        // @formatter:on
     }
 }

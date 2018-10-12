@@ -1,27 +1,24 @@
 <?php
 
-$EM_CONF[$_EXTKEY] = array(
+/** @noinspection PhpUndefinedVariableInspection */
+$EM_CONF[$_EXTKEY] = [
     'title' => 'Coordinate Converter',
     'description' => 'View helper for converting geospatial coordinates from one format into another',
     'category' => 'fe',
     'author' => 'Chris Müller',
-    'author_email' => 'chris@byterror.de',
+    'author_email' => 'typo3@krue.ml',
     'state' => 'stable',
-    'internal' => '',
-    'uploadfolder' => '0',
+    'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
     'version' => '1.0.5',
-    'constraints' => array(
-        'depends' => array(
-            'typo3' => '6.2.0-7.6.99',
-        ),
-        'conflicts' => array(
-        ),
-        'suggests' => array(
-        ),
-    ),
-);
-
-
-?>
+    'constraints' => [
+        'depends' => [
+            'typo3' => '8.7.0-9.5.99',
+        ],
+        'conflicts' => [
+        ],
+        'suggests' => [
+        ],
+    ],
+];
