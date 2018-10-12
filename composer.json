@@ -1,0 +1,38 @@
+{
+    "name": "krue-ml/byt_coordconverter",
+    "type": "typo3-cms-extension",
+    "description": "TYPO3 view helper for converting geospatial coordinates from one format into another",
+    "homepage": "https://github.com/krue-ml/byt_coordconverter",
+    "license": ["GPL-2.0+"],
+    "keywords": ["TYPO3", "extension", "coordinate converter"],
+    "authors": [
+        {
+            "name": "Chris Müller",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/krue-ml/byt_coordconverter/issues"
+    },
+    "require": {
+        "typo3/cms-core": "^8.7.0 || ^9.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Byterror\\BytCoordconverter\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Byterror\\BytCoordconverter\\Tests\\": "Tests"
+        }
+    },    "replace": {
+        "byt_coordconverter": "self.version",
+        "typo3-ter/byt_coordconverter": "self.version"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "byt_coordconverter"
+        }
+    }
+}

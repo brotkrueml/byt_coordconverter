@@ -1,23 +1,27 @@
-Coordinate Converter
-====================
+# Coordinate Converter
 
 This is a TYPO3 extension for converting geospacial coordinates from one format into another via a Fluid view helper.
 
 
-Requirements
-------------
+## Requirements
 
 The extension in the recent version requires TYPO3 v8 LTS or TYPO3 v9 LTS.
 
 
-Installation
-------------
+## Installation
 
-Just install this extension like any other extension via the extension manager.
+### Installation via Composer
+
+The recommended way to install this extension is by using [Composer](https://getcomposer.org/). In your Composer based TYPO3 project root, just do
+
+    composer require krue-ml/byt_coordconverter
+
+### Installation as extension from TYPO3 Extension Repository (TER)
+
+Download and install the extension with the extension manager module.
 
 
-Usage
------
+## Usage
 
 ### General
 
@@ -146,7 +150,6 @@ And get the output:
     Wrong output format (given: somethingNotDefined, allowed: degree, degreeMinutes, degreeMinutesSeconds, UTM)
 
 
-Collaboration
--------------
+# Collaboration
 
 If you stumble upon a problem or find a bug, don't hesitate to contact me. You can also provide a patch or feature via a pull request.
