@@ -18,7 +18,7 @@ The extension in version 2.0 works with TYPO3 8 LTS and TYPO3 9 LTS. Use version
 
 The recommended way to install this extension is by using [Composer](https://getcomposer.org/). In your Composer based TYPO3 project root, just do
 
-    composer require brotkrueml/byt_coordconverter
+    composer require brotkrueml/coordconverter
 
 ### Installation as extension from TYPO3 Extension Repository (TER)
 
