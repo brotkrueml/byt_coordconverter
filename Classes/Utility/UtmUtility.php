@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace Byterror\BytCoordconverter\Utility;
+namespace Brotkrueml\BytCoordconverter\Utility;
 
 /**
  * This file is part of the "byt_coordconverter" Extension for TYPO3 CMS.
@@ -35,14 +36,7 @@ class UtmUtility
     const SCALING_FACTOR = 0.9996;
 
 
-    /**
-     * Get the UTM notation from latitude/longitude
-     *
-     * @param float $latitude
-     * @param float $longitude
-     * @return string
-     */
-    public static function getUtmFromLatitudeLongitude($latitude, $longitude)
+    public static function getUtmFromLatitudeLongitude(float $latitude, float $longitude): string
     {
         $eccentricity = static::getEccentricityOfReferenceEllipsoid();
 
@@ -109,13 +103,7 @@ class UtmUtility
         return $longitudinalZone . $utmZone . ' ' . round($utmEasting) . ' ' . round($utmNorthing);
     }
 
-
-    /**
-     * Get the eccentricity of the reference ellipsoid
-     *
-     * @return float
-     */
-    public static function getEccentricityOfReferenceEllipsoid()
+    public static function getEccentricityOfReferenceEllipsoid(): float
     {
         return ((self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS) - (self::ELLIPSOID_MINOR_AXIS * self::ELLIPSOID_MINOR_AXIS)) / (self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS);
     }
@@ -124,12 +112,8 @@ class UtmUtility
     /**
      * Get the longitudinal zone
      * @see http://www.dmap.co.uk/utmworld.htm
-     *
-     * @param float $latitude
-     * @param float $longitude
-     * @return int
      */
-    public static function getLongitudinalZone($latitude, $longitude)
+    public static function getLongitudinalZone(float $latitude, float $longitude): int
     {
         $longitudeZone = (int)(($longitude + 180.0) / 6.0) + 1;
 
@@ -156,14 +140,7 @@ class UtmUtility
         return $longitudeZone;
     }
 
-
-    /**
-     *  Work out the UTM latitudinal zone from the latitude
-     *
-     * @param string latitude
-     * @return string
-     */
-    public static function getLatitudinalZone($latitude)
+    public static function getLatitudinalZone(float $latitude): string
     {
         // @formatter:off
         if ((84 >= $latitude) && ($latitude >= 72)) {

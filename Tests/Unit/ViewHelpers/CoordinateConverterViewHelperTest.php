@@ -1,690 +1,278 @@
 <?php
-namespace Byterror\BytCoordconverter\Tests\Unit\ViewHelpers;
 
-/***************************************************************
- *  Copyright notice
+namespace Brotkrueml\BytCoordconverter\Tests\Unit\ViewHelpers;
+
+use Brotkrueml\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
+
+/**
+ * This file is part of the "byt_coordconverter" Extension for TYPO3 CMS.
  *
- *  (c) 2013-2014 Chris Müller <byt3error@web.de>
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
-
-use \Byterror\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
-
-class CoordinateConverterViewHelperTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+class CoordinateConverterViewHelperTest extends UnitTestCase
+{
+    /**
+     * @var CoordinateConverterViewHelper
+     */
+    private $viewHelper;
 
     /**
-     * @test
+     * @var RenderingContext
      */
-    public function viewHelperFormatsDegreeCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278'
+    private $renderingContextMock;
+
+    protected function setUp()
+    {
+        $this->viewHelper = $this->getAccessibleMock(
+            CoordinateConverterViewHelper::class,
+            null
         );
-        $this->assertEquals('N 49.48711°, E 8.46628°', $actualResult);
+
+        $this->renderingContextMock = $this->getMockBuilder(RenderingContext::class)
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
-
     /**
      * @test
+     * @dataProvider provider
+     *
+     * @param array $arguments
+     * @param string $expected
      */
-    public function viewHelperFormatsDegreeMinutesCorrectly() {
+    public function renderReturnCorrectCoordinatesFormat(array $arguments, string $expected)
+    {
         $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degreeMinutes'
+        $actual = $viewHelper->renderStatic(
+            $arguments,
+            function () {
+            },
+            $this->renderingContextMock
         );
-        $this->assertEquals('N 49° 29.22666\', E 8° 27.97668\'', $actualResult);
+
+        $this->assertEquals($expected, $actual);
     }
 
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesSecondsCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degreeMinutesSeconds'
-        );
-        $this->assertEquals('N 49° 29\' 13.59960&quot;, E 8° 27\' 58.60080&quot;', $actualResult);
+    public function provider()
+    {
+        return [
+            'view helper converts given coordinates to format degree correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                ],
+                'N 49.48711°, E 8.46628°'
+            ],
+            'view helper converts given coordinates to format degreeMinutes correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'degreeMinutes',
+                ],
+                'N 49° 29.22666\', E 8° 27.97668\''
+            ],
+            'view helper converts given coordinates to format degreeMinutesSeconds correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'degreeMinutesSeconds',
+                ],
+                'N 49° 29\' 13.59960", E 8° 27\' 58.60080"'
+            ],
+            'view helper converts given coordinates to format UTM correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'UTM',
+                ],
+                '32U 461344 5481745'
+            ],
+            'view helper converts given coordinates to format degree with numberOfDecimals correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'degree',
+                    'numberOfDecimals' => 3,
+                ],
+                'N 49.487°, E 8.466°'
+            ],
+            'view helper converts given coordinates to format degreeMinutes with numberOfDecimals correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'degreeMinutes',
+                    'numberOfDecimals' => 3,
+                ],
+                'N 49° 29.227\', E 8° 27.977\''
+            ],
+            'view helper converts given coordinates to format degreeMinutesSeconds with numberOfDecimals correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'degreeMinutesSeconds',
+                    'numberOfDecimals' => 1,
+                ],
+                'N 49° 29\' 13.6", E 8° 27\' 58.6"'
+            ],
+            'view helper converts given coordinates to format degree with removeTrailingZeros correctly' => [
+                [
+                    'latitude' => '49.487000',
+                    'longitude' => '8.466201',
+                    'outputFormat' => 'degree',
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49.487°, E 8.4662°'
+            ],
+            'view helper converts given coordinates to format degree with removeTrailingZeros and avoiding dot at the end correctly' => [
+                [
+                    'latitude' => '49.000',
+                    'longitude' => '8.000',
+                    'outputFormat' => 'degree',
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49°, E 8°'
+            ],
+            'view helper converts given coordinates to format degreeMinutes with removeTrailingZeros correctly' => [
+                [
+                    'latitude' => '49.487',
+                    'longitude' => '8.466',
+                    'outputFormat' => 'degreeMinutes',
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49° 29.22\', E 8° 27.96\''
+            ],
+            'view helper converts given coordinates to format degreeMinutes with removeTrailingZeros and avoiding dot at the end correctly' => [
+                [
+                    'latitude' => '49.4833333333',
+                    'longitude' => '8.45',
+                    'outputFormat' => 'degreeMinutes',
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49° 29\', E 8° 27\''
+            ],
+            'view helper converts given coordinates to format degreeMinutes with removeTrailingZeros and avoiding degree at the end correctly' => [
+                [
+                    'latitude' => '49.000',
+                    'longitude' => '8.000',
+                    'outputFormat' => 'degreeMinutes',
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49°, E 8°'
+            ],
+            'view helper converts given coordinates to format degreeMinutesSeconds with removeTrailingZeros correctly' => [
+                [
+                    'latitude' => '49.000',
+                    'longitude' => '8.000',
+                    'outputFormat' => 'degreeMinutesSeconds',
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49°, E 8°'
+            ],
+            'view helper converts given coordinates to format degreeMinutesSeconds with removeTrailingZeros and avoiding dot at the end correctly' => [
+                [
+                    'latitude' => '49.486944',
+                    'longitude' => '8.466111',
+                    'outputFormat' => 'degreeMinutesSeconds',
+                    'numberOfDecimals' => 2,
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49° 29\' 13", E 8° 27\' 58"'
+            ],
+            'view helper converts given coordinates to format degreeMinutesSeconds with removeTrailingZeros and avoiding empty seconds correctly' => [
+                [
+                    'latitude' => '49.48333334',
+                    'longitude' => '8.450001',
+                    'outputFormat' => 'degreeMinutesSeconds',
+                    'numberOfDecimals' => 2,
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49° 29\', E 8° 27\''
+            ],
+            'view helper converts given coordinates to format degreeMinutesSeconds with removeTrailingZeros and avoiding empty minutes and seconds correctly' => [
+                [
+                    'latitude' => '49.0',
+                    'longitude' => '8.0',
+                    'outputFormat' => 'degreeMinutesSeconds',
+                    'numberOfDecimals' => 2,
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49°, E 8°'
+            ],
+            'view helper converts given coordinates to format degreeMinutesSeconds with removeTrailingZeros and zero minutes correctly' => [
+                [
+                    'latitude' => '49.003778',
+                    'longitude' => '8.016278',
+                    'outputFormat' => 'degreeMinutesSeconds',
+                    'numberOfDecimals' => 2,
+                    'removeTrailingZeros' => true,
+                ],
+                'N 49° 0\' 13.6", E 8° 0\' 58.6"'
+            ],
+            'view helper uses delimiter correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'degree',
+                    'delimiter' => ' / ',
+                ],
+                'N 49.48711° / E 8.46628°'
+            ],
+            'view helper uses cardinal points north and east correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'degree',
+                    'cardinalPoints' => 'North|South|East|West'
+                ],
+                'North 49.48711°, East 8.46628°'
+            ],
+            'view helper uses cardinal points south and west correctly' => [
+                [
+                    'latitude' => '-53.163494',
+                    'longitude' => '-70.905071',
+                    'outputFormat' => 'degree',
+                    'cardinalPoints' => 'North|South|East|West'
+                ],
+                'South 53.16349°, West 70.90507°'
+            ],
+            'view helper uses cardinal points position set to before correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'degree',
+                    'cardinalPointsPosition' => 'before'
+                ],
+                'N 49.48711°, E 8.46628°'
+            ],
+            'view helper uses cardinal points position set to after correctly' => [
+                [
+                    'latitude' => '49.487111',
+                    'longitude' => '8.466278',
+                    'outputFormat' => 'degree',
+                    'cardinalPointsPosition' => 'after'
+                ],
+                '49.48711° N, 8.46628° E'
+            ],
+        ];
     }
 
-
     /**
      * @test
+     * @expectedException \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
-    public function viewHelperFormatsUtmCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'UTM'
+    public function renderThrowsViewHelperExceptionOnError()
+    {
+        (new CoordinateConverterViewHelper())->renderStatic(
+            [
+                'latitude' => '200',
+                'longitude' => '8',
+            ],
+            function () {
+            },
+            $this->renderingContextMock
         );
-        $this->assertEquals('32U 461344 5481745', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeWithNumberOfDecimalsCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'N|S|E|W',
-            'before',
-            3
-        );
-        $this->assertEquals('N 49.487°, E 8.466°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesWithNumberOfDecimalsCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degreeMinutes',
-            'N|S|E|W',
-            'before',
-            3
-        );
-        $this->assertEquals('N 49° 29.227\', E 8° 27.977\'', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesSecondsWithNumberOfDecimalsCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degreeMinutesSeconds',
-            'N|S|E|W',
-            'before',
-            1
-        );
-        $this->assertEquals('N 49° 29\' 13.6&quot;, E 8° 27\' 58.6&quot;', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeWithRemovingTrailingZerosCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487000',
-            '8.466201',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            TRUE
-        );
-        $this->assertEquals('N 49.487°, E 8.4662°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeWithRemovingTrailingZerosCorrectlyAvoidingDotAtEnd() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.000',
-            '8.000',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            TRUE
-        );
-        $this->assertEquals('N 49°, E 8°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487',
-            '8.466',
-            'degreeMinutes',
-            'N|S|E|W',
-            'before',
-            3,
-            TRUE
-        );
-        $this->assertEquals('N 49° 29.22\', E 8° 27.96\'', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectlyAvoidingDotAtEnd() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.483333',
-            '8.45',
-            'degreeMinutes',
-            'N|S|E|W',
-            'before',
-            3,
-            TRUE
-        );
-        $this->assertEquals('N 49° 29\', E 8° 27\'', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesWithRemovingTrailingZerosCorrectlyAvoidingDegreeAtEnd() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.000',
-            '8.000',
-            'degreeMinutes',
-            'N|S|E|W',
-            'before',
-            3,
-            TRUE
-        );
-        $this->assertEquals('N 49°, E 8°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesSecondsWithRemovingTrailingZerosCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degreeMinutesSeconds',
-            'N|S|E|W',
-            'before',
-            2,
-            TRUE
-        );
-        $this->assertEquals('N 49° 29\' 13.6&quot;, E 8° 27\' 58.6&quot;', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyAvoidingDotAtEnd() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.486944',
-            '8.466111',
-            'degreeMinutesSeconds',
-            'N|S|E|W',
-            'before',
-            2,
-            TRUE
-        );
-        $this->assertEquals('N 49° 29\' 13&quot;, E 8° 27\' 58&quot;', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyAvoidingEmptySeconds() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.48333334',
-            '8.450001',
-            'degreeMinutesSeconds',
-            'N|S|E|W',
-            'before',
-            2,
-            TRUE
-        );
-        $this->assertEquals('N 49° 29\', E 8° 27\'', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyAvoidingEmptyMinutesAndSeconds() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.0',
-            '8.0',
-            'degreeMinutesSeconds',
-            'N|S|E|W',
-            'before',
-            2,
-            TRUE
-        );
-        $this->assertEquals('N 49°, E 8°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperFormatsDegreeMinutesWithSecondsRemovingTrailingZerosCorrectlyWithZeroMinutes() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.003778',
-            '8.016278',
-            'degreeMinutesSeconds',
-            'N|S|E|W',
-            'before',
-            2,
-            TRUE
-        );
-        $this->assertEquals('N 49° 0\' 13.6&quot;, E 8° 0\' 58.6&quot;', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperUsesDelimiterCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ' / '
-        );
-        $this->assertEquals('N 49.48711° / E 8.46628°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperUsesCardinalPointsNorthAndEastCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'North|South|East|West'
-        );
-        $this->assertEquals('North 49.48711°, East 8.46628°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperUsesCardinalPointsSouthAndWestCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '-53.163494',
-            '-70.905071',
-            'degree',
-            'North|South|East|West'
-        );
-        $this->assertEquals('South 53.16349°, West 70.90507°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperUsesCardinalPointsPositionBeforeCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'N|S|E|W',
-            'before'
-        );
-        $this->assertEquals('N 49.48711°, E 8.46628°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperUsesCardinalPointsPositionAfterCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'N|S|E|W',
-            'after'
-        );
-        $this->assertEquals('49.48711° N, 8.46628° E', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputIsHtmlspecialchardCorrectly() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degree',
-            '<North>|South|"East&|West'
-        );
-        $this->assertEquals('&lt;North&gt; 49.48711°, &quot;East&amp; 8.46628°', $actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperUsesCardinalPointsPositionAndOutputsErrorOnInvalidParameter() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'N|S|E|W',
-            'not-defined',
-            5,
-            FALSE,
-            '',
-            TRUE
-        );
-        $this->assertContains('invalid cardinal points position', $actualResult, '', TRUE);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenLatitudeExceedsPlus90DegreeAndErrorsShouldBeShown() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '90.01',
-            '0.0',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            TRUE
-        );
-        $this->assertContains('invalid latitude', $actualResult, '', TRUE);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenLatitudeExceedsPlus90DegreeAndErrorsShouldBeSuppressed() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '90.01',
-            '0.0',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            FALSE
-        );
-        $this->assertEmpty($actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenLatitudeExceedsMinus90DegreeAndErrorsShouldBeShown() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '-90.01',
-            '0.0',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            TRUE
-        );
-        $this->assertContains('invalid latitude', $actualResult, '', TRUE);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenLatitudeExceedsMinus90DegreeAndErrorsShouldBeSuppressed() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '-90.01',
-            '0.0',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            FALSE
-        );
-        $this->assertEmpty($actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenLongitudeExceedsPlus180DegreeAndErrorsShouldBeShown() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '0.0',
-            '180.01',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            TRUE
-        );
-        $this->assertContains('invalid longitude', $actualResult, '', TRUE);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenLongitudeExceedsPlus180DegreeAndErrorsShouldBeSuppressed() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '0.0',
-            '180.01',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            FALSE
-        );
-        $this->assertEmpty($actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenLongitudeExceedsMinus180DegreeAndErrorsShouldBeShown() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '0.0',
-            '-180.01',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            TRUE
-        );
-        $this->assertContains('invalid longitude', $actualResult, '', TRUE);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenLongitudeExceedsMinus180DegreeAndErrorsShouldBeSuppressed() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '0.0',
-            '-180.01',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            FALSE
-        );
-        $this->assertEmpty($actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenFormatIsInvalidAndErrorsShouldBeShown() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'not existing',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            TRUE
-        );
-        $this->assertContains('invalid output format', $actualResult, '', TRUE);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenFormatIsInvalidAndErrorsShouldBeSuppressed() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'not existing',
-            'N|S|E|W',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            FALSE
-        );
-        $this->assertEmpty($actualResult);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenNumberOfParametersInCardinalPointsAreInvalidAndErrorsShouldBeShown() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'only|three|parameters',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            TRUE
-        );
-        $this->assertContains('invalid number', $actualResult, '', TRUE);
-    }
-
-
-    /**
-     * @test
-     */
-    public function viewHelperOutputsErrorWhenNumberOfParametersInCardinalPointsAreInvalidAndErrorsShouldBeSuppressed() {
-        $viewHelper = new CoordinateConverterViewHelper();
-
-        $actualResult = $viewHelper->render(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'only|three|parameters',
-            'before',
-            5,
-            FALSE,
-            ', ',
-            FALSE
-        );
-        $this->assertEmpty($actualResult);
     }
 }

@@ -1,38 +1,23 @@
 <?php
-namespace Byterror\BytCoordconverter\Tests\Unit\Domain\Model;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2013-2014 Chris Müller <byt3error@web.de>
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+namespace Brotkrueml\BytCoordconverter\Tests\Unit\Domain\Model;
 
-use Byterror\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
+use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
+use PHPUnit\Framework\TestCase;
 
-
-class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+/**
+ * This file is part of the "byt_coordconverter" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+class CoordinateConverterParameterTest extends TestCase
+{
     /**
      * @test
      */
-    public function parameterLatitudeSetCorrectly() {
+    public function parameterLatitudeSetCorrectly()
+    {
         $parameter = new Parameter(
             '49.487111',
             '8.466278',
@@ -40,7 +25,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            FALSE,
+            false,
             ', '
         );
 
@@ -50,7 +35,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
     /**
      * @test
      */
-    public function parameterLongitudeSetCorrectly() {
+    public function parameterLongitudeSetCorrectly()
+    {
         $parameter = new Parameter(
             '49.487111',
             '8.466278',
@@ -58,7 +44,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            FALSE,
+            false,
             ', '
         );
 
@@ -68,13 +54,14 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
     /**
      * @test
      */
-    public function parameterOutputFormatSetCorrectly() {
-        $allowedOutputFormats = array(
+    public function parameterOutputFormatSetCorrectly()
+    {
+        $allowedOutputFormats = [
             'degree',
             'degreeMinutes',
             'degreeMinutesSeconds',
             'UTM',
-        );
+        ];
 
         foreach ($allowedOutputFormats as $outputFormat) {
             $parameter = new Parameter(
@@ -84,7 +71,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
                 'N|S|E|W',
                 'before',
                 5,
-                FALSE,
+                false,
                 ', '
             );
 
@@ -97,18 +84,24 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
      *
      * @return array [latitude, longitude, cardinalPoints, expectedNorthSouth, expectedEastWest]
      */
-    public function matchingCardinalPointsDataProvider() {
-        return array(
-            'north'  => array(49.487111, 8.466278, 'NORTH|SOUTH|EAST|WEST', 'NORTH', 'EAST'),
-            'south'  => array(-53.163494, -70.905071, 'NORTH|SOUTH|EAST|WEST', 'SOUTH', 'WEST'),
-        );
+    public function matchingCardinalPointsDataProvider()
+    {
+        return [
+            'north' => [49.487111, 8.466278, 'NORTH|SOUTH|EAST|WEST', 'NORTH', 'EAST'],
+            'south' => [-53.163494, -70.905071, 'NORTH|SOUTH|EAST|WEST', 'SOUTH', 'WEST'],
+        ];
     }
 
     /**
      * @test
      * @dataProvider matchingCardinalPointsDataProvider
      */
-    public function parameterCardinalPointsForLatitudeSetCorrectly($latitude, $longitude, $cardinalPoints, $expectedNorthSouthValue) {
+    public function parameterCardinalPointsForLatitudeSetCorrectly(
+        $latitude,
+        $longitude,
+        $cardinalPoints,
+        $expectedNorthSouthValue
+    ) {
         $parameter = new Parameter(
             $latitude,
             $longitude,
@@ -116,7 +109,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             $cardinalPoints,
             'before',
             5,
-            FALSE,
+            false,
             ', '
         );
 
@@ -126,11 +119,12 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
     /**
      * @test
      */
-    public function parameterCardinalPointsPositionSetCorrectly() {
-        $allowedPositions = array(
+    public function parameterCardinalPointsPositionSetCorrectly()
+    {
+        $allowedPositions = [
             'after',
             'before',
-        );
+        ];
 
         foreach ($allowedPositions as $position) {
             $parameter = new Parameter(
@@ -140,7 +134,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
                 'N|S|E|W',
                 $position,
                 5,
-                FALSE,
+                false,
                 ', '
             );
 
@@ -151,7 +145,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
     /**
      * @test
      */
-    public function parameterNumberOfDecimalsSetCorrectly() {
+    public function parameterNumberOfDecimalsSetCorrectly()
+    {
         $parameter = new Parameter(
             '49.487111',
             '8.466278',
@@ -159,7 +154,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             3,
-            FALSE,
+            true,
             ', '
         );
 
@@ -169,7 +164,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
     /**
      * @test
      */
-    public function parameterShowTrailingZerosSetCorrectly() {
+    public function parameterShowTrailingZerosSetCorrectly()
+    {
         $parameter = new Parameter(
             '49.487111',
             '8.466278',
@@ -177,7 +173,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            TRUE,
+            true,
             ', '
         );
 
@@ -190,7 +186,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            FALSE,
+            false,
             ', '
         );
 
@@ -200,7 +196,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
     /**
      * @test
      */
-    public function parameterDelimiterZerosSetCorrectly() {
+    public function parameterDelimiterZerosSetCorrectly()
+    {
         $parameter = new Parameter(
             '49.487111',
             '8.466278',
@@ -208,7 +205,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            FALSE,
+            false,
             ' / '
         );
 
@@ -219,7 +216,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function parameterLatitudeIsToHigh() {
+    public function parameterLatitudeIsToHigh()
+    {
         new Parameter(
             '90.01',
             '8.466278',
@@ -227,7 +225,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            FALSE,
+            false,
             ' / '
         );
     }
@@ -236,7 +234,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function parameterLatitudeIsToLow() {
+    public function parameterLatitudeIsToLow()
+    {
         new Parameter(
             '-90.01',
             '8.466278',
@@ -244,7 +243,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            FALSE,
+            false,
             ' / '
         );
     }
@@ -253,7 +252,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function parameterLongitudeIsToHigh() {
+    public function parameterLongitudeIsToHigh()
+    {
         new Parameter(
             '49.487111',
             '180.01',
@@ -261,7 +261,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            TRUE,
+            true,
             ', '
         );
     }
@@ -270,7 +270,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function parameterLongitudeIsToLow() {
+    public function parameterLongitudeIsToLow()
+    {
         new Parameter(
             '49.487111',
             '-180.01',
@@ -278,7 +279,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            TRUE,
+            true,
             ', '
         );
     }
@@ -287,7 +288,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function parameterDegreeIsInvalid() {
+    public function parameterDegreeIsInvalid()
+    {
         new Parameter(
             '49.487111',
             '8.466278',
@@ -295,7 +297,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'before',
             5,
-            TRUE,
+            true,
             ', '
         );
     }
@@ -304,7 +306,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function parameterCardinalPointsNumberIsToLow() {
+    public function parameterCardinalPointsNumberIsToLow()
+    {
         new Parameter(
             '49.487111',
             '8.466278',
@@ -312,7 +315,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E',
             'before',
             5,
-            TRUE,
+            true,
             ', '
         );
     }
@@ -321,7 +324,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function parameterCardinalPointsNumberIsToHigh() {
+    public function parameterCardinalPointsNumberIsToHigh()
+    {
         new Parameter(
             '49.487111',
             '8.466278',
@@ -329,7 +333,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W|Z',
             'before',
             5,
-            TRUE,
+            true,
             ', '
         );
     }
@@ -338,7 +342,8 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function parameterCardinalPointsPositionIsInvalid() {
+    public function parameterCardinalPointsPositionIsInvalid()
+    {
         new Parameter(
             '49.487111',
             '8.466278',
@@ -346,7 +351,7 @@ class CoordinateConverterParameterTest extends \TYPO3\CMS\Extbase\Tests\Unit\Bas
             'N|S|E|W',
             'middle',
             5,
-            TRUE,
+            true,
             ', '
         );
     }

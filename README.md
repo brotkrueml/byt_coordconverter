@@ -5,7 +5,7 @@ This is a TYPO3 extension for converting geospacial coordinates from one format 
 
 ## Requirements
 
-The extension in the recent version requires TYPO3 v8 LTS or TYPO3 v9 LTS.
+The extension in version 2.0 works with TYPO3 8 LTS and TYPO3 9 LTS. Use version 1.0 for TYPO3 7 LTS from the TYPO3 Extension Repository.
 
 
 ## Installation
@@ -14,7 +14,7 @@ The extension in the recent version requires TYPO3 v8 LTS or TYPO3 v9 LTS.
 
 The recommended way to install this extension is by using [Composer](https://getcomposer.org/). In your Composer based TYPO3 project root, just do
 
-    composer require krue-ml/byt_coordconverter
+    composer require brotkrueml/byt_coordconverter
 
 ### Installation as extension from TYPO3 Extension Repository (TER)
 
@@ -27,11 +27,24 @@ Download and install the extension with the extension manager module.
 
 After installation you can use it in every Fluid template. First you have to declare a namespace for the view helper. So, edit your template in which you want to use it and add the following snippet:
 
-    {namespace cc=Byterror\BytCoordconverter\ViewHelpers}
+    {namespace cc=Brotkrueml\BytCoordconverter\ViewHelpers}
 
 Instead of cc you can use any other unique identifier for your template.
 
-Now you can add the new view helper. In the minimal version you must assign a latitude and longitude in the decimal degree notation:
+Now you can add the new view helper. You must assign a latitude and longitude in the decimal degree notation.
+
+Overview of the possible parameters:
+
+| Parameter              | Description                                      | Default value | Possible values                                  |
+|------------------------|--------------------------------------------------|---------------|--------------------------------------------------|
+| latitude               | Latitude                                         |               | +90.0 to -90.0                                   |
+| longitude              | Longitude                                        |               | +180.0 to -180.0                                 |
+| outputFormat           | The output format of the coordinates             | degree        | degree, degreeMinutes, degreeMinutesSeconds, UTM |
+| cardinalPoints         | Results for the cardinal points, separated by \| | N\|S\|E\|W    |                                                  |
+| cardinalPointsPosition | Position for the cardinal points                 | before        | before, after                                    |
+| numberOfDecimals       | Number of decimals for the result                | 5             | 0-                                               |
+| removeTrailingZeros    | Set to true, if trailing zeros should be removed | false         | false, true, 0, 1                                |
+| delimiter              | The delimiter between latitude and longitude     |  ,            |                                                  |
 
 
 ### Output formats
@@ -137,19 +150,3 @@ You can choose, at which position to show the cardinal point, before or after th
 Now you get the cardinal point after each coordinate: `49.48711° N, 8.46628° E`
 
 The parameter has no effect in output format "UTM notation".
-
-
-### Errors
-
-If you enter an invalid value for a parameter no output is shown. You can get the error messages if you set the error parameter to 1:
-
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="somethingNotDefined" error="1" />
-
-And get the output:
-
-    Wrong output format (given: somethingNotDefined, allowed: degree, degreeMinutes, degreeMinutesSeconds, UTM)
-
-
-# Collaboration
-
-If you stumble upon a problem or find a bug, don't hesitate to contact me. You can also provide a patch or feature via a pull request.
