@@ -167,5 +167,5 @@ You can also import the XSD file into your favorite IDE, it is shipped with the 
 
 Version 1.0 is available for TYPO3 7 LTS, version 2.0 works only for TYPO3 8 LTS und TYPO3 9 LTS. The following breaking changes were made:
 
-- The declaration of the `cc` namespace in the Fluid template to use the view helper not needed anymore as it is bound to the extension.
-- The namespace of the PHP classes changed to `Byterror\BytCoordconverter\`. This shouldn't harm you as the fluid namespace is not needed anymore.
+- The declaration of the `cc` namespace in the Fluid template to use the view helper is not needed anymore as it is bound to the extension.
+- The namespace of the PHP classes changed to `Brotkrueml\BytCoordconverter\`. This shouldn't harm you as the fluid namespace is not needed anymore.
