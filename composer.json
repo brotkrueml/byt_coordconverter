@@ -1,5 +1,5 @@
 {
-    "name": "brotkrueml/byt_coordconverter",
+    "name": "brotkrueml/byt-coordconverter",
     "type": "typo3-cms-extension",
     "description": "TYPO3 view helper for converting geospatial coordinates from one format into another",
     "homepage": "https://github.com/brotkrueml/byt_coordconverter",
