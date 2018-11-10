@@ -25,20 +25,16 @@ Download and install the extension with the extension manager module.
 
 ### General
 
-After installation you can use it in every Fluid template. First you have to declare a namespace for the view helper. So, edit your template in which you want to use it and add the following snippet:
+After installation you can use it in every Fluid template. The namespace is set to `cc`, the basic usage:
 
-    {namespace cc=Brotkrueml\BytCoordconverter\ViewHelpers}
-
-Instead of cc you can use any other unique identifier for your template.
-
-Now you can add the new view helper. You must assign a latitude and longitude in the decimal degree notation.
+    <cc:coordinateConverter latitude="{latitude}" longitude="{longitude}"/>
 
 Overview of the possible parameters:
 
 | Parameter              | Description                                      | Default value | Possible values                                  |
 |------------------------|--------------------------------------------------|---------------|--------------------------------------------------|
-| latitude               | Latitude                                         |               | +90.0 to -90.0                                   |
-| longitude              | Longitude                                        |               | +180.0 to -180.0                                 |
+| latitude               | Latitude (required)                              |               | +90.0 to -90.0                                   |
+| longitude              | Longitude (required)                             |               | +180.0 to -180.0                                 |
 | outputFormat           | The output format of the coordinates             | degree        | degree, degreeMinutes, degreeMinutesSeconds, UTM |
 | cardinalPoints         | Results for the cardinal points, separated by \| | N\|S\|E\|W    |                                                  |
 | cardinalPointsPosition | Position for the cardinal points                 | before        | before, after                                    |
@@ -51,7 +47,7 @@ Overview of the possible parameters:
 
 #### Degree notation with decimals
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278"/>
 
 The output is: `N 49.48711°, E 8.46628°`
 
@@ -61,14 +57,14 @@ This input format is ideal to store in databases.
 
 The next example is identical, the output format parameter defaults to "degree":
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degree" />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degree"/>
 
 
 #### Degree/minutes notation
 
 To convert the coordinate pair into the degree/minutes format just add the output format parameter to the view helper:
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degreeMinutes" />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degreeMinutes"/>
 
 Now you get the result: `N 49° 29.22666', E 8° 27.97668'`
 
@@ -77,7 +73,7 @@ Now you get the result: `N 49° 29.22666', E 8° 27.97668'`
 
 If you want to output the coordinate pair in minutes and seconds just use this syntax:
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degreeMinutesSeconds" />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="degreeMinutesSeconds"/>
 
 The result is: `N 49° 29' 13.59960", E 8° 27' 58.60080"`
 
@@ -86,7 +82,7 @@ The result is: `N 49° 29' 13.59960", E 8° 27' 58.60080"`
 
 You can also convert the latitude/longitude coordinates to the UTM (Universal Transverse Mercator) notation:
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="UTM" />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" outputFormat="UTM"/>
 
 The result is: `32U 461344 5481745`
 
@@ -95,7 +91,7 @@ The result is: `32U 461344 5481745`
 
 The default number of decimals to show in the coordinates is set to 5. If you want to change the just use the numberOfDecimals parameter:
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" numberOfDecimals="4" />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" numberOfDecimals="4"/>
 
 The output is: `N 49.4871°, E 8.4663°`
 
@@ -106,7 +102,7 @@ The parameter has no effect in output format "UTM notation".
 
 Sometimes the coordinates look nicer when the trailing zeros are stripped. Just use the `removeTrailingZeros` parameter:
 
-    <cc:coordinateConverter latitude="49.48710" longitude="8.46600" removeTrailingZeros="1" />
+    <cc:coordinateConverter latitude="49.48710" longitude="8.46600" removeTrailingZeros="1"/>
 
 The output is: `N 49.4871°, E 8.466°`
 
@@ -117,7 +113,7 @@ This parameter has no effect in output format "UTM notation".
 
 The default delimiter between the two coordinates is the comma with a white space. You can change it:
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" delimiter=" / " />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" delimiter=" / "/>
 
 You get the result: `N 49.48711° / E 8.46628°`
 
@@ -128,13 +124,13 @@ The parameter has no effect in output format "UTM notation".
 
 You don't like the abbreviations N, S, E, W? You can change it:
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPoints="North|South|East|West" />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPoints="North|South|East|West"/>
 
 Now you get: `North 49.48711° / East 8.46628°`
 
 Or you like to use the german version?
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPoints="N|S|O|W" />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPoints="N|S|O|W"/>
 
 This outputs: `N 49.48711° / O 8.46628°`
 
@@ -145,7 +141,7 @@ The parameter has no effect in output format "UTM notation".
 
 You can choose, at which position to show the cardinal point, before or after the coordinate:
 
-    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPointsPosition="after" />
+    <cc:coordinateConverter latitude="49.487111" longitude="8.466278" cardinalPointsPosition="after"/>
 
 Now you get the cardinal point after each coordinate: `49.48711° N, 8.46628° E`
 
