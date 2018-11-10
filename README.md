@@ -146,3 +146,15 @@ You can choose, at which position to show the cardinal point, before or after th
 Now you get the cardinal point after each coordinate: `49.48711° N, 8.46628° E`
 
 The parameter has no effect in output format "UTM notation".
+
+
+## Using the XML Schema (XSD) for Validation in your Template
+
+It is possible to assist your code editor on suggesting the tag name and the possible attributes.
+Just add the `cc` namespace to the root of your Fluid template:
+
+    <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:cc="http://typo3.org/ns/Brotkrueml/BytCoordconverter/ViewHelpers" cc:schemaLocation="https://brot.krue.ml/schemas/byt_coordconverter-2.0.0.xsd" data-namespace-typo3-fluid="true">
+
+The relevant part is the namespace declaration (`xmlns:cc="http://typo3.org/ns/Brotkrueml/BytCoordconverter/ViewHelpers"`). The content of the `cc:schemaLocation` attribute points to the recent XSD definition.
+
+You can also import the XSD file into your favorite IDE, it is shipped with the extension. You can find the file in the folder `Resources/Private/Schemas/`.
