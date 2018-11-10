@@ -1,5 +1,9 @@
 # Coordinate Converter
 
+[![TYPO3](https://img.shields.io/badge/TYPO3-8%20LTS-orange.svg)](https://typo3.org/)
+[![TYPO3](https://img.shields.io/badge/TYPO3-9%20LTS-orange.svg)](https://typo3.org/)
+[![Build Status](https://travis-ci.org/brotkrueml/byt_coordconverter.svg?branch=master)](https://travis-ci.org/brotkrueml/byt_coordconverter)
+
 This is a TYPO3 extension for converting geospacial coordinates from one format into another via a Fluid view helper.
 
 
