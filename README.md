@@ -157,8 +157,15 @@ The parameter has no effect in output format "UTM notation".
 It is possible to assist your code editor on suggesting the tag name and the possible attributes.
 Just add the `cc` namespace to the root of your Fluid template:
 
-    <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:cc="http://typo3.org/ns/Brotkrueml/BytCoordconverter/ViewHelpers" cc:schemaLocation="https://brot.krue.ml/schemas/byt_coordconverter-2.0.0.xsd" data-namespace-typo3-fluid="true">
+    <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:cc="http://typo3.org/ns/Brotkrueml/Coordconverter/ViewHelpers" cc:schemaLocation="https://brot.krue.ml/schemas/byt_coordconverter-2.0.0.xsd" data-namespace-typo3-fluid="true">
 
-The relevant part is the namespace declaration (`xmlns:cc="http://typo3.org/ns/Brotkrueml/BytCoordconverter/ViewHelpers"`). The content of the `cc:schemaLocation` attribute points to the recent XSD definition.
+The relevant part is the namespace declaration (`xmlns:cc="http://typo3.org/ns/Brotkrueml/Coordconverter/ViewHelpers"`). The content of the `cc:schemaLocation` attribute points to the recent XSD definition.
 
 You can also import the XSD file into your favorite IDE, it is shipped with the extension. You can find the file in the folder `Resources/Private/Schemas/`.
+
+## Upgrading from version 1.0 to version 2.0
+
+Version 1.0 is available for TYPO3 7 LTS, version 2.0 works only for TYPO3 8 LTS und TYPO3 9 LTS. The following breaking changes were made:
+
+- The declaration of the `cc` namespace in the Fluid template to use the view helper not needed anymore as it is bound to the extension.
+- The namespace of the PHP classes changed to `Byterror\BytCoordconverter\`. This shouldn't harm you as the fluid namespace is not needed anymore.
