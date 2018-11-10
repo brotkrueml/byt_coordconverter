@@ -3,6 +3,7 @@
 [![TYPO3](https://img.shields.io/badge/TYPO3-8%20LTS-orange.svg)](https://typo3.org/)
 [![TYPO3](https://img.shields.io/badge/TYPO3-9%20LTS-orange.svg)](https://typo3.org/)
 [![Build Status](https://travis-ci.org/brotkrueml/byt_coordconverter.svg?branch=master)](https://travis-ci.org/brotkrueml/byt_coordconverter)
+[![Latest Stable Version](https://poser.pugx.org/brotkrueml/coordconverter/v/stable)](https://packagist.org/packages/brotkrueml/coordconverter)
 
 This is a TYPO3 extension for converting geospacial coordinates from one format into another via a Fluid view helper.
 
@@ -168,4 +169,4 @@ You can also import the XSD file into your favorite IDE, it is shipped with the 
 Version 1.0 is available for TYPO3 7 LTS, version 2.0 works only for TYPO3 8 LTS und TYPO3 9 LTS. The following breaking changes were made:
 
 - The declaration of the `cc` namespace in the Fluid template to use the view helper is not needed anymore as it is bound to the extension.
-- The namespace of the PHP classes changed to `Brotkrueml\BytCoordconverter\`. This shouldn't harm you as the fluid namespace is not needed anymore.
+- The namespace of the PHP classes changed to `Brotkrueml\BytCoordconverter\`. This shouldn't harm you as the manual declaration of the Fluid namespace is not needed anymore.
