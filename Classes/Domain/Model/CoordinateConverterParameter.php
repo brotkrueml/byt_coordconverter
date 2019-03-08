@@ -116,8 +116,10 @@ class CoordinateConverterParameter
 
         if (!in_array($this->outputFormat, $this->allowedOutputFormats)) {
             throw new \InvalidArgumentException(
-                'Invalid output format: must be one of [' . implode('|',
-                    $this->allowedOutputFormats) . '] (given: ' . $this->longitude . ')'
+                'Invalid output format: must be one of [' . implode(
+                    '|',
+                    $this->allowedOutputFormats
+                ) . '] (given: ' . $this->longitude . ')'
             );
         }
 
@@ -143,8 +145,10 @@ class CoordinateConverterParameter
 
         if (!in_array($this->cardinalPointsPosition, $this->allowedCardinalPointsPositions)) {
             throw new \InvalidArgumentException(
-                'Invalid cardinal points position: must be one of [' . implode('|',
-                    $this->allowedCardinalPointsPositions) . '] (given: ' . $cardinalPointsPosition . ')'
+                'Invalid cardinal points position: must be one of [' . implode(
+                    '|',
+                    $this->allowedCardinalPointsPositions
+                ) . '] (given: ' . $cardinalPointsPosition . ')'
             );
         }
 

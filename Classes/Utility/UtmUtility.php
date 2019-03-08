@@ -127,11 +127,11 @@ class UtmUtility
             // @formatter:off
             if (($longitude >= 0.0) && ($longitude < 9.0)) {
                 $longitudeZone = 31;
-            } else if (($longitude >= 9.0) && ($longitude < 21.0)) {
+            } elseif (($longitude >= 9.0) && ($longitude < 21.0)) {
                 $longitudeZone = 33;
-            } else if (($longitude >= 21.0) && ($longitude < 33.0)) {
+            } elseif (($longitude >= 21.0) && ($longitude < 33.0)) {
                 $longitudeZone = 35;
-            } else if (($longitude >= 33.0) && ($longitude < 42.0)) {
+            } elseif (($longitude >= 33.0) && ($longitude < 42.0)) {
                 $longitudeZone = 37;
             }
             // @formatter:on
@@ -145,43 +145,43 @@ class UtmUtility
         // @formatter:off
         if ((84 >= $latitude) && ($latitude >= 72)) {
             return 'X';
-        } else if ((72 > $latitude) && ($latitude >= 64)) {
+        } elseif ((72 > $latitude) && ($latitude >= 64)) {
             return 'W';
-        } else if ((64 > $latitude) && ($latitude >= 56)) {
+        } elseif ((64 > $latitude) && ($latitude >= 56)) {
             return 'V';
-        } else if ((56 > $latitude) && ($latitude >= 48)) {
+        } elseif ((56 > $latitude) && ($latitude >= 48)) {
             return 'U';
-        } else if ((48 > $latitude) && ($latitude >= 40)) {
+        } elseif ((48 > $latitude) && ($latitude >= 40)) {
             return 'T';
-        } else if ((40 > $latitude) && ($latitude >= 32)) {
+        } elseif ((40 > $latitude) && ($latitude >= 32)) {
             return 'S';
-        } else if ((32 > $latitude) && ($latitude >= 24)) {
+        } elseif ((32 > $latitude) && ($latitude >= 24)) {
             return 'R';
-        } else if ((24 > $latitude) && ($latitude >= 16)) {
+        } elseif ((24 > $latitude) && ($latitude >= 16)) {
             return 'Q';
-        } else if ((16 > $latitude) && ($latitude >= 8)) {
+        } elseif ((16 > $latitude) && ($latitude >= 8)) {
             return 'P';
-        } else if ((8 > $latitude) && ($latitude >= 0)) {
+        } elseif ((8 > $latitude) && ($latitude >= 0)) {
             return 'N';
-        } else if ((0 > $latitude) && ($latitude >=  -8)) {
+        } elseif ((0 > $latitude) && ($latitude >=  -8)) {
             return 'M';
-        } else if ((-8 > $latitude) && ($latitude >= -16)) {
+        } elseif ((-8 > $latitude) && ($latitude >= -16)) {
             return 'L';
-        } else if ((-16 > $latitude) && ($latitude >= -24)) {
+        } elseif ((-16 > $latitude) && ($latitude >= -24)) {
             return 'K';
-        } else if ((-24 > $latitude) && ($latitude >= -32)) {
+        } elseif ((-24 > $latitude) && ($latitude >= -32)) {
             return 'J';
-        } else if ((-32 > $latitude) && ($latitude >= -40)) {
+        } elseif ((-32 > $latitude) && ($latitude >= -40)) {
             return 'H';
-        } else if ((-40 > $latitude) && ($latitude >= -48)) {
+        } elseif ((-40 > $latitude) && ($latitude >= -48)) {
             return 'G';
-        } else if ((-48 > $latitude) && ($latitude >= -56)) {
+        } elseif ((-48 > $latitude) && ($latitude >= -56)) {
             return 'F';
-        } else if ((-56 > $latitude) && ($latitude >= -64)) {
+        } elseif ((-56 > $latitude) && ($latitude >= -64)) {
             return 'E';
-        } else if ((-64 > $latitude) && ($latitude >= -72)) {
+        } elseif ((-64 > $latitude) && ($latitude >= -72)) {
             return 'D';
-        } else if ((-72 > $latitude) && ($latitude >= -80)) {
+        } elseif ((-72 > $latitude) && ($latitude >= -80)) {
             return 'C';
         }
 
