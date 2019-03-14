@@ -3,6 +3,8 @@
 [![TYPO3](https://img.shields.io/badge/TYPO3-8%20LTS-orange.svg)](https://typo3.org/)
 [![TYPO3](https://img.shields.io/badge/TYPO3-9%20LTS-orange.svg)](https://typo3.org/)
 [![Build Status](https://travis-ci.org/brotkrueml/byt_coordconverter.svg?branch=master)](https://travis-ci.org/brotkrueml/byt_coordconverter)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b7e02a9299d5d65d18bf/maintainability)](https://codeclimate.com/github/brotkrueml/byt_coordconverter/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b7e02a9299d5d65d18bf/test_coverage)](https://codeclimate.com/github/brotkrueml/byt_coordconverter/test_coverage)
 [![Latest Stable Version](https://poser.pugx.org/brotkrueml/coordconverter/v/stable)](https://packagist.org/packages/brotkrueml/coordconverter)
 
 This is a TYPO3 extension for converting geospacial coordinates from one format into another via a Fluid view helper.
