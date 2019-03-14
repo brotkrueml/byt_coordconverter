@@ -25,7 +25,7 @@
         "typo3/cms-fluid": "^8.7 || ^9.5"
     },
     "require-dev": {
-        "nimut/testing-framework": "^4.0"
+        "phpunit/phpunit": "^6.5 || ^7.5"
     },
     "autoload": {
         "psr-4": {

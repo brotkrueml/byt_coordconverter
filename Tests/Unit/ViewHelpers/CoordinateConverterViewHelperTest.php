@@ -3,7 +3,7 @@
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\ViewHelpers;
 
 use Brotkrueml\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
 /**
@@ -12,7 +12,7 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-class CoordinateConverterViewHelperTest extends UnitTestCase
+class CoordinateConverterViewHelperTest extends TestCase
 {
     /**
      * @var CoordinateConverterViewHelper
@@ -26,10 +26,7 @@ class CoordinateConverterViewHelperTest extends UnitTestCase
 
     protected function setUp()
     {
-        $this->viewHelper = $this->getAccessibleMock(
-            CoordinateConverterViewHelper::class,
-            null
-        );
+        $this->viewHelper = $this->getMockBuilder(CoordinateConverterViewHelper::class);
 
         $this->renderingContextMock = $this->getMockBuilder(RenderingContext::class)
             ->disableOriginalConstructor()
