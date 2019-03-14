@@ -84,7 +84,7 @@ class CoordinateConverterParameterTest extends TestCase
      *
      * @return array [latitude, longitude, cardinalPoints, expectedNorthSouth, expectedEastWest]
      */
-    public function matchingCardinalPointsDataProvider()
+    public function matchingCardinalPointsDataProvider(): array
     {
         return [
             'north' => [49.487111, 8.466278, 'NORTH|SOUTH|EAST|WEST', 'NORTH', 'EAST'],
@@ -95,12 +95,17 @@ class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      * @dataProvider matchingCardinalPointsDataProvider
+     *
+     * @param string $latitude
+     * @param string $longitude
+     * @param string $cardinalPoints
+     * @param string $expectedNorthSouthValue
      */
     public function parameterCardinalPointsForLatitudeSetCorrectly(
-        $latitude,
-        $longitude,
-        $cardinalPoints,
-        $expectedNorthSouthValue
+        string $latitude,
+        string $longitude,
+        string $cardinalPoints,
+        string $expectedNorthSouthValue
     ) {
         $parameter = new Parameter(
             $latitude,
@@ -214,145 +219,134 @@ class CoordinateConverterParameterTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
+     * @dataProvider dataProviderForInvalidParameters
+     *
+     * @param string $latitude
+     * @param string $longitude
+     * @param string $outputFormat
+     * @param string $cardinalPoints
+     * @param string $cardinalPointsPosition
+     * @param int $numberOfDecimals
+     * @param bool $removeTrailingZeros
+     * @param string $delimiter
      */
-    public function parameterLatitudeIsToHigh()
-    {
+    public function invalidParametersThrowInvalidArgumentException(
+        string $latitude,
+        string $longitude,
+        string $outputFormat,
+        string $cardinalPoints,
+        string $cardinalPointsPosition,
+        int $numberOfDecimals,
+        bool $removeTrailingZeros,
+        string $delimiter
+    ) {
+        $this->expectException(\InvalidArgumentException::class);
+
         new Parameter(
-            '90.01',
-            '8.466278',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            false,
-            ' / '
+            $latitude,
+            $longitude,
+            $outputFormat,
+            $cardinalPoints,
+            $cardinalPointsPosition,
+            $numberOfDecimals,
+            $removeTrailingZeros,
+            $delimiter
         );
     }
 
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     */
-    public function parameterLatitudeIsToLow()
+    public function dataProviderForInvalidParameters(): array
     {
-        new Parameter(
-            '-90.01',
-            '8.466278',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            false,
-            ' / '
-        );
-    }
-
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     */
-    public function parameterLongitudeIsToHigh()
-    {
-        new Parameter(
-            '49.487111',
-            '180.01',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            true,
-            ', '
-        );
-    }
-
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     */
-    public function parameterLongitudeIsToLow()
-    {
-        new Parameter(
-            '49.487111',
-            '-180.01',
-            'degree',
-            'N|S|E|W',
-            'before',
-            5,
-            true,
-            ', '
-        );
-    }
-
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     */
-    public function parameterDegreeIsInvalid()
-    {
-        new Parameter(
-            '49.487111',
-            '8.466278',
-            'somethingElse',
-            'N|S|E|W',
-            'before',
-            5,
-            true,
-            ', '
-        );
-    }
-
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     */
-    public function parameterCardinalPointsNumberIsToLow()
-    {
-        new Parameter(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'N|S|E',
-            'before',
-            5,
-            true,
-            ', '
-        );
-    }
-
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     */
-    public function parameterCardinalPointsNumberIsToHigh()
-    {
-        new Parameter(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'N|S|E|W|Z',
-            'before',
-            5,
-            true,
-            ', '
-        );
-    }
-
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     */
-    public function parameterCardinalPointsPositionIsInvalid()
-    {
-        new Parameter(
-            '49.487111',
-            '8.466278',
-            'degree',
-            'N|S|E|W',
-            'middle',
-            5,
-            true,
-            ', '
-        );
+        return [
+            'latitude is too high' => [
+                '90.01',
+                '8.466278',
+                'degree',
+                'N|S|E|W',
+                'before',
+                5,
+                false,
+                ' / '
+            ],
+            'latitude is too low' => [
+                '-90.01',
+                '8.466278',
+                'degree',
+                'N|S|E|W',
+                'before',
+                5,
+                false,
+                ' / '
+            ],
+            'longitude is too high' => [
+                '49.487111',
+                '180.01',
+                'degree',
+                'N|S|E|W',
+                'before',
+                5,
+                true,
+                ', '
+            ],
+            'longitude is too low' => [
+                '49.487111',
+                '-180.01',
+                'degree',
+                'N|S|E|W',
+                'before',
+                5,
+                true,
+                ', '
+            ],
+            'degree is invalid' => [
+                '49.487111',
+                '8.466278',
+                'somethingElse',
+                'N|S|E|W',
+                'before',
+                5,
+                true,
+                ', '
+            ],
+            'cardinal points number is too low' => [
+                '49.487111',
+                '8.466278',
+                'degree',
+                'N|S|E',
+                'before',
+                5,
+                true,
+                ', '
+            ],
+            'cardinal points number is too high' => [
+                '49.487111',
+                '8.466278',
+                'degree',
+                'N|S|E|W|Z',
+                'before',
+                5,
+                true,
+                ', '
+            ],
+            'cardinal points position is invalid' => [
+                '49.487111',
+                '8.466278',
+                'degree',
+                'N|S|E|W',
+                'middle',
+                5,
+                true,
+                ', '
+            ],
+            'number of decimals is negative' => [
+                '49.487111',
+                '8.466278',
+                'degree',
+                'N|S|E|W',
+                'before',
+                -5,
+                true,
+                ', '
+            ],
+        ];
     }
 }

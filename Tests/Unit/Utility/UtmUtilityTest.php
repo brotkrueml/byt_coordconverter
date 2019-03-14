@@ -29,7 +29,7 @@ class UtmUtilityTest extends TestCase
      *
      * @return array [north, south, west, east, expectedZone]
      */
-    public function matchingLongitudinalZoneDataProvider()
+    public function matchingLongitudinalZoneDataProvider(): array
     {
         return [
             'zone 1' => [0.0, 0.0, -180.0, -174.0001, 1],
@@ -107,9 +107,20 @@ class UtmUtilityTest extends TestCase
     /**
      * @test
      * @dataProvider matchingLongitudinalZoneDataProvider
+     *
+     * @param float $north
+     * @param float $south
+     * @param float $west
+     * @param float $east
+     * @param float $expectedZone
      */
-    public function longitudinalZonesAreCorrectlyCalculated($north, $south, $west, $east, $expectedZone)
-    {
+    public function longitudinalZonesAreCorrectlyCalculated(
+        float $north,
+        float $south,
+        float $west,
+        float $east,
+        float $expectedZone
+    ) {
         $west = UtmUtility::getLongitudinalZone($north, $west);
         $east = UtmUtility::getLongitudinalZone($south, $east);
 
@@ -123,7 +134,7 @@ class UtmUtilityTest extends TestCase
      *
      * @return array [north, south, expectedZone]
      */
-    public function matchingLatitudinalZoneDataProvider()
+    public function matchingLatitudinalZoneDataProvider(): array
     {
         return [
             'zone c' => [-72.0001, -80.0, 'C'],
@@ -146,6 +157,7 @@ class UtmUtilityTest extends TestCase
             'zone v' => [63.9999, 56.0, 'V'],
             'zone w' => [71.9999, 64.0, 'W'],
             'zone x' => [84.0, 72.0, 'X'],
+            'zone z' => [84.0001, 90.0, 'Z'],
         ];
     }
 
@@ -153,9 +165,16 @@ class UtmUtilityTest extends TestCase
     /**
      * @test
      * @dataProvider matchingLatitudinalZoneDataProvider
+     *
+     * @param float $north
+     * @param float $south
+     * @param string $expectedZone
      */
-    public function latitudinalZonesAreCorrectlyCalculated($north, $south, $expectedZone)
-    {
+    public function latitudinalZonesAreCorrectlyCalculated(
+        float $north,
+        float $south,
+        string $expectedZone
+    ) {
         $west = UtmUtility::getLatitudinalZone($north);
         $east = UtmUtility::getLatitudinalZone($south);
 
@@ -169,7 +188,7 @@ class UtmUtilityTest extends TestCase
      *
      * @return array [latitude, longitude, expectedResult]
      */
-    public function matchingCoordinatesDataProvider()
+    public function matchingCoordinatesDataProvider(): array
     {
         return [
             'paradeplatz, mannheim' => [49.487111, 8.466278, '32U 461344 5481745'],
@@ -183,9 +202,16 @@ class UtmUtilityTest extends TestCase
     /**
      * @test
      * @dataProvider matchingCoordinatesDataProvider
+     *
+     * @param float $latitude
+     * @param float $longitude
+     * @param string $expectedResult
      */
-    public function coordinatesAreCorrectlyCalculated($latitude, $longitude, $expectedResult)
-    {
+    public function coordinatesAreCorrectlyCalculated(
+        float $latitude,
+        float $longitude,
+        string $expectedResult
+    ) {
         $actualResult = UtmUtility::getUtmFromLatitudeLongitude(
             $latitude,
             $longitude

@@ -3,6 +3,7 @@
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\ViewHelpers;
 
 use Brotkrueml\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
@@ -35,6 +36,79 @@ class CoordinateConverterViewHelperTest extends TestCase
 
     /**
      * @test
+     */
+    public function argumentsAreRegisteredCorrectly()
+    {
+        /** @var MockObject|CoordinateConverterViewHelper $viewHelper */
+        $viewHelper = $this->getMockBuilder(CoordinateConverterViewHelper::class)
+            ->setMethods(['registerArgument'])
+            ->getMock();
+
+        $viewHelper
+            ->expects($this->exactly(8))
+            ->method('registerArgument')
+            ->withConsecutive(
+                [
+                    'latitude',
+                    'string',
+                    $this->anything(),
+                    true,
+                ],
+                [
+                    'longitude',
+                    'string',
+                    $this->anything(),
+                    true,
+                ],
+                [
+                    'outputFormat',
+                    'string',
+                    $this->anything(),
+                    false,
+                    'degree',
+                ],
+                [
+                    'cardinalPoints',
+                    'string',
+                    $this->anything(),
+                    false,
+                    'N|S|E|W',
+                ],
+                [
+                    'cardinalPointsPosition',
+                    'string',
+                    $this->anything(),
+                    false,
+                    'before',
+                ],
+                [
+                    'numberOfDecimals',
+                    'int',
+                    $this->anything(),
+                    false,
+                    5,
+                ],
+                [
+                    'removeTrailingZeros',
+                    'bool',
+                    $this->anything(),
+                    false,
+                    false,
+                ],
+                [
+                    'delimiter',
+                    'string',
+                    $this->anything(),
+                    false,
+                    ', ',
+                ]
+            );
+
+        $viewHelper->initializeArguments();
+    }
+
+    /**
+     * @test
      * @dataProvider provider
      *
      * @param array $arguments
@@ -53,7 +127,7 @@ class CoordinateConverterViewHelperTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function provider()
+    public function provider(): array
     {
         return [
             'view helper converts given coordinates to format degree correctly' => [
