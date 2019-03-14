@@ -157,7 +157,6 @@ class UtmUtilityTest extends TestCase
             'zone v' => [63.9999, 56.0, 'V'],
             'zone w' => [71.9999, 64.0, 'W'],
             'zone x' => [84.0, 72.0, 'X'],
-            'zone z' => [84.0001, 90.0, 'Z'],
         ];
     }
 

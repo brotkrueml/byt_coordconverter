@@ -112,80 +112,42 @@ class UtmUtility
     /**
      * Get the longitudinal zone
      * @see http://www.dmap.co.uk/utmworld.htm
+     *
+     * @param float $latitude
+     * @param float $longitude
+     * @return int
      */
     public static function getLongitudinalZone(float $latitude, float $longitude): int
     {
-        $longitudeZone = (int)(($longitude + 180.0) / 6.0) + 1;
-
         if (($latitude >= 56.0) && ($latitude < 64.0)
             && ($longitude >= 3.0) && ($longitude < 12.0)) {
-            $longitudeZone = 32;
+            return 32;
         }
 
         // Special zones for Svalbard
         if (($latitude >= 72.0) && ($latitude < 84.0)) {
-            // @formatter:off
             if (($longitude >= 0.0) && ($longitude < 9.0)) {
-                $longitudeZone = 31;
-            } elseif (($longitude >= 9.0) && ($longitude < 21.0)) {
-                $longitudeZone = 33;
-            } elseif (($longitude >= 21.0) && ($longitude < 33.0)) {
-                $longitudeZone = 35;
-            } elseif (($longitude >= 33.0) && ($longitude < 42.0)) {
-                $longitudeZone = 37;
+                return 31;
             }
-            // @formatter:on
+
+            if (($longitude >= 9.0) && ($longitude < 21.0)) {
+                return 33;
+            }
+
+            if (($longitude >= 21.0) && ($longitude < 33.0)) {
+                return 35;
+            }
+
+            if (($longitude >= 33.0) && ($longitude < 42.0)) {
+                return 37;
+            }
         }
 
-        return $longitudeZone;
+        return (int)(($longitude + 180.0) / 6.0) + 1;
     }
 
     public static function getLatitudinalZone(float $latitude): string
     {
-        // @formatter:off
-        if ((84 >= $latitude) && ($latitude >= 72)) {
-            return 'X';
-        } elseif ((72 > $latitude) && ($latitude >= 64)) {
-            return 'W';
-        } elseif ((64 > $latitude) && ($latitude >= 56)) {
-            return 'V';
-        } elseif ((56 > $latitude) && ($latitude >= 48)) {
-            return 'U';
-        } elseif ((48 > $latitude) && ($latitude >= 40)) {
-            return 'T';
-        } elseif ((40 > $latitude) && ($latitude >= 32)) {
-            return 'S';
-        } elseif ((32 > $latitude) && ($latitude >= 24)) {
-            return 'R';
-        } elseif ((24 > $latitude) && ($latitude >= 16)) {
-            return 'Q';
-        } elseif ((16 > $latitude) && ($latitude >= 8)) {
-            return 'P';
-        } elseif ((8 > $latitude) && ($latitude >= 0)) {
-            return 'N';
-        } elseif ((0 > $latitude) && ($latitude >=  -8)) {
-            return 'M';
-        } elseif ((-8 > $latitude) && ($latitude >= -16)) {
-            return 'L';
-        } elseif ((-16 > $latitude) && ($latitude >= -24)) {
-            return 'K';
-        } elseif ((-24 > $latitude) && ($latitude >= -32)) {
-            return 'J';
-        } elseif ((-32 > $latitude) && ($latitude >= -40)) {
-            return 'H';
-        } elseif ((-40 > $latitude) && ($latitude >= -48)) {
-            return 'G';
-        } elseif ((-48 > $latitude) && ($latitude >= -56)) {
-            return 'F';
-        } elseif ((-56 > $latitude) && ($latitude >= -64)) {
-            return 'E';
-        } elseif ((-64 > $latitude) && ($latitude >= -72)) {
-            return 'D';
-        } elseif ((-72 > $latitude) && ($latitude >= -80)) {
-            return 'C';
-        }
-
-        return 'Z';
-        // @formatter:on
+        return 'CDEFGHJKLMNPQRSTUVWXX'[(int)(($latitude + 80) / 8)];
     }
 }
