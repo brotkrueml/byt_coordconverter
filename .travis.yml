@@ -1,3 +1,7 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=bd8bdc104b6bce68936f368c8a13ccf3013f5e9acbe0d0a45758416f6f29f9db
+
 language: php
 
 matrix:
@@ -23,11 +27,15 @@ before_install:
   - composer --version
 
 before_script:
-  - phpenv config-rm xdebug.ini
   - composer require typo3/cms-core=$TYPO3_VERSION
   - git checkout composer.json
   - export TYPO3_PATH_WEB=$PWD/Build/web
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - find . -name \*.php  ! -path "./.Build/*" -exec php -d display_errors=stderr -l {} > /dev/null \;
-  - .Build/bin/phpunit -c Tests/UnitTests.xml
+  - .Build/bin/phpunit -c Tests/UnitTests.xml --coverage-text --coverage-clover .Build/logs/clover.xml
+  - ./cc-test-reporter format-coverage -t clover -o .Build/logs/codeclimate.json .Build/logs/clover.xml
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage -i .Build/logs/codeclimate.json; fi
