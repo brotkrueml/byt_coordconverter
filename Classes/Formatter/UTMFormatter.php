@@ -20,7 +20,6 @@ class UTMFormatter implements FormatterInterface
      */
     const ELLIPSOID_MAJOR_AXIS = 6378137.0;
 
-
     /**
      * The minor (equitorial) axis
      *
@@ -28,93 +27,62 @@ class UTMFormatter implements FormatterInterface
      */
     const ELLIPSOID_MINOR_AXIS = 6356752.314;
 
-
     /**
-     * The scaling factor
+     * The scaling factor of central meridian
      *
      * @var float
      */
     const SCALING_FACTOR = 0.9996;
 
+    /** @var float */
+    private $latitude;
+
+    /** @var float */
+    private $longitude;
+
+    /** @var string */
+    private $utmZone;
+
+    /** @var int */
+    private $longitudinalZone;
+
+    /** @var float */
+    private $eccentricity;
+
+    /** @var float */
+    private $eccentricityPrimeSquared;
+
+    /** @var float */
+    private $latitudeRad;
+
+    /** @var float */
+    private $longitudeRad;
+
+    /** @var float */
+    private $a;
+
+    /** @var float */
+    private $c;
+
+    /** @var float */
+    private $m;
+
+    /** @var float */
+    private $n;
+
+    /** @var float */
+    private $t;
+
 
     public function format(CoordinateConverterParameter $parameter): string
     {
-        return static::getUtmFromLatitudeLongitude(
-            $parameter->getLatitude(),
-            $parameter->getLongitude()
-        );
-    }
+        $this->latitude = $parameter->getLatitude();
+        $this->longitude = $parameter->getLongitude();
 
-    private static function getUtmFromLatitudeLongitude(float $latitude, float $longitude): string
-    {
-        $eccentricity = static::getEccentricityOfReferenceEllipsoid();
+        $this->utmZone = static::getLatitudinalZone($this->latitude);
+        $this->longitudinalZone = $this->getLongitudinalZone($this->latitude, $this->longitude);
 
-        $latitudeRad = $latitudeRad = $latitude * (pi() / 180.0);
-        $longitudeRad = $longitude * (pi() / 180.0);
-
-        $longitudinalZone = static::getLongitudinalZone($latitude, $longitude);
-
-        $longitudeOrigin = ($longitudinalZone - 1) * 6 - 180 + 3;
-        $longitudeOriginRad = $longitudeOrigin * (pi() / 180.0);
-
-        $utmZone = static::getLatitudinalZone($latitude);
-
-        $eccentricityPrimeSquared = ($eccentricity) / (1 - $eccentricity);
-
-        $n = static::ELLIPSOID_MAJOR_AXIS / sqrt(1 - $eccentricity * sin($latitudeRad) * sin($latitudeRad));
-        $t = tan($latitudeRad) * tan($latitudeRad);
-        $c = $eccentricityPrimeSquared * cos($latitudeRad) * cos($latitudeRad);
-        $A = cos($latitudeRad) * ($longitudeRad - $longitudeOriginRad);
-
-        $M =
-            static::ELLIPSOID_MAJOR_AXIS
-            * ((1
-                    - $eccentricity / 4
-                    - 3 * $eccentricity * $eccentricity / 64
-                    - 5 * $eccentricity * $eccentricity * $eccentricity / 256)
-                * $latitudeRad
-                - (3 * $eccentricity / 8
-                    + 3 * $eccentricity * $eccentricity / 32
-                    + 45 * $eccentricity * $eccentricity * $eccentricity / 1024)
-                * sin(2 * $latitudeRad)
-                + (15 * $eccentricity * $eccentricity / 256
-                    + 45 * $eccentricity * $eccentricity * $eccentricity / 1024)
-                * sin(4 * $latitudeRad)
-                - (35 * $eccentricity * $eccentricity * $eccentricity / 3072)
-                * sin(6 * $latitudeRad));
-
-        $utmEasting =
-            (double)(static::SCALING_FACTOR
-                * $n
-                * ($A
-                    + (1 - $t + $c) * pow($A, 3.0) / 6
-                    + (5 - 18 * $t + $t * $t + 72 * $c - 58 * $eccentricityPrimeSquared)
-                    * pow($A, 5.0)
-                    / 120)
-                + 500000.0);
-
-        $utmNorthing =
-            (double)(static::SCALING_FACTOR
-                * ($M
-                    + $n
-                    * tan($latitudeRad)
-                    * ($A * $A / 2
-                        + (5 - $t + (9 * $c) + (4 * $c * $c)) * pow($A, 4.0) / 24
-                        + (61 - (58 * $t) + ($t * $t) + (600 * $c) - (330 * $eccentricityPrimeSquared))
-                        * pow($A, 6.0)
-                        / 720)));
-
-        // Adjust for the southern hemisphere
-        if ($latitude < 0) {
-            $utmNorthing += 10000000.0;
-        }
-
-        return $longitudinalZone . $utmZone . ' ' . round($utmEasting) . ' ' . round($utmNorthing);
-    }
-
-    private static function getEccentricityOfReferenceEllipsoid(): float
-    {
-        return ((self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS) - (self::ELLIPSOID_MINOR_AXIS * self::ELLIPSOID_MINOR_AXIS)) / (self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS);
+        return $this->getUtmFromLatitudeLongitude();
     }
 
     /**
@@ -125,7 +93,7 @@ class UTMFormatter implements FormatterInterface
      * @param float $longitude
      * @return int
      */
-    private static function getLongitudinalZone(float $latitude, float $longitude): int
+    private function getLongitudinalZone(float $latitude, float $longitude): int
     {
         if (($latitude >= 56.0) && ($latitude < 64.0)
             && ($longitude >= 3.0) && ($longitude < 12.0)) {
@@ -154,8 +122,76 @@ class UTMFormatter implements FormatterInterface
         return (int)(($longitude + 180.0) / 6.0) + 1;
     }
 
-    private static function getLatitudinalZone(float $latitude): string
+    private function getLatitudinalZone(float $latitude): string
     {
         return 'CDEFGHJKLMNPQRSTUVWXX'[(int)(($latitude + 80) / 8)];
+    }
+
+    private function getUtmFromLatitudeLongitude(): string
+    {
+        $this->calculateInterimValues();
+
+        $utmEasting =
+            (double)(static::SCALING_FACTOR
+                * $this->n
+                * ($this->a
+                    + (1 - $this->t + $this->c) * pow($this->a, 3.0) / 6
+                    + (5 - 18 * $this->t + $this->t * $this->t + 72 * $this->c - 58 * $this->eccentricityPrimeSquared)
+                    * pow($this->a, 5.0)
+                    / 120)
+                + 500000.0);
+
+        $utmNorthing =
+            (double)(static::SCALING_FACTOR
+                * ($this->m
+                    + $this->n
+                    * tan($this->latitudeRad)
+                    * ($this->a * $this->a / 2
+                        + (5 - $this->t + (9 * $this->c) + (4 * $this->c * $this->c)) * pow($this->a, 4.0) / 24
+                        + (61 - (58 * $this->t) + ($this->t * $this->t) + (600 * $this->c) - (330 * $this->eccentricityPrimeSquared))
+                        * pow($this->a, 6.0)
+                        / 720)));
+
+        // Adjust for the southern hemisphere
+        if ($this->latitude < 0) {
+            $utmNorthing += 10000000.0;
+        }
+
+        return $this->longitudinalZone . $this->utmZone . ' ' . round($utmEasting) . ' ' . round($utmNorthing);
+    }
+
+    private function calculateInterimValues()
+    {
+        $this->eccentricity = ((static::ELLIPSOID_MAJOR_AXIS * static::ELLIPSOID_MAJOR_AXIS) - (static::ELLIPSOID_MINOR_AXIS * static::ELLIPSOID_MINOR_AXIS)) / (static::ELLIPSOID_MAJOR_AXIS * static::ELLIPSOID_MAJOR_AXIS);
+        $this->eccentricityPrimeSquared = ($this->eccentricity) / (1 - $this->eccentricity);
+
+        $this->latitudeRad = $this->latitude * (pi() / 180.0);
+        $this->longitudeRad = $this->longitude * (pi() / 180.0);
+
+        $this->n = static::ELLIPSOID_MAJOR_AXIS / sqrt(1 - $this->eccentricity * sin($this->latitudeRad) * sin($this->latitudeRad));
+        $this->t = tan($this->latitudeRad) * tan($this->latitudeRad);
+        $this->c = $this->eccentricityPrimeSquared * cos($this->latitudeRad) * cos($this->latitudeRad);
+
+        $longitudeOrigin = ($this->longitudinalZone - 1) * 6 - 180 + 3;
+        $longitudeOriginRad = $longitudeOrigin * (pi() / 180.0);
+
+        $this->a = cos($this->latitudeRad) * ($this->longitudeRad - $longitudeOriginRad);
+
+        $this->m =
+            static::ELLIPSOID_MAJOR_AXIS
+            * ((1
+                    - $this->eccentricity / 4
+                    - 3 * $this->eccentricity * $this->eccentricity / 64
+                    - 5 * $this->eccentricity * $this->eccentricity * $this->eccentricity / 256)
+                * $this->latitudeRad
+                - (3 * $this->eccentricity / 8
+                    + 3 * $this->eccentricity * $this->eccentricity / 32
+                    + 45 * $this->eccentricity * $this->eccentricity * $this->eccentricity / 1024)
+                * sin(2 * $this->latitudeRad)
+                + (15 * $this->eccentricity * $this->eccentricity / 256
+                    + 45 * $this->eccentricity * $this->eccentricity * $this->eccentricity / 1024)
+                * sin(4 * $this->latitudeRad)
+                - (35 * $this->eccentricity * $this->eccentricity * $this->eccentricity / 3072)
+                * sin(6 * $this->latitudeRad));
     }
 }
