@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\Domain\Model;
 
@@ -19,8 +20,8 @@ class CoordinateConverterParameterTest extends TestCase
     public function parameterLatitudeSetCorrectly()
     {
         $parameter = new Parameter(
-            '49.487111',
-            '8.466278',
+            49.487111,
+            8.466278,
             'degree',
             'N|S|E|W',
             'before',
@@ -29,7 +30,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertEquals(49.487111, $parameter->getLatitude());
+        $this->assertSame(49.487111, $parameter->getLatitude());
     }
 
     /**
@@ -38,8 +39,8 @@ class CoordinateConverterParameterTest extends TestCase
     public function parameterLongitudeSetCorrectly()
     {
         $parameter = new Parameter(
-            '49.487111',
-            '8.466278',
+            49.487111,
+            8.466278,
             'degree',
             'N|S|E|W',
             'before',
@@ -48,7 +49,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertEquals(8.466278, $parameter->getLongitude());
+        $this->assertSame(8.466278, $parameter->getLongitude());
     }
 
     /**
@@ -65,8 +66,8 @@ class CoordinateConverterParameterTest extends TestCase
 
         foreach ($allowedOutputFormats as $outputFormat) {
             $parameter = new Parameter(
-                '49.487111',
-                '8.466278',
+                49.487111,
+                8.466278,
                 $outputFormat,
                 'N|S|E|W',
                 'before',
@@ -75,7 +76,7 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             );
 
-            $this->assertEquals($outputFormat, $parameter->getOutputFormat());
+            $this->assertSame($outputFormat, $parameter->getOutputFormat());
         }
     }
 
@@ -96,14 +97,14 @@ class CoordinateConverterParameterTest extends TestCase
      * @test
      * @dataProvider matchingCardinalPointsDataProvider
      *
-     * @param string $latitude
-     * @param string $longitude
+     * @param float $latitude
+     * @param float $longitude
      * @param string $cardinalPoints
      * @param string $expectedNorthSouthValue
      */
     public function parameterCardinalPointsForLatitudeSetCorrectly(
-        string $latitude,
-        string $longitude,
+        float $latitude,
+        float $longitude,
         string $cardinalPoints,
         string $expectedNorthSouthValue
     ) {
@@ -118,7 +119,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertEquals($expectedNorthSouthValue, $parameter->getCardinalPointForLatitude());
+        $this->assertSame($expectedNorthSouthValue, $parameter->getCardinalPointForLatitude());
     }
 
     /**
@@ -133,8 +134,8 @@ class CoordinateConverterParameterTest extends TestCase
 
         foreach ($allowedPositions as $position) {
             $parameter = new Parameter(
-                '49.487111',
-                '8.466278',
+                49.487111,
+                8.466278,
                 'degree',
                 'N|S|E|W',
                 $position,
@@ -143,7 +144,7 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             );
 
-            $this->assertEquals($position, $parameter->getCardinalPointsPosition());
+            $this->assertSame($position, $parameter->getCardinalPointsPosition());
         }
     }
 
@@ -153,8 +154,8 @@ class CoordinateConverterParameterTest extends TestCase
     public function parameterNumberOfDecimalsSetCorrectly()
     {
         $parameter = new Parameter(
-            '49.487111',
-            '8.466278',
+            49.487111,
+            8.466278,
             'degree',
             'N|S|E|W',
             'before',
@@ -163,7 +164,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertEquals(3, $parameter->getNumberOfDecimals());
+        $this->assertSame(3, $parameter->getNumberOfDecimals());
     }
 
     /**
@@ -172,8 +173,8 @@ class CoordinateConverterParameterTest extends TestCase
     public function parameterShowTrailingZerosSetCorrectly()
     {
         $parameter = new Parameter(
-            '49.487111',
-            '8.466278',
+            49.487111,
+            8.466278,
             'degree',
             'N|S|E|W',
             'before',
@@ -185,8 +186,8 @@ class CoordinateConverterParameterTest extends TestCase
         $this->assertTrue($parameter->shouldTrailingZerosBeRemoved());
 
         $parameter = new Parameter(
-            '49.487111',
-            '8.466278',
+            49.487111,
+            8.466278,
             'degree',
             'N|S|E|W',
             'before',
@@ -204,8 +205,8 @@ class CoordinateConverterParameterTest extends TestCase
     public function parameterDelimiterZerosSetCorrectly()
     {
         $parameter = new Parameter(
-            '49.487111',
-            '8.466278',
+            49.487111,
+            8.466278,
             'degree',
             'N|S|E|W',
             'before',
@@ -214,15 +215,15 @@ class CoordinateConverterParameterTest extends TestCase
             ' / '
         );
 
-        $this->assertEquals(' / ', $parameter->getDelimiter());
+        $this->assertSame(' / ', $parameter->getDelimiter());
     }
 
     /**
      * @test
      * @dataProvider dataProviderForInvalidParameters
      *
-     * @param string $latitude
-     * @param string $longitude
+     * @param float $latitude
+     * @param float $longitude
      * @param string $outputFormat
      * @param string $cardinalPoints
      * @param string $cardinalPointsPosition
@@ -231,8 +232,8 @@ class CoordinateConverterParameterTest extends TestCase
      * @param string $delimiter
      */
     public function invalidParametersThrowInvalidArgumentException(
-        string $latitude,
-        string $longitude,
+        float $latitude,
+        float $longitude,
         string $outputFormat,
         string $cardinalPoints,
         string $cardinalPointsPosition,
@@ -258,8 +259,8 @@ class CoordinateConverterParameterTest extends TestCase
     {
         return [
             'latitude is too high' => [
-                '90.01',
-                '8.466278',
+                90.01,
+                8.466278,
                 'degree',
                 'N|S|E|W',
                 'before',
@@ -268,8 +269,8 @@ class CoordinateConverterParameterTest extends TestCase
                 ' / '
             ],
             'latitude is too low' => [
-                '-90.01',
-                '8.466278',
+                -90.01,
+                8.466278,
                 'degree',
                 'N|S|E|W',
                 'before',
@@ -278,8 +279,8 @@ class CoordinateConverterParameterTest extends TestCase
                 ' / '
             ],
             'longitude is too high' => [
-                '49.487111',
-                '180.01',
+                49.487111,
+                180.01,
                 'degree',
                 'N|S|E|W',
                 'before',
@@ -288,8 +289,8 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             ],
             'longitude is too low' => [
-                '49.487111',
-                '-180.01',
+                49.487111,
+                -180.01,
                 'degree',
                 'N|S|E|W',
                 'before',
@@ -298,8 +299,8 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             ],
             'degree is invalid' => [
-                '49.487111',
-                '8.466278',
+                49.487111,
+                8.466278,
                 'somethingElse',
                 'N|S|E|W',
                 'before',
@@ -308,8 +309,8 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             ],
             'cardinal points number is too low' => [
-                '49.487111',
-                '8.466278',
+                49.487111,
+                8.466278,
                 'degree',
                 'N|S|E',
                 'before',
@@ -318,8 +319,8 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             ],
             'cardinal points number is too high' => [
-                '49.487111',
-                '8.466278',
+                49.487111,
+                8.466278,
                 'degree',
                 'N|S|E|W|Z',
                 'before',
@@ -328,8 +329,8 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             ],
             'cardinal points position is invalid' => [
-                '49.487111',
-                '8.466278',
+                49.487111,
+                8.466278,
                 'degree',
                 'N|S|E|W',
                 'middle',
@@ -338,8 +339,8 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             ],
             'number of decimals is negative' => [
-                '49.487111',
-                '8.466278',
+                49.487111,
+                8.466278,
                 'degree',
                 'N|S|E|W',
                 'before',

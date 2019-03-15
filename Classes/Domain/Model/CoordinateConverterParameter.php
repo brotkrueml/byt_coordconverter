@@ -67,11 +67,11 @@ class CoordinateConverterParameter
         float $latitude,
         float $longitude,
         string $outputFormat,
-        string $cardinalPoints,
-        string $cardinalPointsPosition,
-        string $numberOfDecimals,
-        bool $removeTrailingZeros,
-        string $delimiter
+        string $cardinalPoints = 'N|S|E|W',
+        string $cardinalPointsPosition = 'before',
+        int $numberOfDecimals = 5,
+        bool $removeTrailingZeros = false,
+        string $delimiter = ', '
     ) {
         $this
             ->setLatitude($latitude)
@@ -155,9 +155,9 @@ class CoordinateConverterParameter
         return $this;
     }
 
-    private function setNumberOfDecimals(string $numberOfDecimals): self
+    private function setNumberOfDecimals(int $numberOfDecimals): self
     {
-        $this->numberOfDecimals = (int)$numberOfDecimals;
+        $this->numberOfDecimals = $numberOfDecimals;
 
         if ($numberOfDecimals < 0) {
             throw new \InvalidArgumentException(
@@ -195,11 +195,6 @@ class CoordinateConverterParameter
     public function getOutputFormat(): string
     {
         return $this->outputFormat;
-    }
-
-    public function getCardinalPointNameForNorth(): string
-    {
-        return $this->cardinalPointsList[0];
     }
 
     public function getCardinalPointForLatitude(): string

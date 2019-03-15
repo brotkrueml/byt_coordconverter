@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Brotkrueml\BytCoordconverter\Utility;
+namespace Brotkrueml\BytCoordconverter\Formatter;
+
+use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 
 /**
  * This file is part of the "byt_coordconverter" Extension for TYPO3 CMS.
@@ -9,9 +11,8 @@ namespace Brotkrueml\BytCoordconverter\Utility;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-class UtmUtility
+class UTMFormatter implements FormatterInterface
 {
-
     /**
      * The major (equitorial) axis
      *
@@ -36,7 +37,15 @@ class UtmUtility
     const SCALING_FACTOR = 0.9996;
 
 
-    public static function getUtmFromLatitudeLongitude(float $latitude, float $longitude): string
+    public function format(CoordinateConverterParameter $parameter): string
+    {
+        return static::getUtmFromLatitudeLongitude(
+            $parameter->getLatitude(),
+            $parameter->getLongitude()
+        );
+    }
+
+    private static function getUtmFromLatitudeLongitude(float $latitude, float $longitude): string
     {
         $eccentricity = static::getEccentricityOfReferenceEllipsoid();
 
@@ -103,11 +112,10 @@ class UtmUtility
         return $longitudinalZone . $utmZone . ' ' . round($utmEasting) . ' ' . round($utmNorthing);
     }
 
-    public static function getEccentricityOfReferenceEllipsoid(): float
+    private static function getEccentricityOfReferenceEllipsoid(): float
     {
         return ((self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS) - (self::ELLIPSOID_MINOR_AXIS * self::ELLIPSOID_MINOR_AXIS)) / (self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS);
     }
-
 
     /**
      * Get the longitudinal zone
@@ -117,7 +125,7 @@ class UtmUtility
      * @param float $longitude
      * @return int
      */
-    public static function getLongitudinalZone(float $latitude, float $longitude): int
+    private static function getLongitudinalZone(float $latitude, float $longitude): int
     {
         if (($latitude >= 56.0) && ($latitude < 64.0)
             && ($longitude >= 3.0) && ($longitude < 12.0)) {
@@ -146,7 +154,7 @@ class UtmUtility
         return (int)(($longitude + 180.0) / 6.0) + 1;
     }
 
-    public static function getLatitudinalZone(float $latitude): string
+    private static function getLatitudinalZone(float $latitude): string
     {
         return 'CDEFGHJKLMNPQRSTUVWXX'[(int)(($latitude + 80) / 8)];
     }
