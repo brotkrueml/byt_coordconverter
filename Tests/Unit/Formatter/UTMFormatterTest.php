@@ -134,8 +134,8 @@ class UTMFormatterTest extends TestCase
         $northParameter = new CoordinateConverterParameter($north, 0.0, 'UTM');
         $southParameter = new CoordinateConverterParameter($south, 0.0, 'UTM');
 
-        $this->assertStringContainsString($expectedZone . ' ', $this->formatter->format($northParameter));
-        $this->assertStringContainsString($expectedZone . ' ', $this->formatter->format($southParameter));
+        $this->assertContains($expectedZone . ' ', $this->formatter->format($northParameter));
+        $this->assertContains($expectedZone . ' ', $this->formatter->format($southParameter));
     }
 
     public function dataProviderForLatitudinalZone(): array
