@@ -9,49 +9,48 @@ class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
 {
     public function format(CoordinateConverterParameter $parameter): string
     {
-        $latitudeDegrees = abs((int)$parameter->getLatitude());
-        $latitudeMinutes = abs(($parameter->getLatitude() - (int)$parameter->getLatitude()) * 60);
-        $latitudeSeconds = number_format(
-            abs(($latitudeMinutes - (int)$latitudeMinutes) * 60),
-            $parameter->getNumberOfDecimals()
+
+        $newLatitude = $this->formatCoordinate(
+            $parameter->getLatitude(),
+            $parameter->getNumberOfDecimals(),
+            $parameter->shouldTrailingZerosBeRemoved()
         );
-        $latitudeMinutes = (int)$latitudeMinutes;
 
-        $longitudeDegrees = abs((int)$parameter->getLongitude());
-        $longitudeMinutes = abs(($parameter->getLongitude() - (int)$parameter->getLongitude()) * 60);
-        $longitudeSeconds = number_format(
-            abs(($longitudeMinutes - (int)$longitudeMinutes) * 60),
-            $parameter->getNumberOfDecimals()
+        $newLongitude = $this->formatCoordinate(
+            $parameter->getLongitude(),
+            $parameter->getNumberOfDecimals(),
+            $parameter->shouldTrailingZerosBeRemoved()
         );
-        $longitudeMinutes = (int)$longitudeMinutes;
-
-        $newLatitude = $latitudeDegrees . '°';
-        $newLongitude = $longitudeDegrees . '°';
-
-        if ($parameter->shouldTrailingZerosBeRemoved()) {
-            $latitudeSeconds = rtrim($latitudeSeconds, '0.');
-            $longitudeSeconds = rtrim($longitudeSeconds, '0.');
-
-            if (empty($latitudeSeconds)) {
-                if ($latitudeMinutes !== 0) {
-                    $newLatitude .= ' ' . $latitudeMinutes . '\'';
-                }
-            } else {
-                $newLatitude .= ' ' . $latitudeMinutes . '\' ' . $latitudeSeconds . '"';
-            }
-
-            if (empty($longitudeSeconds)) {
-                if ($longitudeMinutes !== 0) {
-                    $newLongitude .= ' ' . $longitudeMinutes . '\'';
-                }
-            } else {
-                $newLongitude .= ' ' . $longitudeMinutes . '\' ' . $longitudeSeconds . '"';
-            }
-        } else {
-            $newLatitude .= ' ' . $latitudeMinutes . '\' ' . $latitudeSeconds . '"';
-            $newLongitude .= ' ' . $longitudeMinutes . '\' ' . $longitudeSeconds . '"';
-        }
 
         return $this->getFormattedLatitudeLongitude($newLatitude, $newLongitude, $parameter);
+    }
+
+    private function formatCoordinate(float $coordinate, int $numberOfDecimals, bool $removeTrailingZeros)
+    {
+        $degrees = abs((int)$coordinate);
+        $minutes = abs(($coordinate - (int)$coordinate) * 60);
+        $seconds = number_format(
+            abs(($minutes - (int)$minutes) * 60),
+            $numberOfDecimals
+        );
+        $minutes = (int)$minutes;
+
+        $coordinate = $degrees . '°';
+
+        if (!$removeTrailingZeros) {
+            return $coordinate . ' ' . $minutes . '\' ' . $seconds . '"';
+        }
+
+        $seconds = rtrim($seconds, '0.');
+
+        if ($seconds) {
+            return $coordinate . ' ' . $minutes . '\' ' . $seconds . '"';
+        }
+
+        if ($minutes) {
+            return $coordinate . ' ' . $minutes . '\'';
+        }
+
+        return $coordinate;
     }
 }
