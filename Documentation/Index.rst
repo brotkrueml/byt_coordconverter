@@ -39,7 +39,7 @@ Converting geospacial coordinates from the degree notation into other formats vi
    It is maintained as part of this third party extension.
 
    If you find an error or something is missing, please:
-   `Report a Problem <https://github.com/TYPO3-Documentation/TYPO3CMS-Example-ExtensionManual/issues/new>`__
+   `Report a Problem <https://github.com/brotkrueml/byt_coordconverter/issues/new>`__
 
 **Extension Manual**
 
