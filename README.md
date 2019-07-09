@@ -29,4 +29,5 @@ Download and install the extension with the extension manager module.
 
 ## Usage
 
-You can find the latest documentation in the Documentation folder.
+You can find the latest documentation on [docs.typo3.org](https://docs.typo3.org/p/brotkrueml/coordconverter/master/en-us/)
+or in the Documentation folder.
