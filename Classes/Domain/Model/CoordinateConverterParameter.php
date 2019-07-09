@@ -90,7 +90,11 @@ class CoordinateConverterParameter
 
         if (($this->latitude > 90.0) || ($this->latitude < -90.0)) {
             throw new \InvalidArgumentException(
-                'Invalid latitude: must be a value between 90.0 and -90.0 (given: ' . $this->latitude . ')'
+                \sprintf(
+                    'Invalid latitude: must be a value between 90.0 and -90.0 (given: "%s")',
+                    $this->latitude
+                ),
+                1562698303
             );
         }
 
@@ -103,7 +107,11 @@ class CoordinateConverterParameter
 
         if (($this->longitude > 180.0) || ($this->longitude < -180.0)) {
             throw new \InvalidArgumentException(
-                'Invalid longitude: must be a value between 180.0 and -180.0 (given: ' . $this->longitude . ')'
+                \sprintf(
+                    'Invalid longitude: must be a value between 180.0 and -180.0 (given: "%s")',
+                    $this->longitude
+                ),
+                1562698344
             );
         }
 
@@ -114,12 +122,14 @@ class CoordinateConverterParameter
     {
         $this->outputFormat = $outputFormat;
 
-        if (!in_array($this->outputFormat, $this->allowedOutputFormats)) {
+        if (!\in_array($this->outputFormat, $this->allowedOutputFormats)) {
             throw new \InvalidArgumentException(
-                'Invalid output format: must be one of [' . implode(
-                    '|',
-                    $this->allowedOutputFormats
-                ) . '] (given: ' . $this->longitude . ')'
+                \sprintf(
+                    'Invalid output format: must be one of [%s] (given: "%s")',
+                    implode('|', $this->allowedOutputFormats),
+                    $this->longitude
+                ),
+                1562698411
             );
         }
 
@@ -130,9 +140,13 @@ class CoordinateConverterParameter
     {
         $this->cardinalPointsList = explode('|', $cardinalPoints);
 
-        if (count($this->cardinalPointsList) !== 4) {
+        if (\count($this->cardinalPointsList) !== 4) {
             throw new \InvalidArgumentException(
-                'Invalid number of parameters for cardinal points: must be 4 (separated by |, given: ' . $cardinalPoints . ')'
+                \sprintf(
+                    'Invalid number of parameters for cardinal points: must be 4 (separated by "|", given: "%s")',
+                    $cardinalPoints
+                ),
+                1562698459
             );
         }
 
@@ -143,12 +157,14 @@ class CoordinateConverterParameter
     {
         $this->cardinalPointsPosition = $cardinalPointsPosition;
 
-        if (!in_array($this->cardinalPointsPosition, $this->allowedCardinalPointsPositions)) {
+        if (!\in_array($this->cardinalPointsPosition, $this->allowedCardinalPointsPositions)) {
             throw new \InvalidArgumentException(
-                'Invalid cardinal points position: must be one of [' . implode(
-                    '|',
-                    $this->allowedCardinalPointsPositions
-                ) . '] (given: ' . $cardinalPointsPosition . ')'
+                \sprintf(
+                    'Invalid cardinal points position: must be one of [%s] (given: "%s")',
+                    implode('|', $this->allowedCardinalPointsPositions),
+                    $cardinalPointsPosition
+                ),
+                1562698511
             );
         }
 
@@ -161,7 +177,8 @@ class CoordinateConverterParameter
 
         if ($numberOfDecimals < 0) {
             throw new \InvalidArgumentException(
-                'The number of decimals cannot be negative'
+                'The number of decimals cannot be negative',
+                1562698555
             );
         }
 

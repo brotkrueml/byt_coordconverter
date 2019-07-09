@@ -230,6 +230,7 @@ class CoordinateConverterParameterTest extends TestCase
      * @param int $numberOfDecimals
      * @param bool $removeTrailingZeros
      * @param string $delimiter
+     * @param int $expectedExceptionCode
      */
     public function invalidParametersThrowInvalidArgumentException(
         float $latitude,
@@ -239,9 +240,11 @@ class CoordinateConverterParameterTest extends TestCase
         string $cardinalPointsPosition,
         int $numberOfDecimals,
         bool $removeTrailingZeros,
-        string $delimiter
+        string $delimiter,
+        int $expectedExceptionCode
     ) {
         $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode($expectedExceptionCode);
 
         new Parameter(
             $latitude,
@@ -266,7 +269,8 @@ class CoordinateConverterParameterTest extends TestCase
                 'before',
                 5,
                 false,
-                ' / '
+                ' / ',
+                1562698303
             ],
             'latitude is too low' => [
                 -90.01,
@@ -276,7 +280,8 @@ class CoordinateConverterParameterTest extends TestCase
                 'before',
                 5,
                 false,
-                ' / '
+                ' / ',
+                1562698303
             ],
             'longitude is too high' => [
                 49.487111,
@@ -286,7 +291,8 @@ class CoordinateConverterParameterTest extends TestCase
                 'before',
                 5,
                 true,
-                ', '
+                ', ',
+                1562698344
             ],
             'longitude is too low' => [
                 49.487111,
@@ -296,7 +302,8 @@ class CoordinateConverterParameterTest extends TestCase
                 'before',
                 5,
                 true,
-                ', '
+                ', ',
+                1562698344
             ],
             'degree is invalid' => [
                 49.487111,
@@ -306,7 +313,8 @@ class CoordinateConverterParameterTest extends TestCase
                 'before',
                 5,
                 true,
-                ', '
+                ', ',
+                1562698411
             ],
             'cardinal points number is too low' => [
                 49.487111,
@@ -316,7 +324,8 @@ class CoordinateConverterParameterTest extends TestCase
                 'before',
                 5,
                 true,
-                ', '
+                ', ',
+                1562698459
             ],
             'cardinal points number is too high' => [
                 49.487111,
@@ -326,7 +335,8 @@ class CoordinateConverterParameterTest extends TestCase
                 'before',
                 5,
                 true,
-                ', '
+                ', ',
+                1562698459
             ],
             'cardinal points position is invalid' => [
                 49.487111,
@@ -336,7 +346,8 @@ class CoordinateConverterParameterTest extends TestCase
                 'middle',
                 5,
                 true,
-                ', '
+                ', ',
+                1562698511
             ],
             'number of decimals is negative' => [
                 49.487111,
@@ -346,7 +357,8 @@ class CoordinateConverterParameterTest extends TestCase
                 'before',
                 -5,
                 true,
-                ', '
+                ', ',
+                1562698555
             ],
         ];
     }
