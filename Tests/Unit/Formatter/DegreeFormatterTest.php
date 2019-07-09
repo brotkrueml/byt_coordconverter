@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\Formatter;
 
@@ -9,7 +9,6 @@ namespace Brotkrueml\BytCoordconverter\Tests\Unit\Formatter;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 use Brotkrueml\BytCoordconverter\Formatter\DegreeFormatter;
 use PHPUnit\Framework\TestCase;
@@ -130,5 +129,4 @@ class DegreeFormatterTest extends TestCase
             ],
         ];
     }
-
 }

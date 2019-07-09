@@ -8,7 +8,6 @@ namespace Brotkrueml\BytCoordconverter\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
 use Brotkrueml\BytCoordconverter\Formatter\FormatterInterface;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;

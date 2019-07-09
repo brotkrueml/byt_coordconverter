@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\Domain\Model;
 
@@ -9,7 +9,6 @@ namespace Brotkrueml\BytCoordconverter\Tests\Unit\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
 use PHPUnit\Framework\TestCase;
 
