@@ -3,13 +3,19 @@ declare(strict_types=1);
 
 namespace Brotkrueml\BytCoordconverter\Formatter;
 
+/**
+ * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 
 class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
 {
     public function format(CoordinateConverterParameter $parameter): string
     {
-
         $newLatitude = $this->formatCoordinate(
             $parameter->getLatitude(),
             $parameter->getNumberOfDecimals(),
@@ -27,10 +33,10 @@ class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
 
     private function formatCoordinate(float $coordinate, int $numberOfDecimals, bool $removeTrailingZeros)
     {
-        $degrees = abs((int)$coordinate);
-        $minutes = abs(($coordinate - (int)$coordinate) * 60);
-        $seconds = number_format(
-            abs(($minutes - (int)$minutes) * 60),
+        $degrees = \abs((int)$coordinate);
+        $minutes = \abs(($coordinate - (int)$coordinate) * 60);
+        $seconds = \number_format(
+            \abs(($minutes - (int)$minutes) * 60),
             $numberOfDecimals
         );
         $minutes = (int)$minutes;
@@ -41,7 +47,7 @@ class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
             return $coordinate . ' ' . $minutes . '\' ' . $seconds . '"';
         }
 
-        $seconds = rtrim($seconds, '0.');
+        $seconds = \rtrim($seconds, '0.');
 
         if ($seconds) {
             return $coordinate . ' ' . $minutes . '\' ' . $seconds . '"';

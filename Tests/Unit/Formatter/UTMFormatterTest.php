@@ -3,15 +3,16 @@ declare(strict_types=1);
 
 namespace Brotkrueml\BytCoordconverter\Formatter;
 
-use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
-use PHPUnit\Framework\TestCase;
-
 /**
- * This file is part of the "byt_coordconverter" Extension for TYPO3 CMS.
+ * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
+
+use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
+use PHPUnit\Framework\TestCase;
+
 class UTMFormatterTest extends TestCase
 {
     /** @var UTMFormatter */
@@ -21,7 +22,6 @@ class UTMFormatterTest extends TestCase
     {
         $this->formatter = new UTMFormatter();
     }
-
 
     /**
      * @test

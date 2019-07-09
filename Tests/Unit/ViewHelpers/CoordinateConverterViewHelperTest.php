@@ -3,17 +3,18 @@ declare(strict_types=1);
 
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\ViewHelpers;
 
+/**
+ * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 use Brotkrueml\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
-/**
- * This file is part of the "byt_coordconverter" Extension for TYPO3 CMS.
- *
- * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
- */
 class CoordinateConverterViewHelperTest extends TestCase
 {
     /**

@@ -3,16 +3,17 @@ declare(strict_types=1);
 
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\Formatter;
 
+/**
+ * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 use Brotkrueml\BytCoordconverter\Formatter\DegreeMinutesSecondsFormatter;
 use PHPUnit\Framework\TestCase;
 
-/**
- * This file is part of the "byt_coordconverter" Extension for TYPO3 CMS.
- *
- * For the full copyright and license information, please read the
- * LICENSE file that was distributed with non-default this source code.
- */
 class DegreeMinutesSecondsFormatterTest extends TestCase
 {
     /**
