@@ -123,7 +123,7 @@ The result is:
 Number of decimals
 ------------------
 
-The default number of decimals to show in the coordinates is set to 5. If you want to change it, just use the ``numberOfDecimals``argument:
+The default number of decimals to show in the coordinates is set to 5. If you want to change it, just use the ``numberOfDecimals`` argument:
 
 ::
 
