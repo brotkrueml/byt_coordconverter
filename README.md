@@ -12,8 +12,10 @@ This is a TYPO3 extension for converting geospacial coordinates from the degree 
 
 ## Requirements
 
-The extension in version 2.0 works with TYPO3 8 LTS and TYPO3 9 LTS. Use version 1.0.5 for TYPO3 7 LTS from the TYPO3 Extension Repository.
+The extension in version 2.x works with TYPO3 8 LTS and TYPO3 9 LTS.
+Use version 1.0.5 for TYPO3 7 LTS from the [TYPO3 Extension Repository](https://extensions.typo3.org/extension/byt_coordconverter/) .
 
+The master branch can be used for TYPO3 10.0.
 
 ## Installation
 
