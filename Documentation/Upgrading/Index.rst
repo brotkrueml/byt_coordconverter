@@ -10,7 +10,7 @@ Upgrading
 Upgrading from version 1 to version 2
 =====================================
 
-Version 1.0 is available for TYPO3 7 LTS, version 2.0+ works only for TYPO3 8 LTS und TYPO3 9 LTS.
+Version 1.0 is available for TYPO3 7 LTS, version 2.x works with TYPO3 8+.
 The following breaking changes were made:
 
 * The declaration of the :html:`cc` namespace in the Fluid template to use the view helper is not needed anymore as it
