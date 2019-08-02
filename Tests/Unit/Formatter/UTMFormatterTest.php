@@ -15,11 +15,11 @@ use PHPUnit\Framework\TestCase;
 class UTMFormatterTest extends TestCase
 {
     /** @var UTMFormatter */
-    private $formatter;
+    private $subject;
 
     public function setUp()
     {
-        $this->formatter = new UTMFormatter();
+        $this->subject = new UTMFormatter();
     }
 
     /**
@@ -42,8 +42,8 @@ class UTMFormatterTest extends TestCase
         $northWestParameter = new CoordinateConverterParameter($north, $west, 'UTM');
         $southEastParameter = new CoordinateConverterParameter($south, $east, 'UTM');
 
-        $this->assertStringStartsWith($expectedZone, $this->formatter->format($northWestParameter));
-        $this->assertStringStartsWith($expectedZone, $this->formatter->format($southEastParameter));
+        $this->assertStringStartsWith($expectedZone, $this->subject->format($northWestParameter));
+        $this->assertStringStartsWith($expectedZone, $this->subject->format($southEastParameter));
     }
 
     public function dataProviderForLongitudinalZone(): array
@@ -133,8 +133,8 @@ class UTMFormatterTest extends TestCase
         $northParameter = new CoordinateConverterParameter($north, 0.0, 'UTM');
         $southParameter = new CoordinateConverterParameter($south, 0.0, 'UTM');
 
-        $this->assertContains($expectedZone . ' ', $this->formatter->format($northParameter));
-        $this->assertContains($expectedZone . ' ', $this->formatter->format($southParameter));
+        $this->assertContains($expectedZone . ' ', $this->subject->format($northParameter));
+        $this->assertContains($expectedZone . ' ', $this->subject->format($southParameter));
     }
 
     public function dataProviderForLatitudinalZone(): array
@@ -175,7 +175,7 @@ class UTMFormatterTest extends TestCase
     {
         $parameter = new CoordinateConverterParameter($latitude, $longitude, 'UTM');
 
-        $this->assertSame($expectedCoordinates, $this->formatter->format($parameter));
+        $this->assertSame($expectedCoordinates, $this->subject->format($parameter));
     }
 
     public function dataProviderForSomeCoordinates()

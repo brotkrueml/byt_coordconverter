@@ -24,10 +24,10 @@ class DegreeMinutesSecondsFormatterTest extends TestCase
      */
     public function formatConvertsGivenCoordinatesCorrectly(array $arguments, string $expected)
     {
-        $formatter = new DegreeMinutesSecondsFormatter();
+        $subject = new DegreeMinutesSecondsFormatter();
         $parameter = new CoordinateConverterParameter(...array_values($arguments));
 
-        $this->assertSame($expected, $formatter->format($parameter));
+        $this->assertSame($expected, $subject->format($parameter));
     }
 
     public function dataProvider(): array

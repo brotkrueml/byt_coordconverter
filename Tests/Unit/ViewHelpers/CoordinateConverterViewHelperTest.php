@@ -19,7 +19,7 @@ class CoordinateConverterViewHelperTest extends TestCase
     /**
      * @var CoordinateConverterViewHelper
      */
-    private $viewHelper;
+    private $subject;
 
     /**
      * @var RenderingContext
@@ -28,11 +28,8 @@ class CoordinateConverterViewHelperTest extends TestCase
 
     protected function setUp()
     {
-        $this->viewHelper = $this->getMockBuilder(CoordinateConverterViewHelper::class);
-
-        $this->renderingContextMock = $this->getMockBuilder(RenderingContext::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->subject = $this->createMock(CoordinateConverterViewHelper::class);
+        $this->renderingContextMock = $this->createMock(RenderingContext::class);
     }
 
     /**
@@ -40,12 +37,12 @@ class CoordinateConverterViewHelperTest extends TestCase
      */
     public function argumentsAreRegisteredCorrectly()
     {
-        /** @var MockObject|CoordinateConverterViewHelper $viewHelper */
-        $viewHelper = $this->getMockBuilder(CoordinateConverterViewHelper::class)
+        /** @var MockObject|CoordinateConverterViewHelper $subject */
+        $subject = $this->getMockBuilder(CoordinateConverterViewHelper::class)
             ->setMethods(['registerArgument'])
             ->getMock();
 
-        $viewHelper
+        $subject
             ->expects($this->exactly(8))
             ->method('registerArgument')
             ->withConsecutive(
@@ -105,7 +102,7 @@ class CoordinateConverterViewHelperTest extends TestCase
                 ]
             );
 
-        $viewHelper->initializeArguments();
+        $subject->initializeArguments();
     }
 
     /**

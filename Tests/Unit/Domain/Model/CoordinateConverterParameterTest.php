@@ -19,7 +19,7 @@ class CoordinateConverterParameterTest extends TestCase
      */
     public function parameterLatitudeSetCorrectly()
     {
-        $parameter = new Parameter(
+        $subject = new Parameter(
             49.487111,
             8.466278,
             'degree',
@@ -30,7 +30,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertSame(49.487111, $parameter->getLatitude());
+        $this->assertSame(49.487111, $subject->getLatitude());
     }
 
     /**
@@ -38,7 +38,7 @@ class CoordinateConverterParameterTest extends TestCase
      */
     public function parameterLongitudeSetCorrectly()
     {
-        $parameter = new Parameter(
+        $subject = new Parameter(
             49.487111,
             8.466278,
             'degree',
@@ -49,7 +49,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertSame(8.466278, $parameter->getLongitude());
+        $this->assertSame(8.466278, $subject->getLongitude());
     }
 
     /**
@@ -65,7 +65,7 @@ class CoordinateConverterParameterTest extends TestCase
         ];
 
         foreach ($allowedOutputFormats as $outputFormat) {
-            $parameter = new Parameter(
+            $subject = new Parameter(
                 49.487111,
                 8.466278,
                 $outputFormat,
@@ -76,7 +76,7 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             );
 
-            $this->assertSame($outputFormat, $parameter->getOutputFormat());
+            $this->assertSame($outputFormat, $subject->getOutputFormat());
         }
     }
 
@@ -108,7 +108,7 @@ class CoordinateConverterParameterTest extends TestCase
         string $cardinalPoints,
         string $expectedNorthSouthValue
     ) {
-        $parameter = new Parameter(
+        $subject = new Parameter(
             $latitude,
             $longitude,
             'degree',
@@ -119,7 +119,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertSame($expectedNorthSouthValue, $parameter->getCardinalPointForLatitude());
+        $this->assertSame($expectedNorthSouthValue, $subject->getCardinalPointForLatitude());
     }
 
     /**
@@ -133,7 +133,7 @@ class CoordinateConverterParameterTest extends TestCase
         ];
 
         foreach ($allowedPositions as $position) {
-            $parameter = new Parameter(
+            $subject = new Parameter(
                 49.487111,
                 8.466278,
                 'degree',
@@ -144,7 +144,7 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             );
 
-            $this->assertSame($position, $parameter->getCardinalPointsPosition());
+            $this->assertSame($position, $subject->getCardinalPointsPosition());
         }
     }
 
@@ -153,7 +153,7 @@ class CoordinateConverterParameterTest extends TestCase
      */
     public function parameterNumberOfDecimalsSetCorrectly()
     {
-        $parameter = new Parameter(
+        $subject = new Parameter(
             49.487111,
             8.466278,
             'degree',
@@ -164,7 +164,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertSame(3, $parameter->getNumberOfDecimals());
+        $this->assertSame(3, $subject->getNumberOfDecimals());
     }
 
     /**
@@ -172,7 +172,7 @@ class CoordinateConverterParameterTest extends TestCase
      */
     public function parameterShowTrailingZerosSetCorrectly()
     {
-        $parameter = new Parameter(
+        $subject = new Parameter(
             49.487111,
             8.466278,
             'degree',
@@ -183,9 +183,9 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertTrue($parameter->shouldTrailingZerosBeRemoved());
+        $this->assertTrue($subject->shouldTrailingZerosBeRemoved());
 
-        $parameter = new Parameter(
+        $subject = new Parameter(
             49.487111,
             8.466278,
             'degree',
@@ -196,7 +196,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertFalse($parameter->shouldTrailingZerosBeRemoved());
+        $this->assertFalse($subject->shouldTrailingZerosBeRemoved());
     }
 
     /**
@@ -204,7 +204,7 @@ class CoordinateConverterParameterTest extends TestCase
      */
     public function parameterDelimiterZerosSetCorrectly()
     {
-        $parameter = new Parameter(
+        $subject = new Parameter(
             49.487111,
             8.466278,
             'degree',
@@ -215,7 +215,7 @@ class CoordinateConverterParameterTest extends TestCase
             ' / '
         );
 
-        $this->assertSame(' / ', $parameter->getDelimiter());
+        $this->assertSame(' / ', $subject->getDelimiter());
     }
 
     /**
