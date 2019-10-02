@@ -49,5 +49,28 @@
             "web-dir": ".Build/web",
             "extension-key": "byt_coordconverter"
         }
+    },
+    "scripts": {
+        "extension-init": [
+            "rm -rf ../extension-release/*"
+        ],
+        "extension-copy": [
+            "mkdir -p ../extension-release",
+            "cp -ra * ../extension-release/"
+        ],
+        "extension-cleanup": [
+            "rm -f ../extension-release/composer.lock",
+            "rm -f ../extension-release/README.md",
+            "rm -rf ../extension-release/Documentation*"
+        ],
+        "extension-zip": [
+            "cd ../extension-release/; grep -Po \"(?<='version' => ')([0-9]+\\.[0-9]+\\.[0-9]+)\" ext_emconf.php | xargs -I {version} sh -c 'rm -fv ../byt_coordconverter_{version}.zip; zip -r ../byt_coordconverter_{version}.zip *'"
+        ],
+        "extension-release": [
+            "@extension-init",
+            "@extension-copy",
+            "@extension-cleanup",
+            "@extension-zip"
+        ]
     }
 }
