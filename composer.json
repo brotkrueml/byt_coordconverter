@@ -2,14 +2,12 @@
     "name": "brotkrueml/coordconverter",
     "type": "typo3-cms-extension",
     "description": "TYPO3 view helper for converting geospatial coordinates from one format into another",
-    "homepage": "https://github.com/brotkrueml/byt_coordconverter",
-    "license": [
-        "GPL-2.0+"
-    ],
+    "license": "GPL-2.0-or-later",
     "keywords": [
         "TYPO3",
         "extension",
-        "coordinate converter"
+        "coordinate converter",
+        "coordinates"
     ],
     "authors": [
         {
@@ -38,16 +36,16 @@
         }
     },
     "replace": {
-        "byt_coordconverter": "self.version",
         "typo3-ter/byt_coordconverter": "self.version"
     },
     "config": {
+        "sort-packages": true,
         "vendor-dir": ".Build/vendor",
         "bin-dir": ".Build/bin"
     },
     "extra": {
         "typo3/cms": {
-            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "app-dir": ".Build",
             "web-dir": ".Build/web",
             "extension-key": "byt_coordconverter"
         }
