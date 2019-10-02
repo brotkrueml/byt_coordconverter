@@ -17,6 +17,6 @@ $EM_CONF[$_EXTKEY] = [
         ],
     ],
     'autoload' => [
-        'psr-4' => ['Brotkrueml\BytCoordconverter\\' => 'Classes']
+        'psr-4' => ['Brotkrueml\\BytCoordconverter\\' => 'Classes']
     ],
 ];
