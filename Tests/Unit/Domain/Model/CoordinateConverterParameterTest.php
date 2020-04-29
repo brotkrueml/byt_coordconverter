@@ -13,7 +13,7 @@ namespace Brotkrueml\BytCoordconverter\Tests\Unit\Domain\Model;
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
 use PHPUnit\Framework\TestCase;
 
-class CoordinateConverterParameterTest extends TestCase
+final class CoordinateConverterParameterTest extends TestCase
 {
     /**
      * @test
@@ -259,108 +259,114 @@ class CoordinateConverterParameterTest extends TestCase
         );
     }
 
-    public function dataProviderForInvalidParameters(): array
+    public function dataProviderForInvalidParameters(): \Generator
     {
-        return [
-            'latitude is too high' => [
-                90.01,
-                8.466278,
-                'degree',
-                'N|S|E|W',
-                'before',
-                5,
-                false,
-                ' / ',
-                1562698303
-            ],
-            'latitude is too low' => [
-                -90.01,
-                8.466278,
-                'degree',
-                'N|S|E|W',
-                'before',
-                5,
-                false,
-                ' / ',
-                1562698303
-            ],
-            'longitude is too high' => [
-                49.487111,
-                180.01,
-                'degree',
-                'N|S|E|W',
-                'before',
-                5,
-                true,
-                ', ',
-                1562698344
-            ],
-            'longitude is too low' => [
-                49.487111,
-                -180.01,
-                'degree',
-                'N|S|E|W',
-                'before',
-                5,
-                true,
-                ', ',
-                1562698344
-            ],
-            'degree is invalid' => [
-                49.487111,
-                8.466278,
-                'somethingElse',
-                'N|S|E|W',
-                'before',
-                5,
-                true,
-                ', ',
-                1562698411
-            ],
-            'cardinal points number is too low' => [
-                49.487111,
-                8.466278,
-                'degree',
-                'N|S|E',
-                'before',
-                5,
-                true,
-                ', ',
-                1562698459
-            ],
-            'cardinal points number is too high' => [
-                49.487111,
-                8.466278,
-                'degree',
-                'N|S|E|W|Z',
-                'before',
-                5,
-                true,
-                ', ',
-                1562698459
-            ],
-            'cardinal points position is invalid' => [
-                49.487111,
-                8.466278,
-                'degree',
-                'N|S|E|W',
-                'middle',
-                5,
-                true,
-                ', ',
-                1562698511
-            ],
-            'number of decimals is negative' => [
-                49.487111,
-                8.466278,
-                'degree',
-                'N|S|E|W',
-                'before',
-                -5,
-                true,
-                ', ',
-                1562698555
-            ],
+        yield 'latitude is too high' => [
+            90.01,
+            8.466278,
+            'degree',
+            'N|S|E|W',
+            'before',
+            5,
+            false,
+            ' / ',
+            1562698303
+        ];
+
+        yield 'latitude is too low' => [
+            -90.01,
+            8.466278,
+            'degree',
+            'N|S|E|W',
+            'before',
+            5,
+            false,
+            ' / ',
+            1562698303
+        ];
+
+        yield 'longitude is too high' => [
+            49.487111,
+            180.01,
+            'degree',
+            'N|S|E|W',
+            'before',
+            5,
+            true,
+            ', ',
+            1562698344
+        ];
+
+        yield 'longitude is too low' => [
+            49.487111,
+            -180.01,
+            'degree',
+            'N|S|E|W',
+            'before',
+            5,
+            true,
+            ', ',
+            1562698344
+        ];
+
+        yield 'degree is invalid' => [
+            49.487111,
+            8.466278,
+            'somethingElse',
+            'N|S|E|W',
+            'before',
+            5,
+            true,
+            ', ',
+            1562698411
+        ];
+
+        yield 'cardinal points number is too low' => [
+            49.487111,
+            8.466278,
+            'degree',
+            'N|S|E',
+            'before',
+            5,
+            true,
+            ', ',
+            1562698459
+        ];
+
+        yield 'cardinal points number is too high' => [
+            49.487111,
+            8.466278,
+            'degree',
+            'N|S|E|W|Z',
+            'before',
+            5,
+            true,
+            ', ',
+            1562698459
+        ];
+
+        yield 'cardinal points position is invalid' => [
+            49.487111,
+            8.466278,
+            'degree',
+            'N|S|E|W',
+            'middle',
+            5,
+            true,
+            ', ',
+            1562698511
+        ];
+
+        yield 'number of decimals is negative' => [
+            49.487111,
+            8.466278,
+            'degree',
+            'N|S|E|W',
+            'before',
+            -5,
+            true,
+            ', ',
+            1562698555
         ];
     }
 }

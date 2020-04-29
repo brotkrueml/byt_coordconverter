@@ -15,17 +15,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
-class CoordinateConverterViewHelperTest extends TestCase
+final class CoordinateConverterViewHelperTest extends TestCase
 {
-    /**
-     * @var CoordinateConverterViewHelper
-     */
-    private $subject;
-
-    /**
-     * @var RenderingContext
-     */
-    private $renderingContextMock;
+    private CoordinateConverterViewHelper $subject;
+    private RenderingContext $renderingContextMock;
 
     protected function setUp(): void
     {
@@ -40,7 +33,7 @@ class CoordinateConverterViewHelperTest extends TestCase
     {
         /** @var MockObject|CoordinateConverterViewHelper $subject */
         $subject = $this->getMockBuilder(CoordinateConverterViewHelper::class)
-            ->setMethods(['registerArgument'])
+            ->onlyMethods(['registerArgument'])
             ->getMock();
 
         $subject
@@ -164,41 +157,42 @@ class CoordinateConverterViewHelperTest extends TestCase
         self::assertSame($expectedCoordinates, $actualCoordinates);
     }
 
-    public function dataProviderForFormatter(): array
+    public function dataProviderForFormatter(): \Generator
     {
-        return [
-            'degree' => [
-                [
-                    'latitude' => '-49.3',
-                    'longitude' => '-8.4',
-                    'outputFormat' => 'degree',
-                ],
-                'S 49.30000°, W 8.40000°',
+        yield 'degree' => [
+            [
+                'latitude' => '-49.3',
+                'longitude' => '-8.4',
+                'outputFormat' => 'degree',
             ],
-            'degreeMinutes' => [
-                [
-                    'latitude' => '-49.3',
-                    'longitude' => '-8.4',
-                    'outputFormat' => 'degreeMinutes',
-                ],
-                'S 49° 18.00000\', W 8° 24.00000\'',
+            'S 49.30000°, W 8.40000°',
+        ];
+
+        yield 'degreeMinutes' => [
+            [
+                'latitude' => '-49.3',
+                'longitude' => '-8.4',
+                'outputFormat' => 'degreeMinutes',
             ],
-            'degreeMinutesSeconds' => [
-                [
-                    'latitude' => '-49.3',
-                    'longitude' => '-8.4',
-                    'outputFormat' => 'degreeMinutesSeconds',
-                ],
-                'S 49° 17\' 60.00000", W 8° 24\' 0.00000"',
+            'S 49° 18.00000\', W 8° 24.00000\'',
+        ];
+
+        yield 'degreeMinutesSeconds' => [
+            [
+                'latitude' => '-49.3',
+                'longitude' => '-8.4',
+                'outputFormat' => 'degreeMinutesSeconds',
             ],
-            'UTM' => [
-                [
-                    'latitude' => '-49.3',
-                    'longitude' => '-8.4',
-                    'outputFormat' => 'UTM',
-                ],
-                '29F 543621 4539021',
+            'S 49° 17\' 60.00000", W 8° 24\' 0.00000"',
+        ];
+
+        yield 'UTM' => [
+            [
+                'latitude' => '-49.3',
+                'longitude' => '-8.4',
+                'outputFormat' => 'UTM',
             ],
+            '29F 543621 4539021',
         ];
     }
 }
