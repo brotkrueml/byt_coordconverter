@@ -1,14 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Brotkrueml\BytCoordconverter\Tests\Unit\ViewHelpers;
-
-/**
+/*
  * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
+ * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace Brotkrueml\BytCoordconverter\Tests\Unit\ViewHelpers;
+
 use Brotkrueml\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -43,60 +44,60 @@ class CoordinateConverterViewHelperTest extends TestCase
             ->getMock();
 
         $subject
-            ->expects($this->exactly(8))
+            ->expects(self::exactly(8))
             ->method('registerArgument')
             ->withConsecutive(
                 [
                     'latitude',
                     'string',
-                    $this->anything(),
+                    self::anything(),
                     true,
                 ],
                 [
                     'longitude',
                     'string',
-                    $this->anything(),
+                    self::anything(),
                     true,
                 ],
                 [
                     'outputFormat',
                     'string',
-                    $this->anything(),
+                    self::anything(),
                     false,
                     'degree',
                 ],
                 [
                     'cardinalPoints',
                     'string',
-                    $this->anything(),
+                    self::anything(),
                     false,
                     'N|S|E|W',
                 ],
                 [
                     'cardinalPointsPosition',
                     'string',
-                    $this->anything(),
+                    self::anything(),
                     false,
                     'before',
                 ],
                 [
                     'numberOfDecimals',
                     'int',
-                    $this->anything(),
+                    self::anything(),
                     false,
                     5,
                 ],
                 [
                     'removeTrailingZeros',
                     'bool',
-                    $this->anything(),
+                    self::anything(),
                     false,
                     false,
                 ],
                 [
                     'delimiter',
                     'string',
-                    $this->anything(),
+                    self::anything(),
                     false,
                     ', ',
                 ]
@@ -160,7 +161,7 @@ class CoordinateConverterViewHelperTest extends TestCase
             $this->renderingContextMock
         );
 
-        $this->assertSame($expectedCoordinates, $actualCoordinates);
+        self::assertSame($expectedCoordinates, $actualCoordinates);
     }
 
     public function dataProviderForFormatter()

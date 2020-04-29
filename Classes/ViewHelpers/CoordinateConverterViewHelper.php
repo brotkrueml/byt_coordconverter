@@ -1,13 +1,14 @@
 <?php
 
-namespace Brotkrueml\BytCoordconverter\ViewHelpers;
-
-/**
+/*
  * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
+ * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace Brotkrueml\BytCoordconverter\ViewHelpers;
+
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
 use Brotkrueml\BytCoordconverter\Formatter\FormatterInterface;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;

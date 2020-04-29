@@ -1,14 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Brotkrueml\BytCoordconverter\Tests\Unit\Formatter;
-
-/**
+/*
  * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
+ * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace Brotkrueml\BytCoordconverter\Tests\Unit\Formatter;
+
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 use Brotkrueml\BytCoordconverter\Formatter\DegreeMinutesFormatter;
 use PHPUnit\Framework\TestCase;
@@ -27,7 +28,7 @@ class DegreeMinutesFormatterTest extends TestCase
         $subject = new DegreeMinutesFormatter();
         $parameter = new CoordinateConverterParameter(...array_values($arguments));
 
-        $this->assertSame($expected, $subject->format($parameter));
+        self::assertSame($expected, $subject->format($parameter));
     }
 
     public function dataProvider(): array

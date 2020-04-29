@@ -25,6 +25,7 @@
         "typo3fluid/fluid": "^2.6"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
         "php-coveralls/php-coveralls": "^2.2",
         "phpunit/phpunit": "^8.5 || ^9.1"
     },
@@ -54,6 +55,7 @@
         }
     },
     "scripts": {
+        "fix-cs": ".Build/bin/php-cs-fixer fix",
         "extension-init": [
             "rm -rf ../extension-release/*"
         ],

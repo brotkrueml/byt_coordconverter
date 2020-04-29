@@ -1,14 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Brotkrueml\BytCoordconverter\Domain\Model;
-
-/**
+/*
  * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
+ * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace Brotkrueml\BytCoordconverter\Domain\Model;
+
 class CoordinateConverterParameter
 {
     private $allowedOutputFormats = [

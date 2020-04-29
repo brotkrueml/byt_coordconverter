@@ -1,15 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace Brotkrueml\BytCoordconverter\Formatter;
-
-/**
+/*
  * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
+ * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace Brotkrueml\BytCoordconverter\Tests\Unit\Formatter;
+
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
+use Brotkrueml\BytCoordconverter\Formatter\UTMFormatter;
 use PHPUnit\Framework\TestCase;
 
 class UTMFormatterTest extends TestCase
@@ -42,8 +44,8 @@ class UTMFormatterTest extends TestCase
         $northWestParameter = new CoordinateConverterParameter($north, $west, 'UTM');
         $southEastParameter = new CoordinateConverterParameter($south, $east, 'UTM');
 
-        $this->assertStringStartsWith($expectedZone, $this->subject->format($northWestParameter));
-        $this->assertStringStartsWith($expectedZone, $this->subject->format($southEastParameter));
+        self::assertStringStartsWith($expectedZone, $this->subject->format($northWestParameter));
+        self::assertStringStartsWith($expectedZone, $this->subject->format($southEastParameter));
     }
 
     public function dataProviderForLongitudinalZone(): array
@@ -133,8 +135,8 @@ class UTMFormatterTest extends TestCase
         $northParameter = new CoordinateConverterParameter($north, 0.0, 'UTM');
         $southParameter = new CoordinateConverterParameter($south, 0.0, 'UTM');
 
-        $this->assertStringContainsString($expectedZone . ' ', $this->subject->format($northParameter));
-        $this->assertStringContainsString($expectedZone . ' ', $this->subject->format($southParameter));
+        self::assertStringContainsString($expectedZone . ' ', $this->subject->format($northParameter));
+        self::assertStringContainsString($expectedZone . ' ', $this->subject->format($southParameter));
     }
 
     public function dataProviderForLatitudinalZone(): array
@@ -175,7 +177,7 @@ class UTMFormatterTest extends TestCase
     {
         $parameter = new CoordinateConverterParameter($latitude, $longitude, 'UTM');
 
-        $this->assertSame($expectedCoordinates, $this->subject->format($parameter));
+        self::assertSame($expectedCoordinates, $this->subject->format($parameter));
     }
 
     public function dataProviderForSomeCoordinates()

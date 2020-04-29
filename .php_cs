@@ -5,11 +5,19 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__ . '/Tests')
 ;
 
+$header = <<<EOF
+This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
+
+For the full copyright and license information, please read the
+LICENSE.txt file that was distributed with this source code.
+EOF;
+
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
         '@DoctrineAnnotation' => true,
         '@PSR2' => true,
+        'array_indentation' => true,
         'array_syntax' => ['syntax' => 'short'],
         'cast_spaces' => ['space' => 'none'],
         'concat_space' => ['spacing' => 'one'],
@@ -17,6 +25,7 @@ return PhpCsFixer\Config::create()
         'dir_constant' => true,
         'function_typehint_space' => true,
         'hash_to_slash_comment' => true,
+        'header_comment' => ['header' => $header, 'separate' => 'both'],
         'lowercase_cast' => true,
         'modernize_types_casting' => true,
         'native_function_casing' => true,
@@ -44,6 +53,10 @@ return PhpCsFixer\Config::create()
         'phpdoc_trim' => true,
         'phpdoc_types' => true,
         'phpdoc_types_order' => ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none'],
+        'php_unit_mock_short_will_return' => true,
+        'php_unit_set_up_tear_down_visibility' => true,
+        'php_unit_strict' => true,
+        'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
         'return_type_declaration' => ['space_before' => 'none'],
         'single_quote' => true,
         'whitespace_after_comma_in_array' => true,

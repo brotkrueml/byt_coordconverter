@@ -1,14 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Brotkrueml\BytCoordconverter\Tests\Unit\Domain\Model;
-
-/**
+/*
  * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
+ * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace Brotkrueml\BytCoordconverter\Tests\Unit\Domain\Model;
+
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +31,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertSame(49.487111, $subject->getLatitude());
+        self::assertSame(49.487111, $subject->getLatitude());
     }
 
     /**
@@ -49,7 +50,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertSame(8.466278, $subject->getLongitude());
+        self::assertSame(8.466278, $subject->getLongitude());
     }
 
     /**
@@ -76,7 +77,7 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             );
 
-            $this->assertSame($outputFormat, $subject->getOutputFormat());
+            self::assertSame($outputFormat, $subject->getOutputFormat());
         }
     }
 
@@ -119,7 +120,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertSame($expectedNorthSouthValue, $subject->getCardinalPointForLatitude());
+        self::assertSame($expectedNorthSouthValue, $subject->getCardinalPointForLatitude());
     }
 
     /**
@@ -144,7 +145,7 @@ class CoordinateConverterParameterTest extends TestCase
                 ', '
             );
 
-            $this->assertSame($position, $subject->getCardinalPointsPosition());
+            self::assertSame($position, $subject->getCardinalPointsPosition());
         }
     }
 
@@ -164,7 +165,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertSame(3, $subject->getNumberOfDecimals());
+        self::assertSame(3, $subject->getNumberOfDecimals());
     }
 
     /**
@@ -183,7 +184,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertTrue($subject->shouldTrailingZerosBeRemoved());
+        self::assertTrue($subject->shouldTrailingZerosBeRemoved());
 
         $subject = new Parameter(
             49.487111,
@@ -196,7 +197,7 @@ class CoordinateConverterParameterTest extends TestCase
             ', '
         );
 
-        $this->assertFalse($subject->shouldTrailingZerosBeRemoved());
+        self::assertFalse($subject->shouldTrailingZerosBeRemoved());
     }
 
     /**
@@ -215,7 +216,7 @@ class CoordinateConverterParameterTest extends TestCase
             ' / '
         );
 
-        $this->assertSame(' / ', $subject->getDelimiter());
+        self::assertSame(' / ', $subject->getDelimiter());
     }
 
     /**
