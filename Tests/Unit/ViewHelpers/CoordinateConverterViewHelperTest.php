@@ -26,7 +26,7 @@ class CoordinateConverterViewHelperTest extends TestCase
      */
     private $renderingContextMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = $this->createMock(CoordinateConverterViewHelper::class);
         $this->renderingContextMock = $this->createMock(RenderingContext::class);

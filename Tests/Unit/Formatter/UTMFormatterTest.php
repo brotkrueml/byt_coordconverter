@@ -17,7 +17,7 @@ class UTMFormatterTest extends TestCase
     /** @var UTMFormatter */
     private $subject;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->subject = new UTMFormatter();
     }
@@ -133,8 +133,8 @@ class UTMFormatterTest extends TestCase
         $northParameter = new CoordinateConverterParameter($north, 0.0, 'UTM');
         $southParameter = new CoordinateConverterParameter($south, 0.0, 'UTM');
 
-        $this->assertContains($expectedZone . ' ', $this->subject->format($northParameter));
-        $this->assertContains($expectedZone . ' ', $this->subject->format($southParameter));
+        $this->assertStringContainsString($expectedZone . ' ', $this->subject->format($northParameter));
+        $this->assertStringContainsString($expectedZone . ' ', $this->subject->format($southParameter));
     }
 
     public function dataProviderForLatitudinalZone(): array
