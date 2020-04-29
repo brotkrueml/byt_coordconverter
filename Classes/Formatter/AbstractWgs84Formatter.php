@@ -12,6 +12,9 @@ namespace Brotkrueml\BytCoordconverter\Formatter;
 
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 
+/**
+ * @internal
+ */
 abstract class AbstractWgs84Formatter implements FormatterInterface
 {
     protected function getFormattedLatitudeLongitude(

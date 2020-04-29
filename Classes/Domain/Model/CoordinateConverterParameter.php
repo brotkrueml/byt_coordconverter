@@ -10,7 +10,10 @@ declare(strict_types=1);
 
 namespace Brotkrueml\BytCoordconverter\Domain\Model;
 
-class CoordinateConverterParameter
+/**
+ * @internal
+ */
+final class CoordinateConverterParameter
 {
     private $allowedOutputFormats = [
         'degree',

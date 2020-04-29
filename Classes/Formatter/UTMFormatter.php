@@ -12,7 +12,10 @@ namespace Brotkrueml\BytCoordconverter\Formatter;
 
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 
-class UTMFormatter implements FormatterInterface
+/**
+ * @internal
+ */
+final class UTMFormatter implements FormatterInterface
 {
     /**
      * The major (equitorial) axis

@@ -12,6 +12,9 @@ namespace Brotkrueml\BytCoordconverter\Formatter;
 
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 
+/**
+ * @internal
+ */
 interface FormatterInterface
 {
     public function format(CoordinateConverterParameter $parameter): string;

@@ -12,7 +12,10 @@ namespace Brotkrueml\BytCoordconverter\Formatter;
 
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 
-class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
+/**
+ * @internal
+ */
+final class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
 {
     public function format(CoordinateConverterParameter $parameter): string
     {
