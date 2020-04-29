@@ -1,8 +1,7 @@
 # Coordinate Converter
 
-[![Build Status](https://travis-ci.org/brotkrueml/byt_coordconverter.svg?branch=master)](https://travis-ci.org/brotkrueml/byt_coordconverter)
-[![Maintainability](https://api.codeclimate.com/v1/badges/b7e02a9299d5d65d18bf/maintainability)](https://codeclimate.com/github/brotkrueml/byt_coordconverter/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/b7e02a9299d5d65d18bf/test_coverage)](https://codeclimate.com/github/brotkrueml/byt_coordconverter/test_coverage)
+[![CI Status](https://github.com/brotkrueml/byt_coordconverter/workflows/CI/badge.svg?branch=master)](https://github.com/brotkrueml/byt_coordconverter/actions?query=workflow%3ACI)
+[![Coverage Status](https://coveralls.io/repos/github/brotkrueml/byt_coordconverter/badge.svg?branch=master)](https://coveralls.io/github/brotkrueml/byt_coordconverter?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/brotkrueml/coordconverter/v/stable)](https://packagist.org/packages/brotkrueml/coordconverter)
 
 This is a TYPO3 extension for converting geospacial coordinates from the degree notation into other formats via a Fluid view helper.
@@ -10,9 +9,10 @@ This is a TYPO3 extension for converting geospacial coordinates from the degree 
 
 ## Requirements
 
-The extension in version 2.x works with TYPO3 8 LTS, TYPO3 9 LTS and TYPO3 v10.
+The extension in version 3.x works with TYPO3 v9 LTS and TYPO3 v10 LTS.
 
-Use version 1.0.5 for TYPO3 7 LTS from the [TYPO3 Extension Repository](https://extensions.typo3.org/extension/byt_coordconverter/) .
+Use version 2.1.3 for TYPO3 v8 LTS and version 1.0.5 for TYPO3 7 LTS from
+the [TYPO3 Extension Repository](https://extensions.typo3.org/extension/byt_coordconverter/) .
 
 ## Installation
 
