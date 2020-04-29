@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /*
  * This file is part of the "byt_coordconverter" extension for TYPO3 CMS.
@@ -16,7 +17,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper;
 
 class CoordinateConverterViewHelper extends ViewHelper\AbstractViewHelper
 {
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -80,7 +81,7 @@ class CoordinateConverterViewHelper extends ViewHelper\AbstractViewHelper
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    ) {
+    ): string {
         try {
             $parameter = new Parameter(
                 (float)$arguments['latitude'],
@@ -96,7 +97,10 @@ class CoordinateConverterViewHelper extends ViewHelper\AbstractViewHelper
             throw new ViewHelper\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $className = 'Brotkrueml\\BytCoordconverter\\Formatter\\' . ucfirst($parameter->getOutputFormat()) . 'Formatter';
+        $className = \sprintf(
+            'Brotkrueml\\BytCoordconverter\\Formatter\\%sFormatter',
+            \ucfirst($parameter->getOutputFormat())
+        );
 
         /** @var FormatterInterface $formatter */
         $formatter = new $className();

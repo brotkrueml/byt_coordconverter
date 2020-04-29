@@ -36,7 +36,7 @@ class CoordinateConverterViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function argumentsAreRegisteredCorrectly()
+    public function argumentsAreRegisteredCorrectly(): void
     {
         /** @var MockObject|CoordinateConverterViewHelper $subject */
         $subject = $this->getMockBuilder(CoordinateConverterViewHelper::class)
@@ -109,7 +109,7 @@ class CoordinateConverterViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderThrowsViewHelperExceptionWhenOnOutOfBoundsCoordinatesAreGiven()
+    public function renderThrowsViewHelperExceptionWhenOnOutOfBoundsCoordinatesAreGiven(): void
     {
         $this->expectException(\TYPO3Fluid\Fluid\Core\ViewHelper\Exception::class);
 
@@ -127,7 +127,7 @@ class CoordinateConverterViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderThrowsViewHelperExceptionWhenInvalidOutputFormatIsGiven()
+    public function renderThrowsViewHelperExceptionWhenInvalidOutputFormatIsGiven(): void
     {
         $this->expectException(\TYPO3Fluid\Fluid\Core\ViewHelper\Exception::class);
 
@@ -153,7 +153,7 @@ class CoordinateConverterViewHelperTest extends TestCase
     public function correctFormatterIsCalled(
         array $arguments,
         string $expectedCoordinates
-    ) {
+    ): void {
         $actualCoordinates = (new CoordinateConverterViewHelper())->renderStatic(
             $arguments,
             function () {
@@ -164,7 +164,7 @@ class CoordinateConverterViewHelperTest extends TestCase
         self::assertSame($expectedCoordinates, $actualCoordinates);
     }
 
-    public function dataProviderForFormatter()
+    public function dataProviderForFormatter(): array
     {
         return [
             'degree' => [

@@ -19,63 +19,32 @@ final class UTMFormatter implements FormatterInterface
 {
     /**
      * The major (equitorial) axis
-     *
-     * @var float
      */
     const ELLIPSOID_MAJOR_AXIS = 6378137.0;
 
     /**
      * The minor (equitorial) axis
-     *
-     * @var float
      */
     const ELLIPSOID_MINOR_AXIS = 6356752.314;
 
     /**
      * The scaling factor of central meridian
-     *
-     * @var float
      */
     const SCALING_FACTOR = 0.9996;
 
-    /** @var float */
-    private $latitude;
-
-    /** @var float */
-    private $longitude;
-
-    /** @var string */
-    private $utmZone;
-
-    /** @var int */
-    private $longitudinalZone;
-
-    /** @var float */
-    private $eccentricity;
-
-    /** @var float */
-    private $eccentricityPrimeSquared;
-
-    /** @var float */
-    private $latitudeRad;
-
-    /** @var float */
-    private $longitudeRad;
-
-    /** @var float */
-    private $a;
-
-    /** @var float */
-    private $c;
-
-    /** @var float */
-    private $m;
-
-    /** @var float */
-    private $n;
-
-    /** @var float */
-    private $t;
+    private float $latitude;
+    private float $longitude;
+    private string $utmZone;
+    private int $longitudinalZone;
+    private float $eccentricity;
+    private float $eccentricityPrimeSquared;
+    private float $latitudeRad;
+    private float $longitudeRad;
+    private float $a;
+    private float $c;
+    private float $m;
+    private float $n;
+    private float $t;
 
     public function format(CoordinateConverterParameter $parameter): string
     {
@@ -163,7 +132,7 @@ final class UTMFormatter implements FormatterInterface
         return $this->longitudinalZone . $this->utmZone . ' ' . \round($utmEasting) . ' ' . \round($utmNorthing);
     }
 
-    private function calculateInterimValues()
+    private function calculateInterimValues(): void
     {
         $this->eccentricity = ((static::ELLIPSOID_MAJOR_AXIS * static::ELLIPSOID_MAJOR_AXIS) - (static::ELLIPSOID_MINOR_AXIS * static::ELLIPSOID_MINOR_AXIS)) / (static::ELLIPSOID_MAJOR_AXIS * static::ELLIPSOID_MAJOR_AXIS);
         $this->eccentricityPrimeSquared = ($this->eccentricity) / (1 - $this->eccentricity);

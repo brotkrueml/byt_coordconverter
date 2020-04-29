@@ -18,7 +18,7 @@ class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      */
-    public function parameterLatitudeSetCorrectly()
+    public function parameterLatitudeSetCorrectly(): void
     {
         $subject = new Parameter(
             49.487111,
@@ -37,7 +37,7 @@ class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      */
-    public function parameterLongitudeSetCorrectly()
+    public function parameterLongitudeSetCorrectly(): void
     {
         $subject = new Parameter(
             49.487111,
@@ -56,7 +56,7 @@ class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      */
-    public function parameterOutputFormatSetCorrectly()
+    public function parameterOutputFormatSetCorrectly(): void
     {
         $allowedOutputFormats = [
             'degree',
@@ -108,7 +108,7 @@ class CoordinateConverterParameterTest extends TestCase
         float $longitude,
         string $cardinalPoints,
         string $expectedNorthSouthValue
-    ) {
+    ): void {
         $subject = new Parameter(
             $latitude,
             $longitude,
@@ -126,7 +126,7 @@ class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      */
-    public function parameterCardinalPointsPositionSetCorrectly()
+    public function parameterCardinalPointsPositionSetCorrectly(): void
     {
         $allowedPositions = [
             'after',
@@ -152,7 +152,7 @@ class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      */
-    public function parameterNumberOfDecimalsSetCorrectly()
+    public function parameterNumberOfDecimalsSetCorrectly(): void
     {
         $subject = new Parameter(
             49.487111,
@@ -171,7 +171,7 @@ class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      */
-    public function parameterShowTrailingZerosSetCorrectly()
+    public function parameterShowTrailingZerosSetCorrectly(): void
     {
         $subject = new Parameter(
             49.487111,
@@ -203,7 +203,7 @@ class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      */
-    public function parameterDelimiterZerosSetCorrectly()
+    public function parameterDelimiterZerosSetCorrectly(): void
     {
         $subject = new Parameter(
             49.487111,
@@ -243,7 +243,7 @@ class CoordinateConverterParameterTest extends TestCase
         bool $removeTrailingZeros,
         string $delimiter,
         int $expectedExceptionCode
-    ) {
+    ): void {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionCode($expectedExceptionCode);
 

@@ -15,57 +15,26 @@ namespace Brotkrueml\BytCoordconverter\Domain\Model;
  */
 final class CoordinateConverterParameter
 {
-    private $allowedOutputFormats = [
+    private array $allowedOutputFormats = [
         'degree',
         'degreeMinutes',
         'degreeMinutesSeconds',
         'UTM',
     ];
 
-    private $allowedCardinalPointsPositions = [
+    private array $allowedCardinalPointsPositions = [
         'after',
         'before',
     ];
 
-    /**
-     * @var float
-     */
-    private $latitude;
-
-    /**
-     * @var float
-     */
-    private $longitude;
-
-    /**
-     * @var string
-     */
-    private $outputFormat;
-
-    /**
-     * @var array
-     */
-    private $cardinalPointsList;
-
-    /**
-     * @var string
-     */
-    private $cardinalPointsPosition;
-
-    /**
-     * @var int
-     */
-    private $numberOfDecimals;
-
-    /**
-     * @var bool
-     */
-    private $removeTrailingZeros;
-
-    /**
-     * @var string
-     */
-    private $delimiter;
+    private float $latitude;
+    private float $longitude;
+    private string $outputFormat;
+    private array $cardinalPointsList;
+    private string $cardinalPointsPosition;
+    private int $numberOfDecimals;
+    private bool $removeTrailingZeros;
+    private string $delimiter;
 
     public function __construct(
         float $latitude,
@@ -130,7 +99,7 @@ final class CoordinateConverterParameter
             throw new \InvalidArgumentException(
                 \sprintf(
                     'Invalid output format: must be one of [%s] (given: "%s")',
-                    implode('|', $this->allowedOutputFormats),
+                    \implode('|', $this->allowedOutputFormats),
                     $this->longitude
                 ),
                 1562698411
@@ -142,7 +111,7 @@ final class CoordinateConverterParameter
 
     private function setCardinalPoints(string $cardinalPoints): self
     {
-        $this->cardinalPointsList = explode('|', $cardinalPoints);
+        $this->cardinalPointsList = \explode('|', $cardinalPoints);
 
         if (\count($this->cardinalPointsList) !== 4) {
             throw new \InvalidArgumentException(

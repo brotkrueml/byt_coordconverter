@@ -10,7 +10,8 @@ Upgrading
 From version 2 to version 3
 ===========================
 
-The support for TYPO3 v8 LTS was removed. No other breaking changes.
+The support for PHP 7.0-7.3 and TYPO3 v8 LTS was removed. No other breaking
+changes.
 
 
 From version 1 to version 2

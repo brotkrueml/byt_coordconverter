@@ -40,7 +40,7 @@ class UTMFormatterTest extends TestCase
         float $east,
         float $west,
         string $expectedZone
-    ) {
+    ): void {
         $northWestParameter = new CoordinateConverterParameter($north, $west, 'UTM');
         $southEastParameter = new CoordinateConverterParameter($south, $east, 'UTM');
 
@@ -130,7 +130,7 @@ class UTMFormatterTest extends TestCase
      * @param float $south
      * @param string $expectedZone
      */
-    public function latitudinalZoneIsCorrectlyCalculated(float $north, float $south, string $expectedZone)
+    public function latitudinalZoneIsCorrectlyCalculated(float $north, float $south, string $expectedZone): void
     {
         $northParameter = new CoordinateConverterParameter($north, 0.0, 'UTM');
         $southParameter = new CoordinateConverterParameter($south, 0.0, 'UTM');
@@ -173,14 +173,14 @@ class UTMFormatterTest extends TestCase
      * @param float $longitude
      * @param $expectedCoordinates
      */
-    public function someCoordinates(float $latitude, float $longitude, $expectedCoordinates)
+    public function someCoordinates(float $latitude, float $longitude, $expectedCoordinates): void
     {
         $parameter = new CoordinateConverterParameter($latitude, $longitude, 'UTM');
 
         self::assertSame($expectedCoordinates, $this->subject->format($parameter));
     }
 
-    public function dataProviderForSomeCoordinates()
+    public function dataProviderForSomeCoordinates(): array
     {
         return [
             'paradeplatz, mannheim' => [49.487111, 8.466278, '32U 461344 5481745'],

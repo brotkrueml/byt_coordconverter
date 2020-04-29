@@ -23,7 +23,7 @@ class DegreeMinutesSecondsFormatterTest extends TestCase
      * @param array $arguments
      * @param string $expected
      */
-    public function formatConvertsGivenCoordinatesCorrectly(array $arguments, string $expected)
+    public function formatConvertsGivenCoordinatesCorrectly(array $arguments, string $expected): void
     {
         $subject = new DegreeMinutesSecondsFormatter();
         $parameter = new CoordinateConverterParameter(...array_values($arguments));
