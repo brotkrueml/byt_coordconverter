@@ -18,6 +18,7 @@
         }
     ],
     "support": {
+        "docs": "https://docs.typo3.org/p/brotkrueml/coordconverter/master/en-us/",
         "issues": "https://github.com/brotkrueml/byt_coordconverter/issues"
     },
     "require": {
