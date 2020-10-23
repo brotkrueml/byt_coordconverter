@@ -3,11 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../.Build/vendor/phpunit/phpunit/phpunit.xsd"
 >
-    <coverage includeUncoveredFiles="true"
-              processUncoveredFiles="true"
-              ignoreDeprecatedCodeUnits="true"
-              disableCodeCoverageIgnore="true"
-    >
+    <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">../Classes/</directory>
         </include>
