@@ -1,14 +1,6 @@
 name: CI
 
-on:
-  push:
-    paths:
-      - '**.php'
-      - '.github/workflows/ci.yml'
-  pull_request:
-    paths:
-      - '**.php'
-      - '.github/workflows/ci.yml'
+on: [push, pull_request]
 
 jobs:
   build:
