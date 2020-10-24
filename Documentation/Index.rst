@@ -27,10 +27,6 @@ Coordinate Converter
    `CC BY-NC-SA 4.0 <https://creativecommons.org/licenses/by-nc-sa/4.0/>`_
    (Creative Commons) license
 
-.. rst-class:: horizbuttons-tip-xxl
-
-- :ref:`Sitemap`
-
 Converting geospacial coordinates from the degree notation into other formats
 via a Fluid view helper.
 
@@ -39,19 +35,12 @@ via a Fluid view helper.
 The content of this document is related to TYPO3 CMS, a GNU/GPL CMS/Framework
 available from `typo3.org <https://typo3.org/>`_.
 
-**Community Documentation**
-
-This documentation is community documentation for the TYPO3 extension
-byt_coordconverter.
-
-It is maintained as part of this third party extension.
-
-If you find an error or something is missing, please:
-`Report a Problem <https://github.com/brotkrueml/byt_coordconverter/issues/new>`_
-
 **Extension Manual**
 
 This documentation is for the TYPO3 extension byt_coordconverter.
+
+If you find an error or something is missing, please:
+`Report a Problem <https://github.com/brotkrueml/byt_coordconverter/issues/new>`_
 
 **For Contributors**
 
@@ -61,7 +50,6 @@ on the top right to submit your change request.
 
 .. toctree::
    :maxdepth: 3
-   :hidden:
 
    Introduction/Index
    Installation/Index
