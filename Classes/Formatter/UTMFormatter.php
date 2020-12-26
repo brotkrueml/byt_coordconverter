@@ -51,7 +51,7 @@ final class UTMFormatter implements FormatterInterface
         $this->latitude = $parameter->getLatitude();
         $this->longitude = $parameter->getLongitude();
 
-        $this->utmZone = static::getLatitudinalZone($this->latitude);
+        $this->utmZone = self::getLatitudinalZone($this->latitude);
         $this->longitudinalZone = $this->getLongitudinalZone($this->latitude, $this->longitude);
 
         return $this->getUtmFromLatitudeLongitude();
@@ -104,7 +104,7 @@ final class UTMFormatter implements FormatterInterface
         $this->calculateInterimValues();
 
         $utmEasting =
-            (double)(static::SCALING_FACTOR
+            (double)(self::SCALING_FACTOR
                 * $this->n
                 * ($this->a
                     + (1 - $this->t + $this->c) * \pow($this->a, 3.0) / 6
@@ -114,7 +114,7 @@ final class UTMFormatter implements FormatterInterface
                 + 500000.0);
 
         $utmNorthing =
-            (double)(static::SCALING_FACTOR
+            (double)(self::SCALING_FACTOR
                 * ($this->m
                     + $this->n
                     * \tan($this->latitudeRad)
@@ -134,13 +134,13 @@ final class UTMFormatter implements FormatterInterface
 
     private function calculateInterimValues(): void
     {
-        $this->eccentricity = ((static::ELLIPSOID_MAJOR_AXIS * static::ELLIPSOID_MAJOR_AXIS) - (static::ELLIPSOID_MINOR_AXIS * static::ELLIPSOID_MINOR_AXIS)) / (static::ELLIPSOID_MAJOR_AXIS * static::ELLIPSOID_MAJOR_AXIS);
+        $this->eccentricity = ((self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS) - (self::ELLIPSOID_MINOR_AXIS * self::ELLIPSOID_MINOR_AXIS)) / (self::ELLIPSOID_MAJOR_AXIS * static::ELLIPSOID_MAJOR_AXIS);
         $this->eccentricityPrimeSquared = ($this->eccentricity) / (1 - $this->eccentricity);
 
         $this->latitudeRad = $this->latitude * (\pi() / 180.0);
         $this->longitudeRad = $this->longitude * (\pi() / 180.0);
 
-        $this->n = static::ELLIPSOID_MAJOR_AXIS / \sqrt(1 - $this->eccentricity * \sin($this->latitudeRad) * \sin($this->latitudeRad));
+        $this->n = self::ELLIPSOID_MAJOR_AXIS / \sqrt(1 - $this->eccentricity * \sin($this->latitudeRad) * \sin($this->latitudeRad));
         $this->t = \tan($this->latitudeRad) * \tan($this->latitudeRad);
         $this->c = $this->eccentricityPrimeSquared * \cos($this->latitudeRad) * \cos($this->latitudeRad);
 
@@ -149,8 +149,7 @@ final class UTMFormatter implements FormatterInterface
 
         $this->a = \cos($this->latitudeRad) * ($this->longitudeRad - $longitudeOriginRad);
 
-        $this->m =
-            static::ELLIPSOID_MAJOR_AXIS
+        $this->m = self::ELLIPSOID_MAJOR_AXIS
             * ((1
                     - $this->eccentricity / 4
                     - 3 * $this->eccentricity * $this->eccentricity / 64

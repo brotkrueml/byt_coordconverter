@@ -34,7 +34,7 @@ final class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
         return $this->getFormattedLatitudeLongitude($newLatitude, $newLongitude, $parameter);
     }
 
-    private function formatCoordinate(float $coordinate, int $numberOfDecimals, bool $removeTrailingZeros)
+    private function formatCoordinate(float $coordinate, int $numberOfDecimals, bool $removeTrailingZeros): string
     {
         $degrees = \abs((int)$coordinate);
         $minutes = \abs(($coordinate - (int)$coordinate) * 60);
