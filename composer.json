@@ -41,9 +41,6 @@
             "Brotkrueml\\BytCoordconverter\\Tests\\": "Tests"
         }
     },
-    "replace": {
-        "typo3-ter/byt_coordconverter": "self.version"
-    },
     "config": {
         "sort-packages": true,
         "vendor-dir": ".Build/vendor",
