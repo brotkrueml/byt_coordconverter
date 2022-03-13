@@ -1,8 +1,8 @@
 {
     "name": "brotkrueml/coordconverter",
-    "type": "typo3-cms-extension",
     "description": "TYPO3 view helper for converting geospatial coordinates from one format into another",
     "license": "GPL-2.0-or-later",
+    "type": "typo3-cms-extension",
     "keywords": [
         "TYPO3",
         "extension",
@@ -18,8 +18,8 @@
         }
     ],
     "support": {
-        "docs": "https://docs.typo3.org/p/brotkrueml/coordconverter/main/en-us/",
-        "issues": "https://github.com/brotkrueml/byt_coordconverter/issues"
+        "issues": "https://github.com/brotkrueml/byt_coordconverter/issues",
+        "docs": "https://docs.typo3.org/p/brotkrueml/coordconverter/main/en-us/"
     },
     "require": {
         "php": ">=7.4",
@@ -28,6 +28,7 @@
     },
     "require-dev": {
         "brotkrueml/coding-standards": "~1.2.0",
+        "ergebnis/composer-normalize": "~2.24.0",
         "php-coveralls/php-coveralls": "^2.4",
         "phpunit/phpunit": "^9.5"
     },
@@ -42,19 +43,20 @@
         }
     },
     "config": {
-        "sort-packages": true,
-        "vendor-dir": ".Build/vendor",
-        "bin-dir": ".Build/bin",
         "allow-plugins": {
             "typo3/cms-composer-installers": true,
-            "typo3/class-alias-loader": true
-        }
+            "typo3/class-alias-loader": true,
+            "ergebnis/composer-normalize": true
+        },
+        "bin-dir": ".Build/bin",
+        "sort-packages": true,
+        "vendor-dir": ".Build/vendor"
     },
     "extra": {
         "typo3/cms": {
             "app-dir": ".Build",
-            "web-dir": ".Build/web",
-            "extension-key": "byt_coordconverter"
+            "extension-key": "byt_coordconverter",
+            "web-dir": ".Build/web"
         }
     },
     "scripts": {
