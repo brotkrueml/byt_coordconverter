@@ -20,9 +20,6 @@ final class DegreeMinutesFormatterTest extends TestCase
     /**
      * @test
      * @dataProvider dataProvider
-     *
-     * @param array $arguments
-     * @param string $expected
      */
     public function formatConvertsGivenCoordinatesCorrectly(array $arguments, string $expected): void
     {
@@ -40,7 +37,7 @@ final class DegreeMinutesFormatterTest extends TestCase
                 'longitude' => 8.466278,
                 'outputFormat' => 'degreeMinutes',
             ],
-            'N 49° 29.22666\', E 8° 27.97668\''
+            'N 49° 29.22666\', E 8° 27.97668\'',
         ];
 
         yield 'uses numberOfDecimals correctly' => [
@@ -52,7 +49,7 @@ final class DegreeMinutesFormatterTest extends TestCase
                 'cardinalPointsPosition' => 'before',
                 'numberOfDecimals' => 3,
             ],
-            'N 49° 29.227\', E 8° 27.977\''
+            'N 49° 29.227\', E 8° 27.977\'',
         ];
 
         yield 'uses removeTrailingZeros correctly' => [
@@ -65,7 +62,7 @@ final class DegreeMinutesFormatterTest extends TestCase
                 'numberOfDecimals' => 5,
                 'removeTrailingZeros' => true,
             ],
-            'N 49° 29.22\', E 8° 27.96\''
+            'N 49° 29.22\', E 8° 27.96\'',
         ];
 
         yield 'uses removeTrailingZeros and avoiding dot at the end correctly' => [
@@ -78,7 +75,7 @@ final class DegreeMinutesFormatterTest extends TestCase
                 'numberOfDecimals' => 5,
                 'removeTrailingZeros' => true,
             ],
-            'N 49° 29\', E 8° 27\''
+            'N 49° 29\', E 8° 27\'',
         ];
 
         yield 'uses removeTrailingZeros and avoiding degree at the end correctly' => [
@@ -91,7 +88,7 @@ final class DegreeMinutesFormatterTest extends TestCase
                 'numberOfDecimals' => 5,
                 'removeTrailingZeros' => true,
             ],
-            'N 49°, E 8°'
+            'N 49°, E 8°',
         ];
     }
 }

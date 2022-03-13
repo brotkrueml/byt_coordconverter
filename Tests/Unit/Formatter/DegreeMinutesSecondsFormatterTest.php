@@ -20,9 +20,6 @@ final class DegreeMinutesSecondsFormatterTest extends TestCase
     /**
      * @test
      * @dataProvider dataProvider
-     *
-     * @param array $arguments
-     * @param string $expected
      */
     public function formatConvertsGivenCoordinatesCorrectly(array $arguments, string $expected): void
     {
@@ -40,7 +37,7 @@ final class DegreeMinutesSecondsFormatterTest extends TestCase
                 'longitude' => 8.466278,
                 'outputFormat' => 'degreeMinutesSeconds',
             ],
-            'N 49° 29\' 13.59960", E 8° 27\' 58.60080"'
+            'N 49° 29\' 13.59960", E 8° 27\' 58.60080"',
         ];
 
         yield 'uses numberOfDecimals correctly' => [
@@ -52,7 +49,7 @@ final class DegreeMinutesSecondsFormatterTest extends TestCase
                 'cardinalPointsPosition' => 'before',
                 'numberOfDecimals' => 1,
             ],
-            'N 49° 29\' 13.6", E 8° 27\' 58.6"'
+            'N 49° 29\' 13.6", E 8° 27\' 58.6"',
         ];
 
         yield 'uses removeTrailingZeros correctly' => [
@@ -65,7 +62,7 @@ final class DegreeMinutesSecondsFormatterTest extends TestCase
                 'numberOfDecimals' => 5,
                 'removeTrailingZeros' => true,
             ],
-            'N 49°, E 8°'
+            'N 49°, E 8°',
         ];
 
         yield 'uses removeTrailingZeros and avoiding dot at the end correctly' => [
@@ -78,7 +75,7 @@ final class DegreeMinutesSecondsFormatterTest extends TestCase
                 'numberOfDecimals' => 2,
                 'removeTrailingZeros' => true,
             ],
-            'N 49° 29\' 13", E 8° 27\' 58"'
+            'N 49° 29\' 13", E 8° 27\' 58"',
         ];
 
         yield 'uses removeTrailingZeros and avoiding empty seconds correctly' => [
@@ -91,7 +88,7 @@ final class DegreeMinutesSecondsFormatterTest extends TestCase
                 'numberOfDecimals' => 2,
                 'removeTrailingZeros' => true,
             ],
-            'N 49° 29\', E 8° 27\''
+            'N 49° 29\', E 8° 27\'',
         ];
 
         yield 'uses removeTrailingZeros and avoiding empty minutes and seconds correctly' => [
@@ -104,7 +101,7 @@ final class DegreeMinutesSecondsFormatterTest extends TestCase
                 'numberOfDecimals' => 2,
                 'removeTrailingZeros' => true,
             ],
-            'N 49°, E 8°'
+            'N 49°, E 8°',
         ];
 
         yield 'uses removeTrailingZeros and zero minutes correctly' => [
@@ -117,7 +114,7 @@ final class DegreeMinutesSecondsFormatterTest extends TestCase
                 'numberOfDecimals' => 2,
                 'removeTrailingZeros' => true,
             ],
-            'N 49° 0\' 13.6", E 8° 0\' 58.6"'
+            'N 49° 0\' 13.6", E 8° 0\' 58.6"',
         ];
     }
 }

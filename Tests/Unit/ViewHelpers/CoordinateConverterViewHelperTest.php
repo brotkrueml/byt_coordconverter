@@ -18,12 +18,10 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
 final class CoordinateConverterViewHelperTest extends TestCase
 {
-    private CoordinateConverterViewHelper $subject;
     private RenderingContext $renderingContextMock;
 
     protected function setUp(): void
     {
-        $this->subject = $this->createMock(CoordinateConverterViewHelper::class);
         $this->renderingContextMock = $this->createMock(RenderingContext::class);
     }
 
@@ -112,7 +110,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
                 'latitude' => '200',
                 'longitude' => '8',
             ],
-            function () {
+            static function () {
             },
             $this->renderingContextMock
         );
@@ -131,7 +129,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
                 'longitude' => '8',
                 'outputFormat' => 'formatIsInvalid',
             ],
-            function () {
+            static function () {
             },
             $this->renderingContextMock
         );
@@ -140,9 +138,6 @@ final class CoordinateConverterViewHelperTest extends TestCase
     /**
      * @test
      * @dataProvider dataProviderForFormatter
-     *
-     * @param array $arguments
-     * @param string $expectedCoordinates
      */
     public function correctFormatterIsCalled(
         array $arguments,
@@ -150,7 +145,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
     ): void {
         $actualCoordinates = (new CoordinateConverterViewHelper())->renderStatic(
             $arguments,
-            function () {
+            static function () {
             },
             $this->renderingContextMock
         );

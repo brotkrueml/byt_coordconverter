@@ -21,17 +21,17 @@ final class UTMFormatter implements FormatterInterface
     /**
      * The major (equitorial) axis
      */
-    const ELLIPSOID_MAJOR_AXIS = 6378137.0;
+    private const ELLIPSOID_MAJOR_AXIS = 6378137.0;
 
     /**
      * The minor (equitorial) axis
      */
-    const ELLIPSOID_MINOR_AXIS = 6356752.314;
+    private const ELLIPSOID_MINOR_AXIS = 6356752.314;
 
     /**
      * The scaling factor of central meridian
      */
-    const SCALING_FACTOR = 0.9996;
+    private const SCALING_FACTOR = 0.9996;
 
     private float $latitude;
     private float $longitude;
@@ -61,10 +61,6 @@ final class UTMFormatter implements FormatterInterface
     /**
      * Get the longitudinal zone
      * @see http://www.dmap.co.uk/utmworld.htm
-     *
-     * @param float $latitude
-     * @param float $longitude
-     * @return int
      */
     private function getLongitudinalZone(float $latitude, float $longitude): int
     {
@@ -105,7 +101,7 @@ final class UTMFormatter implements FormatterInterface
         $this->calculateInterimValues();
 
         $utmEasting =
-            (double)(self::SCALING_FACTOR
+            (float)(self::SCALING_FACTOR
                 * $this->n
                 * ($this->a
                     + (1 - $this->t + $this->c) * \pow($this->a, 3.0) / 6
@@ -115,7 +111,7 @@ final class UTMFormatter implements FormatterInterface
                 + 500000.0);
 
         $utmNorthing =
-            (double)(self::SCALING_FACTOR
+            (float)(self::SCALING_FACTOR
                 * ($this->m
                     + $this->n
                     * \tan($this->latitudeRad)
@@ -138,15 +134,15 @@ final class UTMFormatter implements FormatterInterface
         $this->eccentricity = ((self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS) - (self::ELLIPSOID_MINOR_AXIS * self::ELLIPSOID_MINOR_AXIS)) / (self::ELLIPSOID_MAJOR_AXIS * static::ELLIPSOID_MAJOR_AXIS);
         $this->eccentricityPrimeSquared = ($this->eccentricity) / (1 - $this->eccentricity);
 
-        $this->latitudeRad = $this->latitude * (\pi() / 180.0);
-        $this->longitudeRad = $this->longitude * (\pi() / 180.0);
+        $this->latitudeRad = $this->latitude * (\M_PI / 180.0);
+        $this->longitudeRad = $this->longitude * (\M_PI / 180.0);
 
         $this->n = self::ELLIPSOID_MAJOR_AXIS / \sqrt(1 - $this->eccentricity * \sin($this->latitudeRad) * \sin($this->latitudeRad));
         $this->t = \tan($this->latitudeRad) * \tan($this->latitudeRad);
         $this->c = $this->eccentricityPrimeSquared * \cos($this->latitudeRad) * \cos($this->latitudeRad);
 
         $longitudeOrigin = ($this->longitudinalZone - 1) * 6 - 180 + 3;
-        $longitudeOriginRad = $longitudeOrigin * (\pi() / 180.0);
+        $longitudeOriginRad = $longitudeOrigin * (\M_PI / 180.0);
 
         $this->a = \cos($this->latitudeRad) * ($this->longitudeRad - $longitudeOriginRad);
 

@@ -98,11 +98,6 @@ final class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      * @dataProvider matchingCardinalPointsDataProvider
-     *
-     * @param float $latitude
-     * @param float $longitude
-     * @param string $cardinalPoints
-     * @param string $expectedNorthSouthValue
      */
     public function parameterCardinalPointsForLatitudeSetCorrectly(
         float $latitude,
@@ -223,16 +218,6 @@ final class CoordinateConverterParameterTest extends TestCase
     /**
      * @test
      * @dataProvider dataProviderForInvalidParameters
-     *
-     * @param float $latitude
-     * @param float $longitude
-     * @param string $outputFormat
-     * @param string $cardinalPoints
-     * @param string $cardinalPointsPosition
-     * @param int $numberOfDecimals
-     * @param bool $removeTrailingZeros
-     * @param string $delimiter
-     * @param int $expectedExceptionCode
      */
     public function invalidParametersThrowInvalidArgumentException(
         float $latitude,
@@ -271,7 +256,7 @@ final class CoordinateConverterParameterTest extends TestCase
             5,
             false,
             ' / ',
-            1562698303
+            1562698303,
         ];
 
         yield 'latitude is too low' => [
@@ -283,7 +268,7 @@ final class CoordinateConverterParameterTest extends TestCase
             5,
             false,
             ' / ',
-            1562698303
+            1562698303,
         ];
 
         yield 'longitude is too high' => [
@@ -295,7 +280,7 @@ final class CoordinateConverterParameterTest extends TestCase
             5,
             true,
             ', ',
-            1562698344
+            1562698344,
         ];
 
         yield 'longitude is too low' => [
@@ -307,7 +292,7 @@ final class CoordinateConverterParameterTest extends TestCase
             5,
             true,
             ', ',
-            1562698344
+            1562698344,
         ];
 
         yield 'degree is invalid' => [
@@ -319,7 +304,7 @@ final class CoordinateConverterParameterTest extends TestCase
             5,
             true,
             ', ',
-            1562698411
+            1562698411,
         ];
 
         yield 'cardinal points number is too low' => [
@@ -331,7 +316,7 @@ final class CoordinateConverterParameterTest extends TestCase
             5,
             true,
             ', ',
-            1562698459
+            1562698459,
         ];
 
         yield 'cardinal points number is too high' => [
@@ -343,7 +328,7 @@ final class CoordinateConverterParameterTest extends TestCase
             5,
             true,
             ', ',
-            1562698459
+            1562698459,
         ];
 
         yield 'cardinal points position is invalid' => [
@@ -355,7 +340,7 @@ final class CoordinateConverterParameterTest extends TestCase
             5,
             true,
             ', ',
-            1562698511
+            1562698511,
         ];
 
         yield 'number of decimals is negative' => [
@@ -367,7 +352,7 @@ final class CoordinateConverterParameterTest extends TestCase
             -5,
             true,
             ', ',
-            1562698555
+            1562698555,
         ];
     }
 }

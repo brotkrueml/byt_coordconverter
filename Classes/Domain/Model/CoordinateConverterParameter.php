@@ -58,7 +58,7 @@ final class CoordinateConverterParameter
             ->setDelimiter($delimiter);
     }
 
-    protected function setLatitude(float $latitude): self
+    private function setLatitude(float $latitude): self
     {
         $this->latitude = $latitude;
 
@@ -96,7 +96,7 @@ final class CoordinateConverterParameter
     {
         $this->outputFormat = $outputFormat;
 
-        if (!\in_array($this->outputFormat, $this->allowedOutputFormats)) {
+        if (! \in_array($this->outputFormat, $this->allowedOutputFormats, true)) {
             throw new \InvalidArgumentException(
                 \sprintf(
                     'Invalid output format: must be one of [%s] (given: "%s")',
@@ -131,7 +131,7 @@ final class CoordinateConverterParameter
     {
         $this->cardinalPointsPosition = $cardinalPointsPosition;
 
-        if (!\in_array($this->cardinalPointsPosition, $this->allowedCardinalPointsPositions)) {
+        if (! \in_array($this->cardinalPointsPosition, $this->allowedCardinalPointsPositions, true)) {
             throw new \InvalidArgumentException(
                 \sprintf(
                     'Invalid cardinal points position: must be one of [%s] (given: "%s")',

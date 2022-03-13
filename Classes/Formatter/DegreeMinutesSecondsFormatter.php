@@ -47,7 +47,7 @@ final class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
 
         $coordinate = $degrees . '°';
 
-        if (!$removeTrailingZeros) {
+        if (! $removeTrailingZeros) {
             return $coordinate . ' ' . $minutes . '\' ' . $seconds . '"';
         }
 

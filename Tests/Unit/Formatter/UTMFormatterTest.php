@@ -17,7 +17,9 @@ use PHPUnit\Framework\TestCase;
 
 final class UTMFormatterTest extends TestCase
 {
-    /** @var UTMFormatter */
+    /**
+     * @var UTMFormatter
+     */
     private $subject;
 
     protected function setUp(): void
@@ -28,12 +30,6 @@ final class UTMFormatterTest extends TestCase
     /**
      * @test
      * @dataProvider dataProviderForLongitudinalZone
-     *
-     * @param float $north
-     * @param float $south
-     * @param float $east
-     * @param float $west
-     * @param string $expectedZone
      */
     public function longitudinalZoneIsCorrectlyCalculated(
         float $north,
@@ -124,10 +120,6 @@ final class UTMFormatterTest extends TestCase
     /**
      * @test
      * @dataProvider dataProviderForLatitudinalZone
-     *
-     * @param float $north
-     * @param float $south
-     * @param string $expectedZone
      */
     public function latitudinalZoneIsCorrectlyCalculated(float $north, float $south, string $expectedZone): void
     {
@@ -166,8 +158,6 @@ final class UTMFormatterTest extends TestCase
      * @test
      * @dataProvider dataProviderForSomeCoordinates
      *
-     * @param float $latitude
-     * @param float $longitude
      * @param $expectedCoordinates
      */
     public function someCoordinates(float $latitude, float $longitude, $expectedCoordinates): void
