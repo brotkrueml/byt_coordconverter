@@ -1,6 +1,5 @@
 .. include:: /Includes.rst.txt
 
-
 .. _start:
 
 ====================
@@ -9,6 +8,9 @@ Coordinate Converter
 
 :Extension key:
    byt_coordconverter
+
+:Package name:
+   brotkrueml/coordconverter
 
 :Version:
    |release|
@@ -19,25 +21,29 @@ Coordinate Converter
 :Author:
    Chris Müller
 
-:Email:
-   typo3 (at) krue (dot) ml
-
-:Slack:
-   chris on `typo3.slack.com <https://typo3.slack.com>`_
-
 :License:
-   This extension documentation is published under the
-   `CC BY-NC-SA 4.0 <https://creativecommons.org/licenses/by-nc-sa/4.0/>`_
-   (Creative Commons) license.
+   This document is published under the `Creative Commons BY 4.0`_ license.
+
+:Rendered:
+   |today|
+
+----
 
 This TYPO3 extension converts geospatial coordinates from the degree notation
 into other formats via a Fluid view helper.
 
+----
+
+**Table of Contents:**
+
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
+   :titlesonly:
 
    Introduction/Index
    Installation/Index
    Usage/Index
    Upgrading/Index
-   Sitemap
+
+
+.. _Creative Commons BY 4.0: https://creativecommons.org/licenses/by/4.0/
