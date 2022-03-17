@@ -23,7 +23,7 @@ Target group: **Administrators**
 The recommended way to install this extension is by using Composer. In your
 Composer based TYPO3 project root, just type
 
-.. code-block:: shell
+.. code-block:: bash
 
    composer req brotkrueml/coordconverter
 

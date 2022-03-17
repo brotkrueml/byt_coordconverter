@@ -1,4 +1,4 @@
-# Coordinate Converter
+# TYPO3 extension "Coordinate Converter"
 
 [![CI Status](https://github.com/brotkrueml/byt_coordconverter/workflows/CI/badge.svg?branch=main)](https://github.com/brotkrueml/byt_coordconverter/actions?query=workflow%3ACI)
 [![Coverage Status](https://coveralls.io/repos/github/brotkrueml/byt_coordconverter/badge.svg?branch=main)](https://coveralls.io/github/brotkrueml/byt_coordconverter?branch=main)
