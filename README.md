@@ -6,8 +6,8 @@
 
 This is a TYPO3 extension for converting geospatial coordinates from the degree notation into other formats via a Fluid view helper.
 
-The extension in the current version supports TYPO3 v9 LTS, TYPO3 v10 LTS and TYPO3 v11 LTS.
-Older versions are available for TYPO3 v7 LTS and TYPO3 v8 LTS.
+The extension in the current version supports TYPO3 v10 LTS and TYPO3 v11 LTS.
+Older versions are available for TYPO3 v7 LTS, TYPO3 v8 LTS and TYPO3 v9 LTS.
 
 [Documentation](https://docs.typo3.org/p/brotkrueml/coordconverter/main/en-us/) |
 [Changelog](https://github.com/brotkrueml/byt_coordconverter/blob/main/CHANGELOG.md) |

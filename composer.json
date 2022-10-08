@@ -23,7 +23,7 @@
     },
     "require": {
         "php": ">=7.4",
-        "typo3/cms-core": "^9.5 || ^10.4 || ^11.5",
+        "typo3/cms-core": "^10.4.11 || ^11.5",
         "typo3fluid/fluid": "^2.6"
     },
     "require-dev": {
