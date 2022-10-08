@@ -17,10 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 final class UTMFormatterTest extends TestCase
 {
-    /**
-     * @var UTMFormatter
-     */
-    private $subject;
+    private UTMFormatter $subject;
 
     protected function setUp(): void
     {
@@ -160,7 +157,7 @@ final class UTMFormatterTest extends TestCase
      *
      * @param $expectedCoordinates
      */
-    public function someCoordinates(float $latitude, float $longitude, $expectedCoordinates): void
+    public function someCoordinates(float $latitude, float $longitude, string $expectedCoordinates): void
     {
         $parameter = new CoordinateConverterParameter($latitude, $longitude, 'UTM');
 

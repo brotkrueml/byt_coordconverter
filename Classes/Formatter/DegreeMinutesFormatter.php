@@ -40,11 +40,11 @@ final class DegreeMinutesFormatter extends AbstractWgs84Formatter
         $newLatitude = $latitudeDegrees . '°';
         $newLongitude = $longitudeDegrees . '°';
 
-        if ($latitudeMinutes) {
+        if ($latitudeMinutes !== '' && $latitudeMinutes !== '0') {
             $newLatitude .= ' ' . $latitudeMinutes . '\'';
         }
 
-        if ($longitudeMinutes) {
+        if ($longitudeMinutes !== '' && $longitudeMinutes !== '0') {
             $newLongitude .= ' ' . $longitudeMinutes . '\'';
         }
 

@@ -101,25 +101,25 @@ final class UTMFormatter implements FormatterInterface
         $this->calculateInterimValues();
 
         $utmEasting =
-            (float)(self::SCALING_FACTOR
+            self::SCALING_FACTOR
                 * $this->n
                 * ($this->a
-                    + (1 - $this->t + $this->c) * \pow($this->a, 3.0) / 6
+                    + (1 - $this->t + $this->c) * $this->a ** 3.0 / 6
                     + (5 - 18 * $this->t + $this->t * $this->t + 72 * $this->c - 58 * $this->eccentricityPrimeSquared)
-                    * \pow($this->a, 5.0)
+                    * $this->a ** 5.0
                     / 120)
-                + 500000.0);
+                + 500000.0;
 
         $utmNorthing =
-            (float)(self::SCALING_FACTOR
+            self::SCALING_FACTOR
                 * ($this->m
                     + $this->n
                     * \tan($this->latitudeRad)
                     * ($this->a * $this->a / 2
-                        + (5 - $this->t + (9 * $this->c) + (4 * $this->c * $this->c)) * \pow($this->a, 4.0) / 24
+                        + (5 - $this->t + (9 * $this->c) + (4 * $this->c * $this->c)) * $this->a ** 4.0 / 24
                         + (61 - (58 * $this->t) + ($this->t * $this->t) + (600 * $this->c) - (330 * $this->eccentricityPrimeSquared))
-                        * \pow($this->a, 6.0)
-                        / 720)));
+                        * $this->a ** 6.0
+                        / 720));
 
         // Adjust for the southern hemisphere
         if ($this->latitude < 0) {

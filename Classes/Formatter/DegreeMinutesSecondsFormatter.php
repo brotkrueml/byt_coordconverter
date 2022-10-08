@@ -53,11 +53,11 @@ final class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
 
         $seconds = \rtrim($seconds, '0.');
 
-        if ($seconds) {
+        if ($seconds !== '' && $seconds !== '0') {
             return $coordinate . ' ' . $minutes . '\' ' . $seconds . '"';
         }
 
-        if ($minutes) {
+        if ($minutes > 0) {
             return $coordinate . ' ' . $minutes . '\'';
         }
 

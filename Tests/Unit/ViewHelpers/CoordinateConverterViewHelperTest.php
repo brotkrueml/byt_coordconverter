@@ -110,7 +110,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
                 'latitude' => '200',
                 'longitude' => '8',
             ],
-            static function () {
+            static function (): void {
             },
             $this->renderingContextMock
         );
@@ -129,7 +129,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
                 'longitude' => '8',
                 'outputFormat' => 'formatIsInvalid',
             ],
-            static function () {
+            static function (): void {
             },
             $this->renderingContextMock
         );
@@ -145,7 +145,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
     ): void {
         $actualCoordinates = (new CoordinateConverterViewHelper())->renderStatic(
             $arguments,
-            static function () {
+            static function (): void {
             },
             $this->renderingContextMock
         );
