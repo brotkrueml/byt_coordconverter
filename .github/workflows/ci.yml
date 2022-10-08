@@ -72,13 +72,16 @@ jobs:
         run: |
           composer --version
           composer install --no-progress --no-suggest
+      - name: Normalize composer.json
+        run: |
+          composer normalize --dry-run
+      - name: Check coding standards
+        run: |
+          .Build/bin/ecs check --no-progress-bar
       - name: Run phpstan
         run: |
           make phpstan
-      - name: Run unit tests
-        run: |
-          .Build/bin/phpunit -c Tests/phpunit.xml.dist --log-junit .Build/logs/phpunit.xml --coverage-text --coverage-clover .Build/logs/clover.xml
-      - name: Run unit tests
+      - name: Generate code coverage
         run: |
           .Build/bin/phpunit -c Tests/phpunit.xml.dist --log-junit .Build/logs/phpunit.xml --coverage-text --coverage-clover .Build/logs/clover.xml
       - name: Send code coverage report to coveralls.io
