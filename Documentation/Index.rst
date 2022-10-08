@@ -44,6 +44,7 @@ into other formats via a Fluid view helper.
    Installation/Index
    Usage/Index
    Upgrading/Index
+   Changelog/Index
 
 
 .. _Creative Commons BY 4.0: https://creativecommons.org/licenses/by/4.0/
