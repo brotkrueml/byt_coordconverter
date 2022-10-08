@@ -55,8 +55,8 @@ jobs:
       - name: Run unit tests
         run: |
           .Build/bin/phpunit -c Tests/phpunit.xml.dist
-  code-coverage:
-    name: Code Coverage
+  code-quality:
+    name: Code Quality
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -72,6 +72,12 @@ jobs:
         run: |
           composer --version
           composer install --no-progress --no-suggest
+      - name: Run phpstan
+        run: |
+          make phpstan
+      - name: Run unit tests
+        run: |
+          .Build/bin/phpunit -c Tests/phpunit.xml.dist --log-junit .Build/logs/phpunit.xml --coverage-text --coverage-clover .Build/logs/clover.xml
       - name: Run unit tests
         run: |
           .Build/bin/phpunit -c Tests/phpunit.xml.dist --log-junit .Build/logs/phpunit.xml --coverage-text --coverage-clover .Build/logs/clover.xml

@@ -16,21 +16,28 @@ namespace Brotkrueml\BytCoordconverter\Domain\Model;
  */
 final class CoordinateConverterParameter
 {
+    /**
+     * @var string[]
+     */
     private array $allowedOutputFormats = [
         'degree',
         'degreeMinutes',
         'degreeMinutesSeconds',
         'UTM',
     ];
-
+    /**
+     * @var string[]
+     */
     private array $allowedCardinalPointsPositions = [
         'after',
         'before',
     ];
-
     private float $latitude;
     private float $longitude;
     private string $outputFormat;
+    /**
+     * @var string[]
+     */
     private array $cardinalPointsList;
     private string $cardinalPointsPosition;
     private int $numberOfDecimals;

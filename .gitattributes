@@ -5,5 +5,7 @@
 /.gitattributes export-ignore
 /.github/ export-ignore
 /.gitignore export-ignore
-/.php_cs export-ignore
+/ecs.php export-ignore
+/Makefile export-ignore
+/phpstan.neon export-ignore
 /README.md export-ignore

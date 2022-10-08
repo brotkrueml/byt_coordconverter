@@ -78,6 +78,9 @@ class CoordinateConverterViewHelper extends ViewHelper\AbstractViewHelper
         );
     }
 
+    /**
+     * @param array{latitude: string, longitude: string, outputFormat?: 'degree'|'degreeMinutes'|'degreeMinutesSeconds'|'UTM', cardinalPoints?: string, cardinalPointsPosition?: 'before'|'after', numberOfDecimals?: positive-int, removeTrailingZeros?: bool, delimiter?: string} $arguments
+     */
     public static function renderStatic(
         array $arguments,
         \Closure $renderChildrenClosure,
