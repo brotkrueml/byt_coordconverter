@@ -27,7 +27,7 @@
         "typo3fluid/fluid": "^2.6"
     },
     "require-dev": {
-        "brotkrueml/coding-standards": "~1.2.0",
+        "brotkrueml/coding-standards": "~2.0.2",
         "ergebnis/composer-normalize": "~2.24.0",
         "php-coveralls/php-coveralls": "^2.4",
         "phpunit/phpunit": "^9.5"
