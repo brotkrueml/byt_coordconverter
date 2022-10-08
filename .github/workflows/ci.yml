@@ -1,6 +1,16 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - 'composer.json'
+      - '.github/workflows/ci.yml'
+      - '**.php'
+  pull_request:
+    paths:
+      - 'composer.json'
+      - '.github/workflows/ci.yml'
+      - '**.php'
 
 jobs:
   build:
