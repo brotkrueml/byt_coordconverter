@@ -28,10 +28,10 @@
     },
     "require-dev": {
         "brotkrueml/coding-standards": "~3.0.0",
-        "ergebnis/composer-normalize": "~2.28.3",
-        "php-coveralls/php-coveralls": "^2.4",
-        "phpstan/phpstan": "1.8.8",
-        "phpunit/phpunit": "^9.5",
+        "ergebnis/composer-normalize": "~2.42.0",
+        "php-coveralls/php-coveralls": "^2.7",
+        "phpstan/phpstan": "1.10.57",
+        "phpunit/phpunit": "^9.6",
         "rector/rector": "0.14.5"
     },
     "autoload": {
@@ -46,9 +46,9 @@
     },
     "config": {
         "allow-plugins": {
-            "typo3/cms-composer-installers": true,
+            "ergebnis/composer-normalize": true,
             "typo3/class-alias-loader": true,
-            "ergebnis/composer-normalize": true
+            "typo3/cms-composer-installers": true
         },
         "bin-dir": ".Build/bin",
         "sort-packages": true,
