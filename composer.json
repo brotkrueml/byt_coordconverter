@@ -23,8 +23,8 @@
     },
     "require": {
         "php": ">=7.4",
-        "typo3/cms-core": "^10.4.11 || ^11.5 || ^12.0",
-        "typo3fluid/fluid": "^2.6"
+        "typo3/cms-core": "^11.5 || ^12.4",
+        "typo3fluid/fluid": "^2.7"
     },
     "require-dev": {
         "brotkrueml/coding-standards": "~3.0.0",
