@@ -154,8 +154,6 @@ final class UTMFormatterTest extends TestCase
     /**
      * @test
      * @dataProvider dataProviderForSomeCoordinates
-     *
-     * @param $expectedCoordinates
      */
     public function someCoordinates(float $latitude, float $longitude, string $expectedCoordinates): void
     {
