@@ -3,12 +3,10 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Core\ValueObject\PhpVersion;
 use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
-use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
-use Rector\TypeDeclaration\Rector\ClassMethod\AddArrayParamDocTypeRector;
+use Rector\ValueObject\PhpVersion;
 
 return static function (RectorConfig $config): void {
     $config->import(LevelSetList::UP_TO_PHP_74);
@@ -16,10 +14,6 @@ return static function (RectorConfig $config): void {
     $config->import(SetList::DEAD_CODE);
     $config->import(SetList::EARLY_RETURN);
     $config->import(SetList::TYPE_DECLARATION);
-    $config->import(PHPUnitSetList::PHPUNIT_CODE_QUALITY);
-    $config->import(PHPUnitSetList::PHPUNIT_EXCEPTION);
-    $config->import(PHPUnitSetList::PHPUNIT_SPECIFIC_METHOD);
-    $config->import(PHPUnitSetList::PHPUNIT_YIELD_DATA_PROVIDER);
 
     $config->phpVersion(PhpVersion::PHP_74);
 
@@ -31,9 +25,6 @@ return static function (RectorConfig $config): void {
         __DIR__ . '/Tests',
     ]);
     $config->skip([
-        AddArrayParamDocTypeRector::class => [
-            __DIR__ . '/Tests/*',
-        ],
         AddLiteralSeparatorToNumberRector::class,
     ]);
 };

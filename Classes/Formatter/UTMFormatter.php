@@ -131,7 +131,7 @@ final class UTMFormatter implements FormatterInterface
 
     private function calculateInterimValues(): void
     {
-        $this->eccentricity = ((self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS) - (self::ELLIPSOID_MINOR_AXIS * self::ELLIPSOID_MINOR_AXIS)) / (self::ELLIPSOID_MAJOR_AXIS * static::ELLIPSOID_MAJOR_AXIS);
+        $this->eccentricity = ((self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS) - (self::ELLIPSOID_MINOR_AXIS * self::ELLIPSOID_MINOR_AXIS)) / (self::ELLIPSOID_MAJOR_AXIS * self::ELLIPSOID_MAJOR_AXIS);
         $this->eccentricityPrimeSquared = ($this->eccentricity) / (1 - $this->eccentricity);
 
         $this->latitudeRad = $this->latitude * (\M_PI / 180.0);
