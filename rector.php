@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\ValueObject\PhpVersion;
@@ -23,8 +22,5 @@ return static function (RectorConfig $config): void {
     $config->paths([
         __DIR__ . '/Classes',
         __DIR__ . '/Tests',
-    ]);
-    $config->skip([
-        AddLiteralSeparatorToNumberRector::class,
     ]);
 };
