@@ -13,280 +13,252 @@ General
 =======
 
 After installation you can use the coordinate converter view helper in every
-Fluid template. The namespace is set to :html:`cc`, the basic usage::
+Fluid template. The namespace is set to :html:`cc`, the basic usage:
 
-   <cc:coordinateConverter latitude="{latitude}" longitude="{longitude}"/>
+.. code-block:: html
+
+   <cc:coordinateConverter latitude="49.487113" longitude="8.466284"/>
+
+The output is:
+
+.. code-block:: plaintext
+
+   N 49.48711°, E 8.46628°
 
 
 The view helper arguments
 =========================
 
-The following arguments are possible:
+The following arguments are available:
 
-======================= ================================================== ============= ================================================
-Argument                Description                                        Default value Possible values
-======================= ================================================== ============= ================================================
-latitude                Latitude (required)                                              +90.0 to -90.0
-longitude               Longitude (required)                                             +180.0 to -180.0
-outputFormat            The output format of the coordinates               degree        degree, degreeMinutes, degreeMinutesSeconds, UTM
-cardinalPoints          Results for the cardinal points, separated by |    N|S|E|W
-cardinalPointsPosition  Position for the cardinal points                   before        before, after
-numberOfDecimals        Number of decimals for the result                  5             0-
-removeTrailingZeros     Set to 1, if trailing zeros should be removed      0             0, 1
-delimiter               The delimiter between latitude and longitude       ,
-======================= ================================================== ============= ================================================
+.. confval-menu::
+   :name: viewhelper-arguments
 
-Below are the arguments described.
+   .. confval:: latitude
+      :name: viewhelper-latitude
+      :type: float
+      :Possible values: `+90.0` to `-90.0`
+      :required:
 
+      The latitude: a positive value is north, a negative value is south.
 
-Output formats
---------------
 
-Degree notation with decimals
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. confval:: longitude
+      :name: viewhelper-longitude
+      :type: float
+      :Possible values: `+180.0` to `-180.0`
+      :required:
 
-.. code-block:: html
+      The longitude: a positive value is east, a negative value is west.
 
-   <cc:coordinateConverter latitude="49.487111" longitude="8.466278"/>
 
-The output is:
+   .. confval:: outputFormat
+      :name: viewhelper-outputformat
+      :type: string
+      :Possible values: `degree`, `degreeMinutes`, `degreeMinutesSeconds`, `UTM`
+      :Default: `degree`
 
-.. code-block:: text
+      The output format of the coordinates.
 
-   N 49.48711°, E 8.46628°
+      **Example: Degree/minutes notation**
 
-.. note::
+      .. code-block:: html
+         :emphasize-lines: 4
 
-   The value for the latitude argument is number-only and ranges from +90.0 to
-   -90.0, a positive values is north, a negative values is south. The value for
-   the longitude argument ranges from +180.0 to -180.0, a positive value is
-   east, a negative value is west. This format is ideal to store in databases.
+         <cc:coordinateConverter
+            latitude="49.487111"
+            longitude="8.466278"
+            outputFormat="degreeMinutes"
+         />
 
-The result of the next example is identical to the previous one, the output
-format parameter defaults to :html:`degree`:
+      The output is:
 
-.. code-block:: html
-   :emphasize-lines: 4
+      .. code-block:: plaintext
 
-   <cc:coordinateConverter
-      latitude="49.487111"
-      longitude="8.466278"
-      outputFormat="degree"
-   />
+         N 49° 29.22666', E 8° 27.97668'
 
+      **Example: Degree/minutes/seconds notation**
 
-Degree/minutes notation
-~~~~~~~~~~~~~~~~~~~~~~~
+      .. code-block:: html
+         :emphasize-lines: 4
 
-To convert the coordinate pair into the degree/minutes format just add the
-:html:`outputFormat` parameter to the view helper:
+         <cc:coordinateConverter
+            latitude="49.487111"
+            longitude="8.466278"
+            outputFormat="degreeMinutesSeconds"
+         />
 
-.. code-block:: html
-   :emphasize-lines: 4
+      The result is:
 
-   <cc:coordinateConverter
-      latitude="49.487111"
-      longitude="8.466278"
-      outputFormat="degreeMinutes"
-   />
+      .. code-block:: plaintext
 
-Now you'll get the result:
+         N 49° 29' 13.59960", E 8° 27' 58.60080"
 
-.. code-block:: text
+      **Example: UTM (Universal Transverse Mercator) notation**
 
-   N 49° 29.22666', E 8° 27.97668'
+      .. code-block:: html
+         :emphasize-lines: 4
 
+         <cc:coordinateConverter
+            latitude="49.487111"
+            longitude="8.466278"
+            outputFormat="UTM"
+         />
 
-Degree/minutes/seconds notation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      The result is:
 
-If you want to output the coordinate pair in minutes and seconds just use this
-syntax:
+      .. code-block:: plaintext
 
-.. code-block:: html
-   :emphasize-lines: 4
+         32U 461344 5481745
 
-   <cc:coordinateConverter
-      latitude="49.487111"
-      longitude="8.466278"
-      outputFormat="degreeMinutesSeconds"
-   />
 
+   .. confval:: cardinalPoints
+      :name: viewhelper-cardinalpoints
+      :type: string
+      :Default: `N|S|E|W`
 
-The result is:
+      Results for the cardinal points, separated by `|`. The argument has no
+      effect in :confval:`output format <viewhelper-outputformat>` :html:`UTM`.
 
-.. code-block:: text
+      **Example: Use full cardinal point name**
 
-   N 49° 29' 13.59960", E 8° 27' 58.60080"
+      .. code-block:: html
+         :emphasize-lines: 4
 
+         <cc:coordinateConverter
+            latitude="49.487111"
+            longitude="8.466278"
+            cardinalPoints="North|South|East|West"
+         />
 
-UTM notation
-~~~~~~~~~~~~
+      The result is:
 
-You can also convert the latitude/longitude coordinates to the UTM (Universal
-Transverse Mercator) notation:
+      .. code-block:: plaintext
 
-.. code-block:: html
-   :emphasize-lines: 4
+         North 49.48711° / East 8.46628°
 
-   <cc:coordinateConverter
-      latitude="49.487111"
-      longitude="8.466278"
-      outputFormat="UTM"
-   />
+      **Example: Use German abbreviations**
 
-The result is:
+      .. code-block:: html
+         :emphasize-lines: 4
 
-.. code-block:: text
+         <cc:coordinateConverter
+            latitude="49.487111"
+            longitude="8.466278"
+            cardinalPoints="N|S|O|W"
+         />
 
-   32U 461344 5481745
+      The result is:
 
+      .. code-block:: plaintext
 
-Number of decimals
-------------------
+         N 49.48711° / O 8.46628°
 
-The default number of decimals to show in the coordinates is set to 5. If you
-want to change it, just use the :html:`numberOfDecimals` argument:
 
-.. code-block:: html
-   :emphasize-lines: 4
+   .. confval:: cardinalPointsPosition
+      :name: viewhelper-cardinalpointsposition
+      :type: string
+      :Possible values: `before`, `after`
+      :Default: `before`
 
-   <cc:coordinateConverter
-      latitude="49.487111"
-      longitude="8.466278"
-      numberOfDecimals="4"
-   />
+      Position for the cardinal points. The argument has no effect in
+      :confval:`output format <viewhelper-outputformat>` :html:`UTM`.
 
-The result is:
+      **Example: Move cardinal point position to the end**
 
-.. code-block:: text
+      .. code-block:: html
+         :emphasize-lines: 4
 
-   N 49.4871°, E 8.4663°
+         <cc:coordinateConverter
+            latitude="49.487111"
+            longitude="8.466278"
+            cardinalPointsPosition="after"
+         />
 
-.. note::
+      The result is:
 
-   The argument has no effect in output format :html:`UTM`.
+      .. code-block:: plaintext
 
+         49.48711° N, 8.46628° E
 
-Remove trailing zeros
----------------------
 
-Sometimes the coordinates look nicer when the trailing zeros are stripped off.
-Just use the :html:`removeTrailingZeros` argument:
+   .. confval:: numberOfDecimals
+      :name: viewhelper-numberofdecimals
+      :type: int
+      :Possible values: >= 0
+      :Default: `5`
 
-.. code-block:: html
-   :emphasize-lines: 4
+      Number of decimals for the result. The argument has no effect in
+      :confval:`output format <viewhelper-outputformat>` :html:`UTM`.
 
-   <cc:coordinateConverter
-      latitude="49.48710"
-      longitude="8.46600"
-      removeTrailingZeros="1"
-   />
+      **Example: Show three decimals**
 
-The result is:
+      .. code-block:: html
+         :emphasize-lines: 4
 
-.. code-block:: text
+         <cc:coordinateConverter
+            latitude="49.487111"
+            longitude="8.466278"
+            numberOfDecimals="3"
+         />
 
-   N 49.4871°, E 8.466°
+      The result is:
 
-.. note::
+      .. code-block:: plaintext
 
-   The argument has no effect in output format :html:`UTM`.
+         N 49.487°, E 8.466°
 
 
-Delimiter
----------
+   .. confval:: removeTrailingZeros
+      :name: viewhelper-removeTrailingZeros
+      :type: bool
+      :Default: `0`
 
-The default delimiter between the two coordinates is the comma with a white
-space. You can change it:
+      Set to `1` to remove trailing zeros in a coordinate. The argument has no
+      effect in :confval:`output format <viewhelper-outputformat>` :html:`UTM`.
 
-.. code-block:: html
-   :emphasize-lines: 4
+      **Example: Show trailing zeros (the default)**
 
-   <cc:coordinateConverter
-      latitude="49.487111"
-      longitude="8.466278"
-      delimiter=" / "
-   />
+      .. code-block:: html
+         :emphasize-lines: 4
 
-You'll get the result:
+         <cc:coordinateConverter
+            latitude="49.48710"
+            longitude="8.46600"
+            removeTrailingZeros="1"
+         />
 
-.. code-block:: text
+      The result is:
 
-   N 49.48711° / E 8.46628°
+      .. code-block:: plaintext
 
-.. note::
+         N 49.4871°, E 008.466°
 
-   The argument has no effect in output format :html:`UTM`.
 
+   .. confval:: delimiter
+      :name: viewhelper-delimiter
+      :type: string
+      :Default: `,`
 
-Cardinal points
----------------
+      The delimiter between latitude and longitude. The argument has no effect
+      in :confval:`output format <viewhelper-outputformat>` :html:`UTM`.
 
-You don't like the default abbreviations N, S, E, W (for North, South, East, W
-est)? You can change it:
+      **Example:**
 
-.. code-block:: html
-   :emphasize-lines: 4
+      .. code-block:: html
+         :emphasize-lines: 4
 
-   <cc:coordinateConverter
-      latitude="49.487111"
-      longitude="8.466278"
-      cardinalPoints="North|South|East|West"
-   />
+         <cc:coordinateConverter
+            latitude="49.487111"
+            longitude="8.466278"
+            delimiter=" / "
+         />
 
-Now you'll get:
+      The result is:
 
-.. code-block:: text
+      .. code-block:: plaintext
 
-   North 49.48711° / East 8.46628°
-
-Or you like to use the German version?
-
-.. code-block:: html
-   :emphasize-lines: 4
-
-   <cc:coordinateConverter
-      latitude="49.487111"
-      longitude="8.466278"
-      cardinalPoints="N|S|O|W"
-   />
-
-The result is:
-
-.. code-block:: text
-
-   N 49.48711° / O 8.46628°
-
-.. note::
-
-   The argument has no effect in output format :html:`UTM`.
-
-
-Cardinal points position
-------------------------
-
-You can choose, at which position to show the cardinal point, before or after a
-coordinate:
-
-.. code-block:: html
-   :emphasize-lines: 4
-
-   <cc:coordinateConverter
-      latitude="49.487111"
-      longitude="8.466278"
-      cardinalPointsPosition="after"
-   />
-
-Now you get the cardinal point after each coordinate:
-
-.. code-block:: text
-
-   49.48711° N, 8.46628° E
-
-.. note::
-
-   The argument has no effect in output format :html:`UTM`.
+         N 49.48711° / E 8.46628°
 
 
 Using the XML Schema (XSD) for validation in your template
@@ -302,7 +274,7 @@ template:
    <html
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:cc="http://typo3.org/ns/Brotkrueml/Coordconverter/ViewHelpers"
-      cc:schemaLocation="https://brot.krue.ml/schemas/byt_coordconverter-3.0.0.xsd"
+      cc:schemaLocation="https://brotkrueml.dev/schemas/byt_coordconverter-3.0.0.xsd"
       data-namespace-typo3-fluid="true"
    >
       ...
