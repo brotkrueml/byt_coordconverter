@@ -1,13 +1,12 @@
 .. include:: /Includes.rst.txt
 
-
 .. _usage:
 
 =====
 Usage
 =====
 
-Target group: **Integrators** **Developers**
+Target group: **Integrators**, **Developers**
 
 
 General
@@ -46,7 +45,7 @@ Output formats
 Degree notation with decimals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-::
+.. code-block:: html
 
    <cc:coordinateConverter latitude="49.487111" longitude="8.466278"/>
 
@@ -290,7 +289,7 @@ Now you get the cardinal point after each coordinate:
    The argument has no effect in output format :html:`UTM`.
 
 
-Using the XML Schema (XSD) for Validation in your Template
+Using the XML Schema (XSD) for validation in your template
 ==========================================================
 
 It is possible to assist your code editor on suggesting the tag name and the
