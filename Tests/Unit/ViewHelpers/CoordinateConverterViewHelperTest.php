@@ -14,17 +14,9 @@ namespace Brotkrueml\BytCoordconverter\Tests\Unit\ViewHelpers;
 use Brotkrueml\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContext;
 
 final class CoordinateConverterViewHelperTest extends TestCase
 {
-    private RenderingContext $renderingContextMock;
-
-    protected function setUp(): void
-    {
-        $this->renderingContextMock = $this->createMock(RenderingContext::class);
-    }
-
     /**
      * @test
      */
@@ -105,15 +97,12 @@ final class CoordinateConverterViewHelperTest extends TestCase
     {
         $this->expectException(\TYPO3Fluid\Fluid\Core\ViewHelper\Exception::class);
 
-        (new CoordinateConverterViewHelper())->renderStatic(
-            [
-                'latitude' => '200',
-                'longitude' => '8',
-            ],
-            static function (): void {
-            },
-            $this->renderingContextMock
-        );
+        $subject = new CoordinateConverterViewHelper();
+        $subject->setArguments([
+            'latitude' => '200',
+            'longitude' => '8',
+        ]);
+        $subject->render();
     }
 
     /**
@@ -123,16 +112,13 @@ final class CoordinateConverterViewHelperTest extends TestCase
     {
         $this->expectException(\TYPO3Fluid\Fluid\Core\ViewHelper\Exception::class);
 
-        (new CoordinateConverterViewHelper())->renderStatic(
-            [
-                'latitude' => '49',
-                'longitude' => '8',
-                'outputFormat' => 'formatIsInvalid',
-            ],
-            static function (): void {
-            },
-            $this->renderingContextMock
-        );
+        $subject = new CoordinateConverterViewHelper();
+        $subject->setArguments([
+            'latitude' => '49',
+            'longitude' => '8',
+            'outputFormat' => 'formatIsInvalid',
+        ]);
+        $subject->render();
     }
 
     /**
@@ -143,17 +129,15 @@ final class CoordinateConverterViewHelperTest extends TestCase
         array $arguments,
         string $expectedCoordinates
     ): void {
-        $actualCoordinates = (new CoordinateConverterViewHelper())->renderStatic(
-            $arguments,
-            static function (): void {
-            },
-            $this->renderingContextMock
-        );
+        $subject = new CoordinateConverterViewHelper();
+        $subject->setArguments($arguments);
+
+        $actualCoordinates = $subject->render();
 
         self::assertSame($expectedCoordinates, $actualCoordinates);
     }
 
-    public function dataProviderForFormatter(): \Generator
+    public function dataProviderForFormatter(): iterable
     {
         yield 'degree' => [
             [
