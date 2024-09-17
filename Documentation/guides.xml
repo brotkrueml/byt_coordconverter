@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guides
+    xmlns="https://www.phpdoc.org/guides"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.phpdoc.org/guides ../vendor/phpdocumentor/guides-cli/resources/schema/guides.xsd"
+    links-are-relative="true"
+>
+    <extension
+        class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
+        project-home="https://extensions.typo3.org/extension/byt_coordconverter"
+        project-repository="https://github.com/brotkrueml/byt_coordconverter"
+        project-issues="https://github.com/brotkrueml/byt_coordconverter/issues"
+        edit-on-github-branch="main"
+        edit-on-github="brotkrueml/byt_coordconverter"
+        typo3-core-preferred="stable"
+    />
+    <project
+        title="Coordinate Converter"
+        release="3.3.0-dev"
+        version="3.3"
+        copyright="since 2013 by Chris Müller"
+    />
+</guides>
