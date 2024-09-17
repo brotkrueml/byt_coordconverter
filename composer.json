@@ -23,8 +23,8 @@
     },
     "require": {
         "php": ">=7.4",
-        "typo3/cms-core": "^11.5 || ^12.4 || ^13.0",
-        "typo3fluid/fluid": "^2.7"
+        "typo3/cms-core": "^11.5 || ^12.4 || ^13.3",
+        "typo3/cms-fluid": "^11.5 || ^12.4 || ^13.3"
     },
     "require-dev": {
         "brotkrueml/coding-standards": "~3.0.0",
@@ -33,8 +33,6 @@
         "phpunit/phpunit": "^9.6",
         "rector/rector": "1.2.5"
     },
-    "minimum-stability": "RC",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Brotkrueml\\BytCoordconverter\\": "Classes/"

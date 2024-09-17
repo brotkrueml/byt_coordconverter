@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Compatibility with Fluid 4
+
 ## [3.2.0] - 2024-02-11
 
 ### Added

@@ -11,6 +11,12 @@ to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 `Unreleased <https://github.com/brotkrueml/byt_coordconverter/compare/v3.2.0...HEAD>`_
 ------------------------------------------------------------------------------------------
 
+Added
+^^^^^
+
+
+* Compatibility with Fluid 4
+
 `3.2.0 <https://github.com/brotkrueml/byt_coordconverter/compare/v3.1.0...v3.2.0>`_ - 2024-02-11
 ----------------------------------------------------------------------------------------------------
 
