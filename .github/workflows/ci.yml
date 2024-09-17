@@ -40,6 +40,12 @@ jobs:
             typo3-versions: ^12
           - php-versions: 8.3
             typo3-versions: ^13
+          - php-versions: 8.4
+            typo3-versions: ^11
+          - php-versions: 8.4
+            typo3-versions: ^12
+          - php-versions: 8.4
+            typo3-versions: ^13
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -62,9 +68,8 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
-          composer --version
-          composer require typo3/cms-core=${{ matrix.typo3-versions }} --no-progress
-          git checkout composer.json
+          composer remove ergebnis/composer-normalize --dev --no-update
+          composer require typo3/cms-core=${{ matrix.typo3-versions }} --no-progress --prefer-dist --optimize-autoloader
       - name: Run PHP linter
         run: |
           find . -name \*.php  ! -path "./.Build/*" -exec php -l {} \;
