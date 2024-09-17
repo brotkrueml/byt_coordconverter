@@ -217,6 +217,10 @@ The following arguments are available:
       Set to `1` to remove trailing zeros in a coordinate. The argument has no
       effect in :confval:`output format <viewhelper-outputformat>` :html:`UTM`.
 
+      .. versionadded:: TYPO3 v13.3
+         The boolean variables `{true}` and `{false}` can also be used instead
+         of `0` and `1`.
+
       **Example: Show trailing zeros (the default)**
 
       .. code-block:: html
