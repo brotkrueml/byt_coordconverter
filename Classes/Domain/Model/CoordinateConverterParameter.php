@@ -52,7 +52,7 @@ final class CoordinateConverterParameter
         string $cardinalPointsPosition = 'before',
         int $numberOfDecimals = 5,
         bool $removeTrailingZeros = false,
-        string $delimiter = ', '
+        string $delimiter = ', ',
     ) {
         $this
             ->setLatitude($latitude)
@@ -73,9 +73,9 @@ final class CoordinateConverterParameter
             throw new \InvalidArgumentException(
                 \sprintf(
                     'Invalid latitude: must be a value between 90.0 and -90.0 (given: "%s")',
-                    $this->latitude
+                    $this->latitude,
                 ),
-                1562698303
+                1562698303,
             );
         }
 
@@ -90,9 +90,9 @@ final class CoordinateConverterParameter
             throw new \InvalidArgumentException(
                 \sprintf(
                     'Invalid longitude: must be a value between 180.0 and -180.0 (given: "%s")',
-                    $this->longitude
+                    $this->longitude,
                 ),
-                1562698344
+                1562698344,
             );
         }
 
@@ -108,9 +108,9 @@ final class CoordinateConverterParameter
                 \sprintf(
                     'Invalid output format: must be one of [%s] (given: "%s")',
                     \implode('|', $this->allowedOutputFormats),
-                    $this->longitude
+                    $this->longitude,
                 ),
-                1562698411
+                1562698411,
             );
         }
 
@@ -125,9 +125,9 @@ final class CoordinateConverterParameter
             throw new \InvalidArgumentException(
                 \sprintf(
                     'Invalid number of parameters for cardinal points: must be 4 (separated by "|", given: "%s")',
-                    $cardinalPoints
+                    $cardinalPoints,
                 ),
-                1562698459
+                1562698459,
             );
         }
 
@@ -142,10 +142,10 @@ final class CoordinateConverterParameter
             throw new \InvalidArgumentException(
                 \sprintf(
                     'Invalid cardinal points position: must be one of [%s] (given: "%s")',
-                    implode('|', $this->allowedCardinalPointsPositions),
-                    $cardinalPointsPosition
+                    \implode('|', $this->allowedCardinalPointsPositions),
+                    $cardinalPointsPosition,
                 ),
-                1562698511
+                1562698511,
             );
         }
 
@@ -159,7 +159,7 @@ final class CoordinateConverterParameter
         if ($numberOfDecimals < 0) {
             throw new \InvalidArgumentException(
                 'The number of decimals cannot be negative',
-                1562698555
+                1562698555,
             );
         }
 

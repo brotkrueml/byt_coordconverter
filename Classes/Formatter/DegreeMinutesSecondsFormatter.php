@@ -23,13 +23,13 @@ final class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
         $newLatitude = $this->formatCoordinate(
             $parameter->getLatitude(),
             $parameter->getNumberOfDecimals(),
-            $parameter->shouldTrailingZerosBeRemoved()
+            $parameter->shouldTrailingZerosBeRemoved(),
         );
 
         $newLongitude = $this->formatCoordinate(
             $parameter->getLongitude(),
             $parameter->getNumberOfDecimals(),
-            $parameter->shouldTrailingZerosBeRemoved()
+            $parameter->shouldTrailingZerosBeRemoved(),
         );
 
         return $this->getFormattedLatitudeLongitude($newLatitude, $newLongitude, $parameter);
@@ -37,13 +37,13 @@ final class DegreeMinutesSecondsFormatter extends AbstractWgs84Formatter
 
     private function formatCoordinate(float $coordinate, int $numberOfDecimals, bool $removeTrailingZeros): string
     {
-        $degrees = \abs((int)$coordinate);
-        $minutes = \abs(($coordinate - (int)$coordinate) * 60);
+        $degrees = \abs((int) $coordinate);
+        $minutes = \abs(($coordinate - (int) $coordinate) * 60);
         $seconds = \number_format(
-            \abs(($minutes - (int)$minutes) * 60),
-            $numberOfDecimals
+            \abs(($minutes - (int) $minutes) * 60),
+            $numberOfDecimals,
         );
-        $minutes = (int)$minutes;
+        $minutes = (int) $minutes;
 
         $coordinate = $degrees . '°';
 

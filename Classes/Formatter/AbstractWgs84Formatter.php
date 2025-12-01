@@ -21,7 +21,7 @@ abstract class AbstractWgs84Formatter implements FormatterInterface
     protected function getFormattedLatitudeLongitude(
         string $latitude,
         string $longitude,
-        CoordinateConverterParameter $parameter
+        CoordinateConverterParameter $parameter,
     ): string {
         $formattedCoordinate = '';
 

@@ -24,7 +24,7 @@ final class DegreeMinutesFormatterTest extends TestCase
     public function formatConvertsGivenCoordinatesCorrectly(array $arguments, string $expected): void
     {
         $subject = new DegreeMinutesFormatter();
-        $parameter = new CoordinateConverterParameter(...array_values($arguments));
+        $parameter = new CoordinateConverterParameter(...\array_values($arguments));
 
         self::assertSame($expected, $subject->format($parameter));
     }

@@ -84,7 +84,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
                     self::anything(),
                     false,
                     ', ',
-                ]
+                ],
             );
 
         $subject->initializeArguments();
@@ -127,7 +127,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
      */
     public function correctFormatterIsCalled(
         array $arguments,
-        string $expectedCoordinates
+        string $expectedCoordinates,
     ): void {
         $subject = new CoordinateConverterViewHelper();
         $subject->setArguments($arguments);

@@ -88,20 +88,20 @@ final class UTMFormatter implements FormatterInterface
             }
         }
 
-        return (int)(($longitude + 180.0) / 6.0) + 1;
+        return (int) (($longitude + 180.0) / 6.0) + 1;
     }
 
     private function getLatitudinalZone(float $latitude): string
     {
-        return 'CDEFGHJKLMNPQRSTUVWXX'[(int)(($latitude + 80) / 8)];
+        return 'CDEFGHJKLMNPQRSTUVWXX'[(int) (($latitude + 80) / 8)];
     }
 
     private function getUtmFromLatitudeLongitude(): string
     {
         $this->calculateInterimValues();
 
-        $utmEasting =
-            self::SCALING_FACTOR
+        $utmEasting
+            = self::SCALING_FACTOR
                 * $this->n
                 * ($this->a
                     + (1 - $this->t + $this->c) * $this->a ** 3.0 / 6
@@ -110,8 +110,8 @@ final class UTMFormatter implements FormatterInterface
                     / 120)
                 + 500000.0;
 
-        $utmNorthing =
-            self::SCALING_FACTOR
+        $utmNorthing
+            = self::SCALING_FACTOR
                 * ($this->m
                     + $this->n
                     * \tan($this->latitudeRad)

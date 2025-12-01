@@ -22,11 +22,11 @@ final class DegreeFormatter extends AbstractWgs84Formatter
     {
         $newLatitude = \number_format(
             \abs($parameter->getLatitude()),
-            $parameter->getNumberOfDecimals()
+            $parameter->getNumberOfDecimals(),
         );
         $newLongitude = \number_format(
             \abs($parameter->getLongitude()),
-            $parameter->getNumberOfDecimals()
+            $parameter->getNumberOfDecimals(),
         );
 
         if ($parameter->shouldTrailingZerosBeRemoved()) {

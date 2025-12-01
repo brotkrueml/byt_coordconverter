@@ -25,55 +25,55 @@ class CoordinateConverterViewHelper extends ViewHelper\AbstractViewHelper
             'latitude',
             'string',
             'The latitude to be converted (in decimal notation)',
-            true
+            true,
         );
         $this->registerArgument(
             'longitude',
             'string',
             'The longitude to be converted (in decimal notation)',
-            true
+            true,
         );
         $this->registerArgument(
             'outputFormat',
             'string',
             'The format of the coordinates for the output (possible values: degree, degreeMinutes, degreeMinutesSeconds, UTM',
             false,
-            'degree'
+            'degree',
         );
         $this->registerArgument(
             'cardinalPoints',
             'string',
             'The naming of the cardinal points (North, South, East, West) separated by | character',
             false,
-            'N|S|E|W'
+            'N|S|E|W',
         );
         $this->registerArgument(
             'cardinalPointsPosition',
             'string',
             'The position of the cardinal points (possible values: before, after)',
             false,
-            'before'
+            'before',
         );
         $this->registerArgument(
             'numberOfDecimals',
             'int',
             'The number of decimals to be shown',
             false,
-            5
+            5,
         );
         $this->registerArgument(
             'removeTrailingZeros',
             'bool',
             'Should trailing zeros be removed',
             false,
-            false
+            false,
         );
         $this->registerArgument(
             'delimiter',
             'string',
             'The delimiter of the coordinates',
             false,
-            ', '
+            ', ',
         );
     }
 
@@ -95,22 +95,22 @@ class CoordinateConverterViewHelper extends ViewHelper\AbstractViewHelper
 
         try {
             $parameter = new Parameter(
-                (float)$arguments['latitude'],
-                (float)$arguments['longitude'],
+                (float) $arguments['latitude'],
+                (float) $arguments['longitude'],
                 $arguments['outputFormat'] ?? 'degree',
                 $arguments['cardinalPoints'] ?? 'N|S|E|W',
                 $arguments['cardinalPointsPosition'] ?? 'before',
-                (int)($arguments['numberOfDecimals'] ?? 5),
-                (bool)($arguments['removeTrailingZeros'] ?? false),
-                $arguments['delimiter'] ?? ', '
+                (int) ($arguments['numberOfDecimals'] ?? 5),
+                (bool) ($arguments['removeTrailingZeros'] ?? false),
+                $arguments['delimiter'] ?? ', ',
             );
         } catch (\InvalidArgumentException $e) {
             throw new ViewHelper\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         $className = \sprintf(
-            'Brotkrueml\\BytCoordconverter\\Formatter\\%sFormatter',
-            \ucfirst($parameter->getOutputFormat())
+            'Brotkrueml\BytCoordconverter\Formatter\%sFormatter',
+            \ucfirst($parameter->getOutputFormat()),
         );
 
         /** @var FormatterInterface $formatter */

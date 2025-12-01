@@ -33,7 +33,7 @@ final class UTMFormatterTest extends TestCase
         float $south,
         float $east,
         float $west,
-        string $expectedZone
+        string $expectedZone,
     ): void {
         $northWestParameter = new CoordinateConverterParameter($north, $west, 'UTM');
         $southEastParameter = new CoordinateConverterParameter($south, $east, 'UTM');

@@ -29,7 +29,7 @@ final class CoordinateConverterParameterTest extends TestCase
             'before',
             5,
             false,
-            ', '
+            ', ',
         );
 
         self::assertSame(49.487111, $subject->getLatitude());
@@ -48,7 +48,7 @@ final class CoordinateConverterParameterTest extends TestCase
             'before',
             5,
             false,
-            ', '
+            ', ',
         );
 
         self::assertSame(8.466278, $subject->getLongitude());
@@ -75,7 +75,7 @@ final class CoordinateConverterParameterTest extends TestCase
                 'before',
                 5,
                 false,
-                ', '
+                ', ',
             );
 
             self::assertSame($outputFormat, $subject->getOutputFormat());
@@ -103,7 +103,7 @@ final class CoordinateConverterParameterTest extends TestCase
         float $latitude,
         float $longitude,
         string $cardinalPoints,
-        string $expectedNorthSouthValue
+        string $expectedNorthSouthValue,
     ): void {
         $subject = new Parameter(
             $latitude,
@@ -113,7 +113,7 @@ final class CoordinateConverterParameterTest extends TestCase
             'before',
             5,
             false,
-            ', '
+            ', ',
         );
 
         self::assertSame($expectedNorthSouthValue, $subject->getCardinalPointForLatitude());
@@ -138,7 +138,7 @@ final class CoordinateConverterParameterTest extends TestCase
                 $position,
                 5,
                 false,
-                ', '
+                ', ',
             );
 
             self::assertSame($position, $subject->getCardinalPointsPosition());
@@ -158,7 +158,7 @@ final class CoordinateConverterParameterTest extends TestCase
             'before',
             3,
             true,
-            ', '
+            ', ',
         );
 
         self::assertSame(3, $subject->getNumberOfDecimals());
@@ -177,7 +177,7 @@ final class CoordinateConverterParameterTest extends TestCase
             'before',
             5,
             true,
-            ', '
+            ', ',
         );
 
         self::assertTrue($subject->shouldTrailingZerosBeRemoved());
@@ -190,7 +190,7 @@ final class CoordinateConverterParameterTest extends TestCase
             'before',
             5,
             false,
-            ', '
+            ', ',
         );
 
         self::assertFalse($subject->shouldTrailingZerosBeRemoved());
@@ -209,7 +209,7 @@ final class CoordinateConverterParameterTest extends TestCase
             'before',
             5,
             false,
-            ' / '
+            ' / ',
         );
 
         self::assertSame(' / ', $subject->getDelimiter());
@@ -228,7 +228,7 @@ final class CoordinateConverterParameterTest extends TestCase
         int $numberOfDecimals,
         bool $removeTrailingZeros,
         string $delimiter,
-        int $expectedExceptionCode
+        int $expectedExceptionCode,
     ): void {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionCode($expectedExceptionCode);
@@ -241,7 +241,7 @@ final class CoordinateConverterParameterTest extends TestCase
             $cardinalPointsPosition,
             $numberOfDecimals,
             $removeTrailingZeros,
-            $delimiter
+            $delimiter,
         );
     }
 
