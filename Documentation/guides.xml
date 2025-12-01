@@ -16,8 +16,8 @@
     />
     <project
         title="Coordinate Converter"
-        release="3.3.0"
-        version="3.3"
+        release="3.4.0-dev"
+        version="3.4"
         copyright="since 2013 by Chris Müller"
     />
 </guides>
