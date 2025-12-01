@@ -9,7 +9,8 @@ Installation
 Target group: **Administrators**
 
 .. note::
-   The extension in version |version| supports TYPO3 v12 LTS and TYPO3 v13 LTS.
+   The extension in version |version| supports TYPO3 v12 LTS, TYPO3 v13 LTS and
+   TYPO3 v14.
 
    *  Use version 3.3.0 for compatibility with TYPO3 v11 LTS.
    *  Use version 3.1.0 for compatibility with TYPO3 v10 LTS.
