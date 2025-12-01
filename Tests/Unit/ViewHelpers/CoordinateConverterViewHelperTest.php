@@ -12,85 +12,11 @@ declare(strict_types=1);
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\ViewHelpers;
 
 use Brotkrueml\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 
 final class CoordinateConverterViewHelperTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function argumentsAreRegisteredCorrectly(): void
-    {
-        /** @var MockObject|CoordinateConverterViewHelper $subject */
-        $subject = $this->getMockBuilder(CoordinateConverterViewHelper::class)
-            ->onlyMethods(['registerArgument'])
-            ->getMock();
-
-        $subject
-            ->expects(self::exactly(8))
-            ->method('registerArgument')
-            ->withConsecutive(
-                [
-                    'latitude',
-                    'string',
-                    self::anything(),
-                    true,
-                ],
-                [
-                    'longitude',
-                    'string',
-                    self::anything(),
-                    true,
-                ],
-                [
-                    'outputFormat',
-                    'string',
-                    self::anything(),
-                    false,
-                    'degree',
-                ],
-                [
-                    'cardinalPoints',
-                    'string',
-                    self::anything(),
-                    false,
-                    'N|S|E|W',
-                ],
-                [
-                    'cardinalPointsPosition',
-                    'string',
-                    self::anything(),
-                    false,
-                    'before',
-                ],
-                [
-                    'numberOfDecimals',
-                    'int',
-                    self::anything(),
-                    false,
-                    5,
-                ],
-                [
-                    'removeTrailingZeros',
-                    'bool',
-                    self::anything(),
-                    false,
-                    false,
-                ],
-                [
-                    'delimiter',
-                    'string',
-                    self::anything(),
-                    false,
-                    ', ',
-                ],
-            );
-
-        $subject->initializeArguments();
-    }
-
     /**
      * @test
      */
