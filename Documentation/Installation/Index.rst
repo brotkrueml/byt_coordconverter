@@ -16,7 +16,7 @@ Target group: **Administrators**
    *  Use version 3.0.0 for compatibility with TYPO3 v9 LTS.
    *  Use version 2.1.3 for compatibility with TYPO3 v8 LTS or older PHP versions.
    *  Use version 1.0.5 for compatibility with TYPO3 v7 LTS from the
-      `TYPO3 Extension Repository (TER)`__.
+      `TYPO3 Extension Repository (TER)`_.
 
 The recommended way to install this extension is by using Composer. In your
 Composer-based TYPO3 project root, just type
@@ -27,9 +27,8 @@ Composer-based TYPO3 project root, just type
 
 and the latest stable release will be installed.
 
-You can also install the extension from the `TYPO3 Extension Repository (TER)`__.
-See :ref:`t3start:extensions_legacy_management` for a manual how to
-install an extension.
+In a classic installation, you can also install the extension from the
+`TYPO3 Extension Repository (TER)`_.
 
 
 .. _TYPO3 Extension Repository (TER): https://extensions.typo3.org/extension/byt_coordconverter
