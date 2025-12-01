@@ -12,14 +12,14 @@ declare(strict_types=1);
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\ViewHelpers;
 
 use Brotkrueml\BytCoordconverter\ViewHelpers\CoordinateConverterViewHelper;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 
 final class CoordinateConverterViewHelperTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function renderThrowsViewHelperExceptionWhenOnOutOfBoundsCoordinatesAreGiven(): void
     {
         $this->expectException(Exception::class);
@@ -32,9 +32,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
         $subject->render();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function renderThrowsViewHelperExceptionWhenInvalidOutputFormatIsGiven(): void
     {
         $this->expectException(Exception::class);
@@ -49,10 +47,10 @@ final class CoordinateConverterViewHelperTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider dataProviderForFormatter
      * @param array<string, string> $arguments
      */
+    #[Test]
+    #[DataProvider('dataProviderForFormatter')]
     public function correctFormatterIsCalled(
         array $arguments,
         string $expectedCoordinates,
@@ -68,7 +66,7 @@ final class CoordinateConverterViewHelperTest extends TestCase
     /**
      * @return \Iterator<(array<int, array<string, string>> | array<int, string>)>
      */
-    public function dataProviderForFormatter(): iterable
+    public static function dataProviderForFormatter(): iterable
     {
         yield 'degree' => [
             [

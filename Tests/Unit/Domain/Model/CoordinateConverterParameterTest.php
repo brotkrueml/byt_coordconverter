@@ -12,13 +12,13 @@ declare(strict_types=1);
 namespace Brotkrueml\BytCoordconverter\Tests\Unit\Domain\Model;
 
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class CoordinateConverterParameterTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function parameterLatitudeSetCorrectly(): void
     {
         $subject = new Parameter(
@@ -35,9 +35,7 @@ final class CoordinateConverterParameterTest extends TestCase
         self::assertSame(49.487111, $subject->getLatitude());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parameterLongitudeSetCorrectly(): void
     {
         $subject = new Parameter(
@@ -54,9 +52,7 @@ final class CoordinateConverterParameterTest extends TestCase
         self::assertSame(8.466278, $subject->getLongitude());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parameterOutputFormatSetCorrectly(): void
     {
         $allowedOutputFormats = [
@@ -87,7 +83,7 @@ final class CoordinateConverterParameterTest extends TestCase
      *
      * @return \Iterator<string, array<(float | string)>> [latitude, longitude, cardinalPoints, expectedNorthSouth, expectedEastWest]
      */
-    public function matchingCardinalPointsDataProvider(): \Iterator
+    public static function matchingCardinalPointsDataProvider(): \Iterator
     {
         yield 'north' => [
             49.487111,
@@ -106,15 +102,14 @@ final class CoordinateConverterParameterTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider matchingCardinalPointsDataProvider
-     */
+    #[Test]
+    #[DataProvider('matchingCardinalPointsDataProvider')]
     public function parameterCardinalPointsForLatitudeSetCorrectly(
         float $latitude,
         float $longitude,
         string $cardinalPoints,
         string $expectedNorthSouthValue,
+        string $expectedWestEastValue,
     ): void {
         $subject = new Parameter(
             $latitude,
@@ -128,11 +123,10 @@ final class CoordinateConverterParameterTest extends TestCase
         );
 
         self::assertSame($expectedNorthSouthValue, $subject->getCardinalPointForLatitude());
+        self::assertSame($expectedWestEastValue, $subject->getCardinalPointForLongitude());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parameterCardinalPointsPositionSetCorrectly(): void
     {
         $allowedPositions = [
@@ -156,9 +150,7 @@ final class CoordinateConverterParameterTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parameterNumberOfDecimalsSetCorrectly(): void
     {
         $subject = new Parameter(
@@ -175,9 +167,7 @@ final class CoordinateConverterParameterTest extends TestCase
         self::assertSame(3, $subject->getNumberOfDecimals());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parameterShowTrailingZerosSetCorrectly(): void
     {
         $subject = new Parameter(
@@ -207,9 +197,7 @@ final class CoordinateConverterParameterTest extends TestCase
         self::assertFalse($subject->shouldTrailingZerosBeRemoved());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parameterDelimiterZerosSetCorrectly(): void
     {
         $subject = new Parameter(
@@ -226,10 +214,8 @@ final class CoordinateConverterParameterTest extends TestCase
         self::assertSame(' / ', $subject->getDelimiter());
     }
 
-    /**
-     * @test
-     * @dataProvider dataProviderForInvalidParameters
-     */
+    #[Test]
+    #[DataProvider('dataProviderForInvalidParameters')]
     public function invalidParametersThrowInvalidArgumentException(
         float $latitude,
         float $longitude,
@@ -259,7 +245,7 @@ final class CoordinateConverterParameterTest extends TestCase
     /**
      * @return \Iterator<(array<int, bool> | array<int, float> | array<int, int> | array<int, string>)>
      */
-    public function dataProviderForInvalidParameters(): iterable
+    public static function dataProviderForInvalidParameters(): iterable
     {
         yield 'latitude is too high' => [
             90.01,

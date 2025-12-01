@@ -13,15 +13,17 @@ namespace Brotkrueml\BytCoordconverter\Tests\Unit\Formatter;
 
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter;
 use Brotkrueml\BytCoordconverter\Formatter\DegreeMinutesSecondsFormatter;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class DegreeMinutesSecondsFormatterTest extends TestCase
 {
     /**
-     * @test
-     * @dataProvider dataProvider
      * @param array<string, float|string|int|bool> $arguments
      */
+    #[Test]
+    #[DataProvider('dataProvider')]
     public function formatConvertsGivenCoordinatesCorrectly(array $arguments, string $expected): void
     {
         $subject = new DegreeMinutesSecondsFormatter();
@@ -33,7 +35,7 @@ final class DegreeMinutesSecondsFormatterTest extends TestCase
     /**
      * @return \Iterator<array<array<int, mixed>, mixed>>
      */
-    public function dataProvider(): iterable
+    public static function dataProvider(): iterable
     {
         yield 'uses default values' => [
             [

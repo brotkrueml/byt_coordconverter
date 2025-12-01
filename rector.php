@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\ReplaceTestAnnotationWithPrefixedFunctionRector;
+use Rector\PHPUnit\Set\PHPUnitSetList;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -27,6 +28,9 @@ return RectorConfig::configure()
         earlyReturn: true,
         phpunitCodeQuality: true,
     )
+    ->withSets([
+        PHPUnitSetList::PHPUNIT_100,
+    ])
     ->withRootFiles()
     ->withSkip([
         PreferPHPUnitThisCallRector::class,
