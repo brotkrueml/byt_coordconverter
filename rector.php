@@ -3,24 +3,32 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Set\ValueObject\SetList;
-use Rector\ValueObject\PhpVersion;
+use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
+use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\ReplaceTestAnnotationWithPrefixedFunctionRector;
 
-return static function (RectorConfig $config): void {
-    $config->import(LevelSetList::UP_TO_PHP_74);
-    $config->import(SetList::CODE_QUALITY);
-    $config->import(SetList::DEAD_CODE);
-    $config->import(SetList::EARLY_RETURN);
-    $config->import(SetList::TYPE_DECLARATION);
-
-    $config->phpVersion(PhpVersion::PHP_74);
-
-    $config->autoloadPaths([
-        __DIR__ . '/.Build/vendor/autoload.php',
-    ]);
-    $config->paths([
+return RectorConfig::configure()
+    ->withPaths([
         __DIR__ . '/Classes',
         __DIR__ . '/Tests',
+    ])
+    ->withPhpSets()
+    ->withAutoloadPaths([
+        __DIR__ . '/.Build/vendor/autoload.php',
+    ])
+    ->withImportNames(
+        importShortClasses: false,
+        removeUnusedImports: true,
+    )
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        typeDeclarations: true,
+        typeDeclarationDocblocks: true,
+        earlyReturn: true,
+        phpunitCodeQuality: true,
+    )
+    ->withRootFiles()
+    ->withSkip([
+        PreferPHPUnitThisCallRector::class,
+        ReplaceTestAnnotationWithPrefixedFunctionRector::class,
     ]);
-};

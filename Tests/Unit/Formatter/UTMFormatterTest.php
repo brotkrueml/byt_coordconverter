@@ -42,7 +42,10 @@ final class UTMFormatterTest extends TestCase
         self::assertStringStartsWith($expectedZone, $this->subject->format($southEastParameter));
     }
 
-    public function dataProviderForLongitudinalZone(): \Generator
+    /**
+     * @return \Iterator<(array<int, float> | array<int, string>)>
+     */
+    public function dataProviderForLongitudinalZone(): iterable
     {
         yield 'zone 1' => [0.0, 0.0, -180.0, -174.0001, '1'];
         yield 'zone 2' => [0.0, 0.0, -174.0, -168.0001, '2'];
@@ -127,7 +130,10 @@ final class UTMFormatterTest extends TestCase
         self::assertStringContainsString($expectedZone . ' ', $this->subject->format($southParameter));
     }
 
-    public function dataProviderForLatitudinalZone(): \Generator
+    /**
+     * @return \Iterator<(array<int, float> | array<int, string>)>
+     */
+    public function dataProviderForLatitudinalZone(): iterable
     {
         yield 'zone c' => [-72.0001, -80.0, 'C'];
         yield 'zone d' => [-64.0001, -72.0, 'D'];
@@ -162,7 +168,10 @@ final class UTMFormatterTest extends TestCase
         self::assertSame($expectedCoordinates, $this->subject->format($parameter));
     }
 
-    public function dataProviderForSomeCoordinates(): \Generator
+    /**
+     * @return \Iterator<(array<int, float> | array<int, string>)>
+     */
+    public function dataProviderForSomeCoordinates(): iterable
     {
         yield 'paradeplatz, mannheim' => [49.487111, 8.466278, '32U 461344 5481745'];
         yield 'empire state building, new york' => [40.748440, -73.984559, '18T 585725 4511328'];

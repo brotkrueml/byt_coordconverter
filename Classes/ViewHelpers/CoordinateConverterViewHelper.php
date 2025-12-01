@@ -13,9 +13,10 @@ namespace Brotkrueml\BytCoordconverter\ViewHelpers;
 
 use Brotkrueml\BytCoordconverter\Domain\Model\CoordinateConverterParameter as Parameter;
 use Brotkrueml\BytCoordconverter\Formatter\FormatterInterface;
-use TYPO3Fluid\Fluid\Core\ViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 
-class CoordinateConverterViewHelper extends ViewHelper\AbstractViewHelper
+class CoordinateConverterViewHelper extends AbstractViewHelper
 {
     public function initializeArguments(): void
     {
@@ -105,7 +106,7 @@ class CoordinateConverterViewHelper extends ViewHelper\AbstractViewHelper
                 $arguments['delimiter'] ?? ', ',
             );
         } catch (\InvalidArgumentException $e) {
-            throw new ViewHelper\Exception($e->getMessage(), $e->getCode(), $e);
+            throw new Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         $className = \sprintf(

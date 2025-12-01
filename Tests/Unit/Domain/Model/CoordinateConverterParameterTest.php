@@ -85,13 +85,24 @@ final class CoordinateConverterParameterTest extends TestCase
     /**
      * Data provider for cardinal points
      *
-     * @return array [latitude, longitude, cardinalPoints, expectedNorthSouth, expectedEastWest]
+     * @return \Iterator<string, array<(float | string)>> [latitude, longitude, cardinalPoints, expectedNorthSouth, expectedEastWest]
      */
-    public function matchingCardinalPointsDataProvider(): array
+    public function matchingCardinalPointsDataProvider(): \Iterator
     {
-        return [
-            'north' => [49.487111, 8.466278, 'NORTH|SOUTH|EAST|WEST', 'NORTH', 'EAST'],
-            'south' => [-53.163494, -70.905071, 'NORTH|SOUTH|EAST|WEST', 'SOUTH', 'WEST'],
+        yield 'north' => [
+            49.487111,
+            8.466278,
+            'NORTH|SOUTH|EAST|WEST',
+            'NORTH',
+            'EAST',
+        ];
+
+        yield 'south' => [
+            -53.163494,
+            -70.905071,
+            'NORTH|SOUTH|EAST|WEST',
+            'SOUTH',
+            'WEST',
         ];
     }
 
@@ -245,7 +256,10 @@ final class CoordinateConverterParameterTest extends TestCase
         );
     }
 
-    public function dataProviderForInvalidParameters(): \Generator
+    /**
+     * @return \Iterator<(array<int, bool> | array<int, float> | array<int, int> | array<int, string>)>
+     */
+    public function dataProviderForInvalidParameters(): iterable
     {
         yield 'latitude is too high' => [
             90.01,

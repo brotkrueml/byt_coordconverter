@@ -20,6 +20,7 @@ final class DegreeFormatterTest extends TestCase
     /**
      * @test
      * @dataProvider dataProvider
+     * @param array<string, bool|float|string|int> $arguments
      */
     public function formatConvertsGivenCoordinatesCorrectly(array $arguments, string $expected): void
     {
@@ -29,7 +30,10 @@ final class DegreeFormatterTest extends TestCase
         self::assertSame($expected, $subject->format($parameter));
     }
 
-    public function dataProvider(): \Generator
+    /**
+     * @return \Iterator<array<array<int, mixed>, mixed>>
+     */
+    public function dataProvider(): iterable
     {
         yield 'uses default values' => [
             [
