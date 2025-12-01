@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [3.4.0] - 2025-12-01
+
 ### Added
 - Compatibility with TYPO3 v14
 
@@ -111,7 +113,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Initial release
 
 
-[Unreleased]: https://github.com/brotkrueml/byt_coordconverter/compare/v3.3.0...HEAD
+[Unreleased]: https://github.com/brotkrueml/byt_coordconverter/compare/v3.4.0...HEAD
+[3.4.0]: https://github.com/brotkrueml/byt_coordconverter/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/brotkrueml/byt_coordconverter/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/brotkrueml/byt_coordconverter/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/brotkrueml/byt_coordconverter/compare/v3.0.0...v3.1.0
