@@ -9,9 +9,9 @@ Installation
 Target group: **Administrators**
 
 .. note::
-   The extension in version |version| needs at least PHP 7.4 and supports
-   TYPO3 v11 LTS, TYPO3 v12 LTS and TYPO3 v13.
+   The extension in version |version| supports TYPO3 v12 LTS and TYPO3 v13 LTS.
 
+   *  Use version 3.3.0 for compatibility with TYPO3 v11 LTS.
    *  Use version 3.1.0 for compatibility with TYPO3 v10 LTS.
    *  Use version 3.0.0 for compatibility with TYPO3 v9 LTS.
    *  Use version 2.1.3 for compatibility with TYPO3 v8 LTS or older PHP versions.
