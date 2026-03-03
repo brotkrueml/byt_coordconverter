@@ -12,6 +12,7 @@
         project-issues="https://github.com/brotkrueml/byt_coordconverter/issues"
         edit-on-github-branch="main"
         edit-on-github="brotkrueml/byt_coordconverter"
+        interlink-shortcode="brotkrueml/byt_coordconverter"
         typo3-core-preferred="stable"
     />
     <project
